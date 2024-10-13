@@ -18,7 +18,7 @@ class pacote_extendido(pacote):
 
     def exibir(self):
         super().exibir()
-        print(f"paramet {self._param} {self.acidional}")
+        print(f"paramet boster {self._param} {self.acidional}")
 
         
 
