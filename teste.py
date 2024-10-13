@@ -1,3 +1,7 @@
+import numpy as np
+
+
+
 class pacote:
     def __init__(self,param):
         self._param=param
