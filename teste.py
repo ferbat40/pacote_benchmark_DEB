@@ -23,5 +23,5 @@ class pacote_extendido(pacote):
 
 pacote1 = pacote(1544)
 pacote1.exibir()
-pacote1_ad = pacote_extendido(871,"foi")
+pacote1_ad = pacote_extendido(871,"foidd")
 pacote1_ad.exibir()
