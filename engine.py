@@ -13,7 +13,9 @@ class engine:
     
     
     def call_DTLZ1(self):
-        DTLZ1.exibir(self)
+        DTLZ1_ = DTLZ1(self.P,self.N,self.M)
+        DTLZ1_.build_objective_space()
+        
     
     def call_DTLZ2(self):
         print("em construção")
@@ -26,6 +28,8 @@ class engine:
     
 
 
-#engine =  engine(1,1500,10,5)
-#engine.call_benchmark()
+engine =  engine(1,1500,4,3)
+engine.call_benchmark()
+
+
 
