@@ -28,8 +28,8 @@ class engine:
     
 
 
-engine =  engine(1,1500,4,3)
-engine.call_benchmark()
+#engine =  engine(1,1500,4,3)
+#engine.call_benchmark()
 
 
 
