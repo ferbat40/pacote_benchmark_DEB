@@ -1,18 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+from benchmarks import benchmarks
 
-class DTLZ1:
+class DTLZ1(benchmarks):
 
     def __init__(self,P,N,M):
-        self.P=P
-        self.M=M
-        self.N=N
-        self.K = self.N-self.M+1
-        self.Nvar = self.K+self.M-1
-        self.Point = [*np.random.random((self.P,self.Nvar+1))]
-        for i_g in self.Point:
-            i_g[self.M:]=0.5
+        super().__init__(P,N,M)
+        
 
     def FPF_cg(self,F):
         sum_xm=np.sum(i  for i in F[0:len(F)] )
@@ -20,13 +15,6 @@ class DTLZ1:
         #BETWEEN hyperplane
         bt_hyper = [0, *[ c == 0.50 for c in sum_xm_aval ]]
         return bt_hyper
-
-    def PROD_xi(i,f,x):
-        if i and f != 0:
-            return np.product(list(map(lambda xi: xi, x[i:f])))
-        else:
-            return 0
-
 
     def FO_PARM(self,index_v_f,param_1,param_2,param_3,param_4,param_5,param_6,param_7,size_f):
         PARAM = {
@@ -69,8 +57,8 @@ class DTLZ1:
                 fo_in += [F]
             else:
                 fo_out += [F]
-        print(f"valor de k = {self.K} , valor de Nvar = {self.Nvar} {fo_in} {fo_out}")
-        self.plot_graphic(fo_in,fo_out)
+        print(f"valor de k = {self.K} , valor de Nvar = {self.Nvar}")
+        self.plot_graphic_in(fo_in,fo_out)
             
   
             
@@ -79,7 +67,7 @@ class DTLZ1:
         G_Xm=[self.K+np.sum([((xi-0.5)**2)-np.cos(20*np.pi*(xi-0.5)) for xi in Xm])]
         return 100*G_Xm[0]
     
-    def plot_graphic(self,fo_in,fo_out):
+    def plot_graphic_in(self,fo_in,fo_out):
         fig = plt.figure()
         fig = plt.figure(figsize=(10, 15))
         ax = fig.add_subplot(111, projection='3d')
@@ -94,7 +82,6 @@ class DTLZ1:
         plt.show()
 
     
-            
 
 
 
