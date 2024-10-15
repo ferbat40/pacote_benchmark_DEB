@@ -39,7 +39,7 @@ class engine:
 
         
         
-    def plot_graphic_in_G(DTLZ):
+    def plot_graphic_in_G(self,DTLZ):
         fig = plt.figure()
         fig = plt.figure(figsize=(10, 15))
         ax = fig.add_subplot(111, projection='3d')
