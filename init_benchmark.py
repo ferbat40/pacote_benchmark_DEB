@@ -17,6 +17,7 @@ class InitBenchmark:
             i_g[self.__M:]=0.5
         self.__Point_out_G=[*np.random.random((self.__P,self.__Nvar+1))]
         self.__DTLZ=DTLZ
+          
 
     def get_P (self):
         return self.__P
@@ -62,6 +63,19 @@ class InitBenchmark:
     
     def set_DTLZ(self,DTLZ_obj):
         self.__DTLZ=DTLZ_obj
+  
+    def get_Nvar(self):
+        return self.__Nvar
+    
+   
+ 
+
+
+
+
+    
+    
+    
         
         
 
