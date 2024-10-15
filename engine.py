@@ -73,14 +73,14 @@ class engine:
     
 
 
-engine =  engine(1,1500,4,3)
-DTLZ=engine.call_benchmark()
-DTLZ.build_objective_space_in_G()
-engine.plot_graphic_in_G(DTLZ.fo_in,DTLZ.fo_out)
+#engine =  engine(1,1500,4,3)
+#DTLZ=engine.call_benchmark()
+#DTLZ.build_objective_space_in_G()
+#engine.plot_graphic_in_G(DTLZ.fo_in,DTLZ.fo_out)
 
 
-DTLZ.build_objective_space_out_G()
-engine.plot_graphic_out_G(DTLZ.fo_in,DTLZ.fo_out,DTLZ.fo_out_g)
+#DTLZ.build_objective_space_out_G()
+#engine.plot_graphic_out_G(DTLZ.fo_in,DTLZ.fo_out,DTLZ.fo_out_g)
 
 
 
