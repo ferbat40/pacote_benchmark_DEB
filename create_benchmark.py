@@ -1,11 +1,11 @@
 from DTLZ1 import DTLZ1
-from benchmarks import benchmarks
+from init_benchmark import InitBenchmark
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 
-class new_benchmark(benchmarks):
+class CreateBenchmark(InitBenchmark):
     
     def __init__(self,benchmark,P,N,M,fo_in=[],fo_out=[],fo_out_g=[],DTLZ=None):
         super().__init__(P,N,M,fo_in,fo_out,fo_out_g,DTLZ)
@@ -63,16 +63,16 @@ class new_benchmark(benchmarks):
   
   
 
-#new_benchmark_obj = new_benchmark(1,1500,18,3)
-#new_benchmark_obj.call_benchmark()
+benchmark = CreateBenchmark(1,1500,18,3)
+benchmark.call_benchmark()
 
 
-#new_benchmark_obj.get_DTLZ().build_objective_space_in_G()
-#new_benchmark_obj.plot_graphic_in_G()
+benchmark.get_DTLZ().build_objective_space_in_G()
+benchmark.plot_graphic_in_G()
 
 
-#new_benchmark_obj.get_DTLZ().build_objective_space_out_G()
-#new_benchmark_obj.plot_graphic_out_G()
+benchmark.get_DTLZ().build_objective_space_out_G()
+benchmark.plot_graphic_out_G()
 
 
 

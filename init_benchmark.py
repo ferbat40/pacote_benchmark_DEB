@@ -1,7 +1,7 @@
 import numpy as np
 
 
-class benchmarks:
+class InitBenchmark:
        
     def __init__(self,P,N,M,fo_in,fo_out,fo_out_g,DTLZ):
         self.__P=P
