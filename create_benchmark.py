@@ -78,16 +78,16 @@ class CreateBenchmark(InitBenchmark):
   
   
 
-benchmark = CreateBenchmark(1,1500,45,3)
-benchmark.call_benchmark()
+#benchmark = CreateBenchmark(1,1500,45,3)
+#benchmark.call_benchmark()
 
 
-benchmark.get_DTLZ().build_objective_space_in_G()
+#benchmark.get_DTLZ().build_objective_space_in_G()
 #benchmark.plot_graphic_in_G()
-benchmark.show_fo_in()
-benchmark.show_fo_out()
-benchmark.show_fo_out_g()
-benchmark.show_var()
+#benchmark.show_fo_in()
+#benchmark.show_fo_out()
+#benchmark.show_fo_out_g()
+#benchmark.show_var()
 
 
 
