@@ -16,14 +16,17 @@ class CreateBenchmark(InitBenchmark):
                 }
             
     def show_fo_in(self):
+        print(f'len = {len(self.get_fo_in())}')
         for i in self.get_fo_in():
             print(i)
 
     def show_fo_out(self):
+        print(f'len = {len(self.get_fo_out())}')
         for i in self.get_fo_out():
             print(i)
 
     def show_fo_out_g(self):
+        print(f'len = {len(self.get_fo_out_g())}')
         for i in self.get_fo_out_g():
             print(i)
 
@@ -78,13 +81,13 @@ class CreateBenchmark(InitBenchmark):
   
   
 
-#benchmark = CreateBenchmark(1,1500,45,3)
-#benchmark.call_benchmark()
+benchmark = CreateBenchmark(1,1500,45,3)
+benchmark.call_benchmark()
 
 
-#benchmark.get_DTLZ().build_objective_space_in_G()
+benchmark.get_DTLZ().build_objective_space_in_G()
 #benchmark.plot_graphic_in_G()
-#benchmark.show_fo_in()
+benchmark.show_fo_in()
 #benchmark.show_fo_out()
 #benchmark.show_fo_out_g()
 #benchmark.show_var()
