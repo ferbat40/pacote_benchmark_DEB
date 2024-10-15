@@ -5,16 +5,26 @@ from benchmarks import benchmarks
 
 class DTLZ1(benchmarks):
 
-    def __init__(self,P,N,M):
-        super().__init__(P,N,M)
+    def __init__(self,P,N,M,fo_in,fo_out,fo_out_g):
+        super().__init__(P,N,M,fo_in,fo_out,fo_out_g)
         
 
-    def FPF_cg(self,F):
+    def FOP_in_g(self,F):
         sum_xm=np.sum(i  for i in F[0:len(F)] )
         sum_xm_aval = [(sum_xm) for i in range(0,1) ]
         #BETWEEN hyperplane
         bt_hyper = [0, *[ c == 0.50 for c in sum_xm_aval ]]
         return bt_hyper
+    
+
+    def FOP_out_g(self,F):
+        sum_xm=np.sum(i  for i in F[0:len(F)] )
+        sum_xm_aval = [(sum_xm) for i in range(0,1) ]
+        #OUTSIDE the hyperplane
+        out_hyper= [0, *[ c >= 0.50 for c in sum_xm_aval ]]
+        return out_hyper
+    
+
 
     def FO_PARM(self,index_v_f,param_1,param_2,param_3,param_4,param_5,param_6,param_7,size_f):
         PARAM = {
@@ -44,42 +54,40 @@ class DTLZ1(benchmarks):
         return F_O
 
         
-    def build_objective_space(self):
-        fo_in,fo_out=[],[]
-        for i in self.Point:
+    def build_objective_space_in_G(self):
+        for i in self.Point_in_G:
             G = self.F_G(i[self.M:])
             F= self.FO(G,i)
-            FPF_c_g=self.FPF_cg(F)
-            FPF_c_g_aval=list(filter(lambda v: v == False, FPF_c_g[1:] ))
+            FOP_in_g_=self.FOP_in_g(F)
+            FOP_in_g_aval=list(filter(lambda v: v == False, FOP_in_g_[1:] ))
             ind = [0,1,2]
             F = [F[i] for i in ind]
-            if len(FPF_c_g_aval) == 0:
-                fo_in += [F]
+            if len(FOP_in_g_aval) == 0:
+                self.fo_in += [F]
             else:
-                fo_out += [F]
-        print(f"valor de k = {self.K} , valor de Nvar = {self.Nvar}")
-        self.plot_graphic_in(fo_in,fo_out)
-            
-  
+                self.fo_out += [F]
+        #print(f"valor de k = {self.K} , valor de Nvar = {self.Nvar}")
+
+
+
+    def build_objective_space_out_G(self):
+        for i in self.Point_out_G:
+            G = self.F_G(i[self.M:])
+            F= self.FO(G,i)
+            FOP_out_g_=self.FOP_out_g(F)
+            FOP_out_g_aval=list(filter(lambda v: v == False, FOP_out_g_[1:] ))
+            IND = [0,1,2]
+            F = [F[i] for i in IND]
+            if len(FOP_out_g_aval) == 0:
+                self.fo_out_g += [F]
+
             
 
     def F_G(self,Xm):
         G_Xm=[self.K+np.sum([((xi-0.5)**2)-np.cos(20*np.pi*(xi-0.5)) for xi in Xm])]
         return 100*G_Xm[0]
     
-    def plot_graphic_in(self,fo_in,fo_out):
-        fig = plt.figure()
-        fig = plt.figure(figsize=(10, 15))
-        ax = fig.add_subplot(111, projection='3d')
-        pp = np.array([fp[0:] if len(fp) > 0 else [0,0,0] for fp in fo_in ])
-        cp = np.array([cv[0:] if len(cv) > 0 else [0,0,0] for cv in fo_out  ])
-        print(pp.shape,cp.shape)
-        if (len(cp)>0):
-            ax.scatter(cp[:,0],cp[:,1],cp[:,2],color='gray')
-        if (len(pp)>0):
-            ax.scatter(pp[:,0],pp[:,1],pp[:,2],color='red')
-        ax.view_init(elev=360, azim=25)
-        plt.show()
+
 
     
 
