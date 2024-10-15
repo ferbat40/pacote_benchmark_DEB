@@ -39,12 +39,12 @@ class engine:
 
         
         
-    def plot_graphic_in_G(self,fo_in,fo_out):
+    def plot_graphic_in_G(DTLZ):
         fig = plt.figure()
         fig = plt.figure(figsize=(10, 15))
         ax = fig.add_subplot(111, projection='3d')
-        pp = np.array([fp[0:] if len(fp) > 0 else [0,0,0] for fp in fo_in ])
-        cp = np.array([cv[0:] if len(cv) > 0 else [0,0,0] for cv in fo_out  ])
+        pp = np.array([fp[0:] if len(fp) > 0 else [0,0,0] for fp in DTLZ.fo_in ])
+        cp = np.array([cv[0:] if len(cv) > 0 else [0,0,0] for cv in DTLZ.fo_out  ])
         print(pp.shape,cp.shape)
         if (len(cp)>0):
             ax.scatter(cp[:,0],cp[:,1],cp[:,2],color='gray')
@@ -54,13 +54,13 @@ class engine:
         plt.show()
 
 
-    def plot_graphic_out_G(self,fo_in,fo_out,fo_out_g):
+    def plot_graphic_out_G(self,DTLZ):
         fig = plt.figure()
         fig = plt.figure(figsize=(10, 15))
         ax = fig.add_subplot(111, projection='3d')
-        ff = np.array([fp[0:] if len(fp) > 0 else [0,0,0] for fp in fo_out_g])
-        pp = np.array([fp[0:] if len(fp) > 0 else [0,0,0] for fp in fo_in ])
-        cp = np.array([cv[0:] if len(cv) > 0 else [0,0,0] for cv in fo_out  ])
+        ff = np.array([fp[0:] if len(fp) > 0 else [0,0,0] for fp in DTLZ.fo_out_g])
+        pp = np.array([fp[0:] if len(fp) > 0 else [0,0,0] for fp in DTLZ.fo_in ])
+        cp = np.array([cv[0:] if len(cv) > 0 else [0,0,0] for cv in DTLZ.fo_out  ])
         print(pp.shape,cp.shape,ff.shape)
         if (len(pp) >0):
             ax.scatter(pp[:,0],pp[:,1],pp[:,2],color='red')
@@ -76,11 +76,11 @@ class engine:
 #engine =  engine(1,1500,4,3)
 #DTLZ=engine.call_benchmark()
 #DTLZ.build_objective_space_in_G()
-#engine.plot_graphic_in_G(DTLZ.fo_in,DTLZ.fo_out)
+#engine.plot_graphic_in_G(DTLZ)
 
 
 #DTLZ.build_objective_space_out_G()
-#engine.plot_graphic_out_G(DTLZ.fo_in,DTLZ.fo_out,DTLZ.fo_out_g)
+#engine.plot_graphic_out_G(DTLZ)
 
 
 
