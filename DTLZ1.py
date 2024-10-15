@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from benchmarks import benchmarks
 
-class DTLZ1(benchmarks):
+class DTLZ1:
 
-    def __init__(self,P,N,M,fo_in,fo_out,fo_out_g):
-        super().__init__(P,N,M,fo_in,fo_out,fo_out_g)
-        
+    def __init__(self,new_benchmark_obj):
+        self.new_benchmark_obj=new_benchmark_obj
+                
 
     def FOP_in_g(self,F):
         sum_xm=np.sum(i  for i in F[0:len(F)] )
@@ -41,52 +41,51 @@ class DTLZ1(benchmarks):
     
     def FO(self,G,X):
         F_index=[]
-        for v in range(0,self.M):
+        for v in range(0,self.new_benchmark_obj.get_M()):
             F_index.append(v)
-        param_1 = np.prod(X[1:(self.M-1+1)])
-        param_2 = np.prod(X[1:(self.M-1)])
+        param_1 = np.prod(X[1:(self.new_benchmark_obj.get_M()-1+1)])
+        param_2 = np.prod(X[1:(self.new_benchmark_obj.get_M()-1)])
         param_3 = (1+G)
-        param_4 = (1-X[self.M-1])
+        param_4 = (1-X[self.new_benchmark_obj.get_M()-1])
         param_5 = (1-X[2])
         param_6 = (1-X[1])
         param_7 = (X[1])
         F_O=[self.FO_PARM(i,param_1,param_2,param_3,param_4,param_5,param_6,param_7,len(F_index)) for i in F_index]
         return F_O
+    
+    def F_G(self,Xm):
+        G_Xm=[self.new_benchmark_obj.get_K()+np.sum([((xi-0.5)**2)-np.cos(20*np.pi*(xi-0.5)) for xi in Xm])]
+        return 100*G_Xm[0]
 
         
     def build_objective_space_in_G(self):
-        for i in self.Point_in_G:
-            G = self.F_G(i[self.M:])
+        for i in self.new_benchmark_obj.get_Point_in_G():
+            G = self.F_G(i[self.new_benchmark_obj.get_M():])
             F= self.FO(G,i)
             FOP_in_g_=self.FOP_in_g(F)
             FOP_in_g_aval=list(filter(lambda v: v == False, FOP_in_g_[1:] ))
             ind = [0,1,2]
             F = [F[i] for i in ind]
             if len(FOP_in_g_aval) == 0:
-                self.fo_in += [F]
+                self.new_benchmark_obj.set_fo_in([F]) 
             else:
-                self.fo_out += [F]
-        #print(f"valor de k = {self.K} , valor de Nvar = {self.Nvar}")
-
+                self.new_benchmark_obj.set_fo_out([F]) 
+       
 
 
     def build_objective_space_out_G(self):
-        for i in self.Point_out_G:
-            G = self.F_G(i[self.M:])
+        for i in self.new_benchmark_obj.get_Point_out_G():
+            G = self.F_G(i[self.new_benchmark_obj.get_M():])
             F= self.FO(G,i)
             FOP_out_g_=self.FOP_out_g(F)
             FOP_out_g_aval=list(filter(lambda v: v == False, FOP_out_g_[1:] ))
             IND = [0,1,2]
             F = [F[i] for i in IND]
             if len(FOP_out_g_aval) == 0:
-                self.fo_out_g += [F]
+                self.new_benchmark_obj.set_fo_out_g([F])
+                            
 
-            
-
-    def F_G(self,Xm):
-        G_Xm=[self.K+np.sum([((xi-0.5)**2)-np.cos(20*np.pi*(xi-0.5)) for xi in Xm])]
-        return 100*G_Xm[0]
-    
+       
 
 
     
