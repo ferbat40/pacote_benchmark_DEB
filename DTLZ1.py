@@ -70,10 +70,10 @@ class DTLZ1:
             ind = [0,1,2]
             F = [F[i] for i in ind]
             if len(FOP_in_g_aval) == 0:
-                self.new_benchmark_obj.set_fo_in([F]) 
+                #self.new_benchmark_obj.set_fo_in([F]) 
                 fo_in+=[F]
             else:
-                self.new_benchmark_obj.set_fo_out([F]) 
+                #self.new_benchmark_obj.set_fo_out([F]) 
                 fo_out+=[F]
         return fo_in,fo_out
        
