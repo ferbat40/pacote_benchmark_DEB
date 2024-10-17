@@ -12,11 +12,6 @@ class InitBenchmark:
         self.__Point_in_G=[]
         self.__Point_out_G=[]
         self.__DTLZ=None
-        
-
-
-
-
         self.__P=P
         self.__M=M
         self.__N=N
