@@ -59,7 +59,6 @@ class DTLZ1:
 
         
     def build_objective_space_in_G(self):
-        print("aqui tbm veio")
         for i in self.new_benchmark_obj.get_Point_in_G():
             G = self.F_G(i[self.new_benchmark_obj.get_M():])
             F= self.FO(G,i)
