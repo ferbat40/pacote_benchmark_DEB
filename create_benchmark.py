@@ -3,6 +3,8 @@ from init_benchmark import InitBenchmark
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+from algorithms import NSGA_benchmark
+
 
 
 class CreateBenchmark(InitBenchmark):
@@ -31,6 +33,7 @@ class CreateBenchmark(InitBenchmark):
 
 
     def plot_graphic_configure(self,vet_0=[],vet_1=[],vet_3=[]):
+        fig = None
         fig = plt.figure()
         fig = plt.figure(figsize=(10, 15))
         ax = fig.add_subplot(111, projection='3d')
@@ -49,6 +52,7 @@ class CreateBenchmark(InitBenchmark):
         
     
     def plot_graphic_in_G(self):
+        fig = None
         fig = plt.figure()
         fig = plt.figure(figsize=(10, 15))
         ax = fig.add_subplot(111, projection='3d')
@@ -64,6 +68,7 @@ class CreateBenchmark(InitBenchmark):
 
 
     def plot_graphic_out_G(self):
+        fig = None
         fig = plt.figure()
         fig = plt.figure(figsize=(10, 15))
         ax = fig.add_subplot(111, projection='3d')
@@ -82,11 +87,12 @@ class CreateBenchmark(InitBenchmark):
 
   
 
-#benchmark = CreateBenchmark(1,1500,45,3)
-#benchmark.call_benchmark()
+benchmark = CreateBenchmark(1,1500,45,3)
+benchmark.call_benchmark()
+benchmark.get_DTLZ().build_objective_space_in_G()
+NSGAbenchmark = NSGA_benchmark(benchmark.get_Nvar(),benchmark.get_M(),1,np.full(2, 0.49),np.full(2, 0.50),benchmark.get_fo_out_g())
 
 
-#benchmark.get_DTLZ().build_objective_space_in_G()
 #dados=benchmark.get_fo_out()
 #benchmark.plot_graphic_configure(dados)
 #print(benchmark.get_fo_out())
