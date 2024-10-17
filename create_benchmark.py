@@ -16,6 +16,7 @@ class CreateBenchmark(InitBenchmark):
                 1:  self.call_DTLZ1,
                 2:  self.call_DTLZ2,
                 }
+          
             
         
     def call_DTLZ1(self):
@@ -84,9 +85,10 @@ class CreateBenchmark(InitBenchmark):
 
   
 
-#benchmark = CreateBenchmark(1,1500,30,7)
-#benchmark.call_benchmark()
-#benchmark.get_DTLZ().build_objective_space_in_G()
+benchmark = CreateBenchmark(1,1500,4,3)
+benchmark.call_benchmark()
+benchmark.get_DTLZ().build_objective_space_in_G()
+benchmark.plot_graphic_in_G()
 #NSGAbenchmark = NSGA_benchmark(benchmark.get_Nvar(),benchmark.get_M(),1,np.full(2, 0.49),np.full(2, 0.50),benchmark.get_fo_out_g())
 
 

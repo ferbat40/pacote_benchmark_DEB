@@ -4,6 +4,22 @@ import numpy as np
 class InitBenchmark:
        
     def __init__(self,P,N,M,fo_in,fo_out,fo_out_g,DTLZ):
+        self.__P=0
+        self.__M=0
+        self.__N=0
+        self.__fo_in=0
+        self.__fo_out=0
+        self.__fo_out_g=0
+        self.__K=0
+        self.__Nvar=0
+        self.__Point_in_G=[]
+        self.__Point_out_G=[]
+        self.__DTLZ=0
+        
+
+
+
+
         self.__P=P
         self.__M=M
         self.__N=N
