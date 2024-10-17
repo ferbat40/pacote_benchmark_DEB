@@ -14,7 +14,7 @@ class InitBenchmark:
         self.__Nvar=0
         self.__Point_in_G=[]
         self.__Point_out_G=[]
-        self.__DTLZ=0
+        self.__DTLZ=None
         
 
 

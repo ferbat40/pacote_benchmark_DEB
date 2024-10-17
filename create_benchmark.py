@@ -3,7 +3,7 @@ from init_benchmark import InitBenchmark
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-#from algorithms import NSGA_benchmark
+from algorithms import NSGA_benchmark
 
 
 
@@ -82,13 +82,8 @@ class CreateBenchmark(InitBenchmark):
         ax.scatter(ff[:,0],ff[:,1],ff[:,2])
         ax.view_init(elev=360, azim=25)
         plt.show()
-
-class remake_build_DTLZ(CreateBenchmark):
-    def __init__(self,P,N,M,fo_in=[],fo_out=[],fo_out_g=[],DTLZ=None):
-        super().__init__(P,N,M,fo_in,fo_out,fo_out_g,DTLZ)
         
-
-
+       
 
   
 
@@ -97,12 +92,6 @@ class remake_build_DTLZ(CreateBenchmark):
 #benchmark.get_DTLZ().build_objective_space_in_G()
 #benchmark.plot_graphic_in_G()
 #NSGAbenchmark = NSGA_benchmark(benchmark.get_Nvar(),benchmark.get_M(),1,np.full(2, 0.49),np.full(2, 0.50),benchmark.get_fo_out_g())
-
-
-#remake_build_DTLZ1 = remake_build_DTLZ(1,1500,4,3)
-#remake_build_DTLZ1.call_benchmark()
-#remake_build_DTLZ1.get_DTLZ().build_objective_space_in_G()
-#remake_build_DTLZ1.plot_graphic_in_G()
 
 
 #dados=benchmark.get_fo_out()
