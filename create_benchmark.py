@@ -105,9 +105,9 @@ class CreateBenchmark(InitBenchmark):
 
   
 
-#benchmark = CreateBenchmark(1,1500,7,3)
-#benchmark.call_benchmark()
-#var=benchmark.get_DTLZ().build_objective_space_in_G()
+benchmark = CreateBenchmark(1,1500,7,3)
+benchmark.call_benchmark()
+benchmark.get_DTLZ().build_objective_space_in_G()
 #var2=benchmark.get_DTLZ().build_objective_space_out_G()
 #benchmark.plot_graphic_configure(var,var2,var2)
 #benchmark.plot_graphic_in_G()
