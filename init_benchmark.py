@@ -3,13 +3,10 @@ import numpy as np
 
 class InitBenchmark:
        
-    def __init__(self,P,N,M,fo_in,fo_out,fo_out_g,DTLZ):
+    def __init__(self,P,N,M,DTLZ):
         self.__P=0
         self.__M=0
         self.__N=0
-        self.__fo_in=0
-        self.__fo_out=0
-        self.__fo_out_g=0
         self.__K=0
         self.__Nvar=0
         self.__Point_in_G=[]
@@ -23,9 +20,6 @@ class InitBenchmark:
         self.__P=P
         self.__M=M
         self.__N=N
-        self.__fo_in=fo_in
-        self.__fo_out=fo_out
-        self.__fo_out_g=fo_out_g
         self.__K = self.__N-self.__M+1
         self.__Nvar = self.__K+self.__M-1
         self.__Point_in_G = [*np.random.random((self.__P,self.__Nvar+1))]
@@ -43,24 +37,6 @@ class InitBenchmark:
     
     def get_N (self):
         return self.__N
-    
-    def get_fo_in (self):
-        return self.__fo_in
-    
-    def set_fo_in(self,fo_in):
-        self.__fo_in+=fo_in
-    
-    def get_fo_out (self):
-        return self.__fo_out
-    
-    def set_fo_out(self,fo_out):
-        self.__fo_out+=fo_out
-    
-    def get_fo_out_g (self):
-        return self.__fo_out_g
-    
-    def set_fo_out_g(self,fo_out_g):
-        self.__fo_out_g+=fo_out_g
     
     def get_K (self):
         return self.__K

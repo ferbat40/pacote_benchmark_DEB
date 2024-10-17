@@ -62,8 +62,6 @@ class DTLZ1:
     def build_objective_space_in_G(self):
         fo_in=[]
         fo_out=[]
-        self.new_benchmark_obj.set_fo_in([])
-        self.new_benchmark_obj.set_fo_out([])
         for i in self.new_benchmark_obj.get_Point_in_G():
             G = self.F_G(i[self.new_benchmark_obj.get_M():])
             F= self.FO(G,i)
@@ -72,17 +70,15 @@ class DTLZ1:
             ind = [0,1,2]
             F = [F[i] for i in ind]
             if len(FOP_in_g_aval) == 0:
-                #self.new_benchmark_obj.set_fo_in([F]) 
                 fo_in+=[F]
             else:
-                #self.new_benchmark_obj.set_fo_out([F]) 
                 fo_out+=[F]
         return fo_in,fo_out
        
 
 
-    def build_objective_space_out_G(self,fo_out_g=[]):
-        self.new_benchmark_obj.set_fo_out_g([])
+    def build_objective_space_out_G(self):
+        fo_out_g=[]
         for i in self.new_benchmark_obj.get_Point_out_G():
             G = self.F_G(i[self.new_benchmark_obj.get_M():])
             F= self.FO(G,i)
@@ -91,7 +87,6 @@ class DTLZ1:
             IND = [0,1,2]
             F = [F[i] for i in IND]
             if len(FOP_out_g_aval) == 0:
-                self.new_benchmark_obj.set_fo_out_g([F])
                 fo_out_g += [F]
         return fo_out_g 
                             
