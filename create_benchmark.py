@@ -32,17 +32,17 @@ class CreateBenchmark(InitBenchmark):
         if self.benchmark in self.PARAM:
            self.PARAM[self.benchmark]()
 
-    def point_in_constrains_in_g(self,vet_out_connstrain):
+    def const_in_g(self,vet_out_connstrain):
         return vet_out_connstrain[0]
 
-    def point_out_constrains_in_g(self,vet_out_connstrain):
+    def const_close_g(self,vet_out_connstrain):
         return vet_out_connstrain[1]
     
-    def point_out_constrains_out_g(self,vet_out_connstrain):
+    def const_out_g(self,vet_out_connstrain):
         return vet_out_connstrain
     
 
-    def plot_graphic_configure(self,vet_0=[],vet_1=[],vet_3=[]):
+    def plot_FP(self,vet_0=[],vet_1=[],vet_3=[]):
         fig = plt.figure()
         fig = plt.figure(figsize=(10, 15))
         ax = fig.add_subplot(111, projection='3d')
@@ -61,27 +61,16 @@ class CreateBenchmark(InitBenchmark):
         
   
 
-#benchmark = CreateBenchmark(1,1500,7,3)
-#benchmark.call_benchmark()
-#var1=benchmark.get_DTLZ().build_objective_space_in_G()
-#var2=benchmark.get_DTLZ().build_objective_space_out_G()
-#point1=benchmark.point_in_constrains_in_g(var1)
-#print(len(point1))
-#point2=benchmark.point_out_constrains_in_g(var1)
-#print(len(point2))
-#point3=benchmark.point_out_constrains_out_g(var2)
-#print(len(point3))
-#benchmark.plot_graphic_configure(point1)
-
-
-
-
-
-
-
-
-
-
-
+#bk = CreateBenchmark(1,1500,7,3)
+#bk.call_benchmark()
+#var1=bk.get_DTLZ().build_in_G()
+#var2=bk.get_DTLZ().build_out_G()
+#pt1=bk.const_in_g(var1)
+#print(len(pt1))
+#pt2=bk.const_close_g(var1)
+#print(len(pt2))
+#pt3=bk.const_out_g(var2)
+#print(len(pt3))
+#bk.plot_FP(pt1,pt3)
 
 

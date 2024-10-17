@@ -59,7 +59,7 @@ class DTLZ1:
         return 100*G_Xm[0]
 
         
-    def build_objective_space_in_G(self):
+    def build_in_G(self):
         fo_in=[]
         fo_out=[]
         for i in self.new_benchmark_obj.get_Point_in_G():
@@ -77,7 +77,7 @@ class DTLZ1:
        
 
 
-    def build_objective_space_out_G(self):
+    def build_out_G(self):
         fo_out_g=[]
         for i in self.new_benchmark_obj.get_Point_out_G():
             G = self.F_G(i[self.new_benchmark_obj.get_M():])
