@@ -6,6 +6,7 @@ from mpl_toolkits.mplot3d import Axes3D
 class DTLZ1:
 
     def __init__(self,new_benchmark_obj):
+        self.new_benchmark_obj=None
         self.new_benchmark_obj=new_benchmark_obj
                 
 
