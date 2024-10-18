@@ -12,16 +12,21 @@ class CreateBenchmark(InitBenchmark):
     
     def __init__(self,benchmark,P,N,M,DTLZ=None):
         super().__init__(P,N,M,DTLZ)
+        self.N=N
+        self.M=M
         self.benchmark=benchmark
         self.PARAM = {
                 1:  self.call_DTLZ1,
                 2:  self.call_DTLZ2,
                 }
           
-            
+    def K_validade(self):
+        assert self.N-self.M+1 > 0, "this value of 'k' is not valid, it must be greater than 0" 
+        return True
         
     def call_DTLZ1(self):
-        self.set_DTLZ(DTLZ1(self))
+        if self.K_validade() == True:
+            self.set_DTLZ(DTLZ1(self))
 
     
     def call_DTLZ2(self):
@@ -33,14 +38,17 @@ class CreateBenchmark(InitBenchmark):
            self.PARAM[self.benchmark]()
 
     def const_in_g(self,vet_out_connstrain):
+        assert isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with two dimension"
         return vet_out_connstrain[0]
 
     def const_close_g(self,vet_out_connstrain):
+        assert isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with two dimension"
         return vet_out_connstrain[1]
     
     def const_out_g(self,vet_out_connstrain):
+        assert not isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with one dimension"
         return vet_out_connstrain
-    
+           
 
     def plot_FP(self,vet_0=[],vet_1=[],vet_3=[]):
         fig = plt.figure()
@@ -61,7 +69,7 @@ class CreateBenchmark(InitBenchmark):
         
   
 
-#bk = CreateBenchmark(1,1500,7,3)
+#bk = CreateBenchmark(1,1500,10,3)
 #bk.call_benchmark()
 #var1=bk.get_DTLZ().build_in_G()
 #var2=bk.get_DTLZ().build_out_G()
@@ -69,8 +77,9 @@ class CreateBenchmark(InitBenchmark):
 #print(len(pt1))
 #pt2=bk.const_close_g(var1)
 #print(len(pt2))
-#pt3=bk.const_out_g(var2)
-#print(len(pt3))
+#pt3=bk.const_close_g(var1)
+#print(pt3)
+
 #bk.plot_FP(pt1,pt3)
 
 
