@@ -23,9 +23,13 @@ class CreateBenchmark(InitBenchmark):
     def K_validade(self):
         assert self.N-self.M+1 > 0, "this value of 'k' is not valid, it must be greater than 0" 
         return True
+    
+    def M_validade(self):
+        assert self.M >= 3, "this value of 'M' is not valid, it must be greater or equal than 3" 
+        return True
         
     def call_DTLZ1(self):
-        if self.K_validade() == True:
+        if self.K_validade() == True and self.M_validade() == True:
             self.set_DTLZ(DTLZ1(self))
 
     
@@ -69,7 +73,7 @@ class CreateBenchmark(InitBenchmark):
         
   
 
-#bk = CreateBenchmark(1,1500,10,3)
+#bk = CreateBenchmark(1,1500,3,2)
 #bk.call_benchmark()
 #var1=bk.get_DTLZ().build_in_G()
 #var2=bk.get_DTLZ().build_out_G()
