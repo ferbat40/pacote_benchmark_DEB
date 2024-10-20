@@ -67,8 +67,8 @@ class DTLZ1:
             F= self.FO(G,i)
             FOP_in_g_=self.FOP_in_g(F)
             FOP_in_g_aval=list(filter(lambda v: v == False, FOP_in_g_[1:] ))
-            ind = [0,1,2]
-            F = [F[i] for i in ind]
+            #ind = [0,1,2]
+            #F = [F[i] for i in ind]
             if len(FOP_in_g_aval) == 0:
                 fo_in+=[F]
             else:
@@ -84,8 +84,8 @@ class DTLZ1:
             F= self.FO(G,i)
             FOP_out_g_=self.FOP_out_g(F)
             FOP_out_g_aval=list(filter(lambda v: v == False, FOP_out_g_[1:] ))
-            IND = [0,1,2]
-            F = [F[i] for i in IND]
+            #IND = [0,1,2]
+            #F = [F[i] for i in IND]
             if len(FOP_out_g_aval) == 0:
                 fo_out_g += [F]
         return fo_out_g 

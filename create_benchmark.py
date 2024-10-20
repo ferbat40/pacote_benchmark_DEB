@@ -1,9 +1,11 @@
+import numpy as np
+import pandas as pd
+from algorithms import NSGA_benchmark
+import plotly.express as px
+import ipywidgets as widgets
+from IPython.display import display
 from DTLZ1 import DTLZ1
 from init_benchmark import InitBenchmark
-import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
-from algorithms import NSGA_benchmark
 
 
 
@@ -52,6 +54,8 @@ class CreateBenchmark(InitBenchmark):
     def const_out_g(self,vet_out_connstrain):
         assert not isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with one dimension"
         return vet_out_connstrain
+    
+    
            
 
     def plot_FP(self,vet_0=[],vet_1=[],vet_3=[]):
@@ -70,20 +74,103 @@ class CreateBenchmark(InitBenchmark):
         ax.view_init(elev=360, azim=25)
         plt.show()
 
+
+   
+
+    def transformer_data(self,vet,index):
+        self.vet=np.array(vet)
+        if len(self.vet)>0:
+         data = {
+            f'Objetivo_{index+1}':[i for i in self.vet[:,index]],
+           
+         }
+         return data
         
+    def choice_dataframe(self,FO_points):
+        vet_pandas=[]
+        for i in range(0,self.get_M()):
+            FO_pandas=pd.DataFrame(self.transformer_data(FO_points,i))
+            vet_pandas.append(FO_pandas)
+        return vet_pandas
+
+        
+    def create_dataframe(self,const_in_g=[],const_close_g=[],const_out_g=[]):
+        vet_const=[const_in_g,const_close_g,const_out_g]
+        all_data=[]
+        for index,value in enumerate(vet_const):
+             if len(value)>0:
+                 vet_pandas=self.choice_dataframe(value)
+                 data_pandas = vet_pandas[0]
+                 for i in vet_pandas[1:]:
+                     data_pandas=pd.concat([data_pandas,i] , axis = 1)
+                 all_data.append(data_pandas)    
+        all_data_pandas=all_data[0]
+        for n in all_data[1:]:
+            all_data_pandas=pd.concat([all_data_pandas,n] , axis = 0)
+        return all_data_pandas
+    
+
+    def plot_FP_M(self,const_in_g=[],const_close_g=[],const_out_g=[],x_axis="Objetivo_1",y_axis="Objetivo_2",z_axis="Objetivo_3"):
+        pd_fo=self.create_dataframe(const_in_g,const_close_g,const_out_g)
+        print(pd_fo)
+        fig = px.scatter_3d(
+            pd_fo,
+            x=x_axis,
+            y=y_axis,
+            z=z_axis,
+            title="Multiobjetivo",
+            color_discrete_sequence=['blue']
+        )
+        fig.show()
+
+        x_axis_widgets=widgets.Dropdown(options=pd_fo.columns.to_list(), description="Eixo x")
+        y_axis_widgets=widgets.Dropdown(options=pd_fo.columns.to_list(), description="Eixo y")
+        z_axis_widgets=widgets.Dropdown(options=pd_fo.columns.to_list(), description="Eixo z")
+
+        interactive_fo=widgets.interactive(self.update_plot_FP_M,
+                            x_axis=x_axis_widgets,
+                            y_axis=y_axis_widgets,
+                            z_axis=z_axis_widgets,
+                            pd_fo=widgets.fixed(pd_fo)                    
+                            )
+        display(interactive_fo)
+        
+
+    def update_plot_FP_M(self,x_axis,y_axis,z_axis,const_in_g,const_close_g,const_out_g):
+        pd_fo=self.create_dataframe(const_in_g,const_close_g,const_out_g)
+        fig = px.scatter_3d(
+        pd_fo,
+        x=x_axis,
+        y=y_axis,
+        z=z_axis,
+        title="Multiobjetivo",
+        color_discrete_sequence=['blue']
+        )
+        fig.show()
+
+
   
 
-#bk = CreateBenchmark(1,1500,3,2)
-#bk.call_benchmark()
-#var1=bk.get_DTLZ().build_in_G()
-#var2=bk.get_DTLZ().build_out_G()
-#pt1=bk.const_in_g(var1)
-#print(len(pt1))
-#pt2=bk.const_close_g(var1)
-#print(len(pt2))
-#pt3=bk.const_close_g(var1)
-#print(pt3)
+bk = CreateBenchmark(1,10,7,5)
+bk.call_benchmark()
+var1=bk.get_DTLZ().build_in_G()
+var2=bk.get_DTLZ().build_out_G()
 
-#bk.plot_FP(pt1,pt3)
+
+pt1=bk.const_in_g(var1)
+
+
+
+pt2=bk.const_close_g(var1)
+
+
+
+pt3=bk.const_out_g(var2)
+
+
+bk.plot_FP_M(pt1,pt2)
+
+
+
 
 
