@@ -4,6 +4,7 @@ from IPython.display import display
 import plotly.io as pio
 pio.renderers.default = 'colab'
 import plotly.offline as pyo
+pio.renderers.default = 'colab'
 
 
 class PlotFP_M():
