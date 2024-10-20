@@ -3,6 +3,7 @@ import plotly.express as px
 from IPython.display import display
 import plotly.io as pio
 pio.renderers.default = 'colab'
+import plotly.offline as pyo
 
 
 class PlotFP_M():
@@ -34,6 +35,6 @@ class PlotFP_M():
                  title="Multiobjetivo",
                  color_discrete_sequence=['blue']
                  )
-            fig.show()
+            pyo.fig.show()
         except Exception as e:
             print("Erro ao plotar o gráfico:", e)
