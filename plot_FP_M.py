@@ -20,6 +20,9 @@ class PlotFP_M():
         
 
      def plot_FP_M(self,x_axis,y_axis,z_axis):
+        x_axis=self.x_axis_widgets.value
+        y_axis=self.y_axis_widgets.value
+        z_axis=self.z_axis_widgets.value
         try:
             fig = px.scatter_3d(
                  self.pd_fo,
