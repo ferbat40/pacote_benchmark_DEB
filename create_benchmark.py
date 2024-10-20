@@ -1,13 +1,9 @@
 import numpy as np
 import pandas as pd
 from algorithms import NSGA_benchmark
-import plotly.express as px
-import ipywidgets as widgets
-from IPython.display import display
 from DTLZ1 import DTLZ1
 from init_benchmark import InitBenchmark
-
-
+from plot_FP_M import PlotFP_M
 
 
 class CreateBenchmark(InitBenchmark):
@@ -109,45 +105,7 @@ class CreateBenchmark(InitBenchmark):
             all_data_pandas=pd.concat([all_data_pandas,n] , axis = 0)
         return all_data_pandas
     
-
-    def plot_FP_M(self,const_in_g=[],const_close_g=[],const_out_g=[],x_axis="Objetivo_1",y_axis="Objetivo_2",z_axis="Objetivo_3"):
-        pd_fo=self.create_dataframe(const_in_g,const_close_g,const_out_g)
-        print(pd_fo)
-        fig = px.scatter_3d(
-            pd_fo,
-            x=x_axis,
-            y=y_axis,
-            z=z_axis,
-            title="Multiobjetivo",
-            color_discrete_sequence=['blue']
-        )
-        fig.show()
-
-        x_axis_widgets=widgets.Dropdown(options=pd_fo.columns.to_list(), description="Eixo x")
-        y_axis_widgets=widgets.Dropdown(options=pd_fo.columns.to_list(), description="Eixo y")
-        z_axis_widgets=widgets.Dropdown(options=pd_fo.columns.to_list(), description="Eixo z")
-
-        interactive_fo=widgets.interactive(self.update_plot_FP_M,
-                            x_axis=x_axis_widgets,
-                            y_axis=y_axis_widgets,
-                            z_axis=z_axis_widgets,
-                            pd_fo=widgets.fixed(pd_fo)                    
-                            )
-        display(interactive_fo)
-        
-
-    def update_plot_FP_M(self,x_axis,y_axis,z_axis,const_in_g,const_close_g,const_out_g):
-        pd_fo=self.create_dataframe(const_in_g,const_close_g,const_out_g)
-        fig = px.scatter_3d(
-        pd_fo,
-        x=x_axis,
-        y=y_axis,
-        z=z_axis,
-        title="Multiobjetivo",
-        color_discrete_sequence=['blue']
-        )
-        fig.show()
-
+      
 
   
 
@@ -167,8 +125,9 @@ class CreateBenchmark(InitBenchmark):
 
 #pt3=bk.const_out_g(var2)
 
-
-#bk.plot_FP_M(pt1,pt2)
+#pd_fo=bk.create_dataframe(pt1,pt2,pt3)
+#plot = PlotFP_M(pd_fo)
+#plot.plot_FP_M("Objetivo_1","Objetivo_2","Objetivo_3")
 
 
 
