@@ -1,1 +1,4 @@
 pymoo
+ipywidgets
+plotly
+ipython
