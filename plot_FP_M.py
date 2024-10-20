@@ -2,7 +2,7 @@ import ipywidgets as widgets
 import plotly.express as px
 from IPython.display import display
 import plotly.io as pio
-pio.renderers.default = 'colab'
+pio.renderers.default = 'notebook'
 
 
 class PlotFP_M():
@@ -26,7 +26,7 @@ class PlotFP_M():
      def plot_FP_M(self,x_axis,y_axis,z_axis):
         try:
             fig = px.scatter_3d(
-            self.pd_fo,
+                 self.pd_fo,
                  x=x_axis,
                  y=y_axis,
                  z=z_axis,

@@ -110,24 +110,24 @@ class CreateBenchmark(InitBenchmark):
 
   
 
-bk = CreateBenchmark(1,10,7,5)
-bk.call_benchmark()
-var1=bk.get_DTLZ().build_in_G()
-var2=bk.get_DTLZ().build_out_G()
+#bk = CreateBenchmark(1,10,7,5)
+#bk.call_benchmark()
+#var1=bk.get_DTLZ().build_in_G()
+#var2=bk.get_DTLZ().build_out_G()
 
 
-pt1=bk.const_in_g(var1)
-
-
-
-pt2=bk.const_close_g(var1)
+#pt1=bk.const_in_g(var1)
 
 
 
-pt3=bk.const_out_g(var2)
+#pt2=bk.const_close_g(var1)
 
-pd_fo=bk.create_dataframe(pt1,pt2,pt3)
-plot = PlotFP_M(pd_fo)
+
+
+#pt3=bk.const_out_g(var2)
+
+#pd_fo=bk.create_dataframe(pt1,pt2,pt3)
+#plot = PlotFP_M(pd_fo)
 #plot.plot_FP_M("Objetivo_1","Objetivo_2","Objetivo_3")
 
 
