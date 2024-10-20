@@ -6,6 +6,7 @@ from IPython.display import display
 class PlotFP_M():
      def __init__(self,pd_fo):
          self.pd_fo=pd_fo
+         print(self.pd_fo)
     
 
          x_axis_widgets=widgets.Dropdown(options=self.pd_fo.columns, description="Eixo x")
