@@ -2,6 +2,7 @@ import ipywidgets as widgets
 import plotly.express as px
 from IPython.display import display
 import plotly.io as pio
+pio.renderers.default = 'colab'
 
 
 class PlotFP_M():
@@ -20,6 +21,7 @@ class PlotFP_M():
         
 
      def plot_FP_M(self,b):
+        print("função chamada")
         x_axis=self.x_axis_widgets.value
         y_axis=self.y_axis_widgets.value
         z_axis=self.z_axis_widgets.value
