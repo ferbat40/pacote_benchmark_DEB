@@ -126,6 +126,7 @@ class CreateBenchmark(InitBenchmark):
 #pt3=bk.const_out_g(var2)
 
 #pd_fo=bk.create_dataframe(pt1,pt2,pt3)
+#print(pd_fo)
 #plot = PlotFP_M(pd_fo)
 #plot.plot_FP_M("Objetivo_1","Objetivo_2","Objetivo_3")
 
