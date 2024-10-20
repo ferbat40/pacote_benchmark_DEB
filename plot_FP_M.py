@@ -2,26 +2,22 @@ import ipywidgets as widgets
 import plotly.express as px
 from IPython.display import display
 import plotly.io as pio
-pio.renderers.default = 'notebook'
 
 
 class PlotFP_M():
      def __init__(self,pd_fo):
-         self.pd_fo=pd_fo
-         
-    
+         self.pd_fo=pd_fo  
 
-         x_axis_widgets=widgets.Dropdown(options=self.pd_fo.columns, description="Eixo x")
-         y_axis_widgets=widgets.Dropdown(options=self.pd_fo.columns, description="Eixo y")
-         z_axis_widgets=widgets.Dropdown(options=self.pd_fo.columns, description="Eixo z")
+         self.x_axis_widgets=widgets.Dropdown(options=self.pd_fo.columns, description="Eixo x")
+         self.y_axis_widgets=widgets.Dropdown(options=self.pd_fo.columns, description="Eixo y")
+         self.z_axis_widgets=widgets.Dropdown(options=self.pd_fo.columns, description="Eixo z")
 
-         interactive_fo=widgets.interactive(self.plot_FP_M,
-                            x_axis=x_axis_widgets,
-                            y_axis=y_axis_widgets,
-                            z_axis=z_axis_widgets,                 
-                            )
-         display(interactive_fo)
+         display(self.x_axis_widgets,self.y_axis_widgets,self.z_axis_widgets)
 
+         self.button = widgets.Button(description="Atualizar")
+         self.button.on_click(self.plot_FP_M)
+         display(self.button)
+        
 
      def plot_FP_M(self,x_axis,y_axis,z_axis):
         try:
