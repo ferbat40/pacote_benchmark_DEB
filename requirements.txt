@@ -2,3 +2,4 @@ pymoo
 ipywidgets
 plotly
 ipython
+pandas
