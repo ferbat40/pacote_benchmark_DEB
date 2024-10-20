@@ -1,41 +1,35 @@
 import ipywidgets as widgets
-import plotly.express as px
 from IPython.display import display
-import plotly.io as pio
-pio.renderers.default = 'colab'
-import plotly.offline as pyo
-pio.renderers.default = 'colab'
+import matplotlib.pyplot as plt
+
 
 
 class PlotFP_M():
      def __init__(self,pd_fo):
          self.pd_fo=pd_fo  
 
-         self.x_axis_widgets=widgets.Dropdown(options=self.pd_fo.columns, description="Eixo x")
-         self.y_axis_widgets=widgets.Dropdown(options=self.pd_fo.columns, description="Eixo y")
-         self.z_axis_widgets=widgets.Dropdown(options=self.pd_fo.columns, description="Eixo z")
 
-         display(self.x_axis_widgets,self.y_axis_widgets,self.z_axis_widgets)
-
-         self.button = widgets.Button(description="Atualizar")
+         self.objectives = list(self.pd_fo.columns)
+         self.y_axis_widgets = widgets.SelectMultiple(options=self.objectives, description = "MultiObjetivo")
+         self.button=widgets.Button(description="Plotar")
          self.button.on_click(self.plot_FP_M)
-         display(self.button)
-        
+
+         display(self.y_axis_widgets, self.button)
+       
 
      def plot_FP_M(self,b):
-        print("função chamada")
-        x_axis=self.x_axis_widgets.value
-        y_axis=self.y_axis_widgets.value
-        z_axis=self.z_axis_widgets.value
-        try:
-            fig = px.scatter_3d(
-                 self.pd_fo,
-                 x=x_axis,
-                 y=y_axis,
-                 z=z_axis,
-                 title="Multiobjetivo",
-                 color_discrete_sequence=['blue']
-                 )
-            pyo.fig.show()
-        except Exception as e:
-            print("Erro ao plotar o gráfico:", e)
+        selected_objectives = list(self.y_axis_widgets.value)
+        plt.figure(figsize=(10,6))
+
+
+        for i in selected_objectives:
+            plt.plot(self.pd_fo.index, self.pd_fo[i], marker='o', label =i)
+        plt.title("Objetives")
+        plt.xlabel("Indice")
+        plt.ylabel("valor")
+        plt.grid()
+        plt.show()
+
+
+
+        
