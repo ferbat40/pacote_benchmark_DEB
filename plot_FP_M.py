@@ -21,7 +21,8 @@ class PlotFP_M():
 
 
      def plot_FP_M(self,x_axis,y_axis,z_axis):
-        fig = px.scatter_3d(
+        try:
+            fig = px.scatter_3d(
             self.pd_fo,
                  x=x_axis,
                  y=y_axis,
@@ -29,4 +30,6 @@ class PlotFP_M():
                  title="Multiobjetivo",
                  color_discrete_sequence=['blue']
                  )
-        fig.show()
+            fig.show()
+        except Exception as e:
+            print("Erro ao plotar o gráfico:", e)
