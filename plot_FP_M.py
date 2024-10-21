@@ -39,7 +39,7 @@ class PlotFP_M():
                  #ax.scatter(point[:,self.x_axis_index], point[:,self.y_axis_index], point[:,self.z_axis_index], color=color, label = vector)
                  
                           
-                 print(f'data {point[:,self.x_axis_index]} colors {color} vetor {vector}')
+                 print(f'data {point[:,1]} colors {color} vetor {vector}')
 
          ax.set_xlabel(self.x_axis.value)
          ax.set_ylabel(self.y_axis.value)
