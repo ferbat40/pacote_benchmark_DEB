@@ -16,14 +16,13 @@ class PlotFP_M():
          self.x_axis = widgets.Dropdown(options=self.list_axis, description="Axis X")
          self.y_axis = widgets.Dropdown(options=self.list_axis, description="Axis Y")
          self.z_axis = widgets.Dropdown(options=self.list_axis, description="Axis Z")
-         self.button = widgets.Button(description="Plot")
+         self.button = widgets.Button(description="PLOT")
          self.button.on_click(self.PlotPF) 
          display(self.x_axis,self.y_axis,self.z_axis,self.button)
                 
                   
 
      def PlotPF(self,b):
-         print("Plot Graph")
          self.x_axis_index = int(self.x_axis.value.split()[-1])-1
          self.y_axis_index = int(self.y_axis.value.split()[-1])-1
          self.z_axis_index = int(self.z_axis.value.split()[-1])-1
@@ -43,6 +42,7 @@ class PlotFP_M():
          ax.set_zlabel(self.z_axis.value)
          ax.view_init(elev=360, azim=25)
          ax.legend()
+         ax.set_title("Plot Graph")
          plt.show()
     
               
