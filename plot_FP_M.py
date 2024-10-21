@@ -33,9 +33,7 @@ class PlotFP_M():
          
          colors  = ['red','gray','blue']
          vectors = ['Points one','Points two','Points three']         
-         fig = plt.figure(figsize=(10, 15))
-         fig.canvas.draw_idle()
-         
+              
 
 
          for (data,color,vector) in zip([self.pt1,self.pt2,self.pt3],colors,vectors):
