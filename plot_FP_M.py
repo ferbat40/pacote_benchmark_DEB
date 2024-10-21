@@ -29,7 +29,7 @@ class PlotFP_M():
          
          colors  = ['red','gray','blue']
          vectors = ['Points one','Points two','Points three']         
-         fig = plt.figure(figsize=(10, 19))
+         fig = plt.figure(figsize=(13, 22))
          ax = fig.add_subplot(111, projection='3d')
 
 
