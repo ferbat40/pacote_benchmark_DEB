@@ -21,7 +21,7 @@ class PlotFP_M():
                 
                   
 
-     def PlotPF(self):
+     def PlotPF(self,b):
          print("plotar grafico")
          self.x_axis_index = int(self.x_axis.value.split()[1])-1
          self.y_axis_index = int(self.y_axis.value.split()[1])-1
