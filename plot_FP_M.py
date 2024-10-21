@@ -26,6 +26,7 @@ class PlotFP_M():
          self.x_axis_index = int(self.x_axis.value.split()[-1])-1
          self.y_axis_index = int(self.y_axis.value.split()[-1])-1
          self.z_axis_index = int(self.z_axis.value.split()[-1])-1
+         
          colors  = ['azul','verde','amarelo']
          vectors = ['vetor1','vetor2','vetor3']         
          fig = plt.figure(figsize=(10, 15))
@@ -38,7 +39,7 @@ class PlotFP_M():
                  #ax.scatter(point[:,self.x_axis_index], point[:,self.y_axis_index], point[:,self.z_axis_index], color=color, label = vector)
                  
                           
-                 print(f'data {point} colors {color} vetor {vector}')
+                 print(f'data {point[:,self.x_axis_index]} colors {color} vetor {vector}')
 
          ax.set_xlabel(self.x_axis.value)
          ax.set_ylabel(self.y_axis.value)
