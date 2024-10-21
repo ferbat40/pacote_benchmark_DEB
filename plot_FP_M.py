@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 
 class PlotFP_M():
      def __init__(self,Objectives,pt1=[],pt2=[],pt3=[]):
-         self.pt1=pt1
-         self.pt2=pt2
-         self.pt3=pt3
+         self.pt1=[pt1]
+         self.pt2=[pt2]
+         self.pt3=[pt3]
          self.list_axis=[f'Objective {i+1}' for i in range(Objectives)]
 
       
