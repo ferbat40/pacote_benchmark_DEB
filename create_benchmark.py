@@ -107,7 +107,7 @@ class CreateBenchmark(InitBenchmark):
         return all_data_pandas
 
     def call_plot_PF_M(self,pt1=[],pt2=[],pt3=[]):
-        plot = PlotFP_M(self.get_M(),np.array(pt1),np.array(pt2),np.array(pt3))
+        plot = PlotFP_M(self.get_M(),pt1,pt2,pt3)
      
 
 #bk = CreateBenchmark(1, 100,7,4)

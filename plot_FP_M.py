@@ -1,14 +1,15 @@
 import ipywidgets as widgets
 from IPython.display import display
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 
 class PlotFP_M():
      def __init__(self,Objectives,pt1=[],pt2=[],pt3=[]):
-         self.pt1=[pt1]
-         self.pt2=[pt2]
-         self.pt3=[pt3]
+         self.pt1=[np.array(pt1)]
+         self.pt2=[np.array(pt2)]
+         self.pt3=[np.array(pt3)]
          self.list_axis=[f'Objective {i+1}' for i in range(Objectives)]
 
       
