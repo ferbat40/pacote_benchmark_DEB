@@ -18,16 +18,16 @@ class CreateBenchmark(InitBenchmark):
                 2:  self.call_DTLZ2,
                 }
           
-    def K_validade(self):
+    def K_validate(self):
         assert self.N-self.M+1 > 0, "this value of 'k' is not valid, it must be greater than 0" 
         return True
     
-    def M_validade(self):
+    def M_validate(self):
         assert self.M >= 3, "this value of 'M' is not valid, it must be greater or equal than 3" 
         return True
         
     def call_DTLZ1(self):
-        if self.K_validade() == True and self.M_validade() == True:
+        if self.K_validate() == True and self.M_validate() == True:
             self.set_DTLZ(DTLZ1(self))
 
     
@@ -50,29 +50,7 @@ class CreateBenchmark(InitBenchmark):
     def const_out_g(self,vet_out_connstrain):
         assert not isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with one dimension"
         return vet_out_connstrain
-    
-    
-           
-
-    def plot_FP(self,vet_0=[],vet_1=[],vet_3=[]):
-        fig = plt.figure()
-        fig = plt.figure(figsize=(10, 15))
-        ax = fig.add_subplot(111, projection='3d')
-        ff = np.array([fp[0:] if len(fp) > 0 else [0,0,0] for fp in vet_0])
-        pp = np.array([fp[0:] if len(fp) > 0 else [0,0,0] for fp in vet_1])
-        cp = np.array([cv[0:] if len(cv) > 0 else [0,0,0] for cv in vet_3])
-        if (len(ff) >0):
-            ax.scatter(ff[:,0],ff[:,1],ff[:,2],color='red')
-        if (len(pp) >0):
-            ax.scatter(pp[:,0],pp[:,1],pp[:,2],color='gray')
-        if (len(cp) >0):
-            ax.scatter(cp[:,0],cp[:,1],cp[:,2])
-        ax.view_init(elev=360, azim=25)
-        plt.show()
-
-
    
-
     def transformer_data(self,vet,index):
         self.vet=np.array(vet)
         if len(self.vet)>0:
