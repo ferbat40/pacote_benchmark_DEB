@@ -35,10 +35,10 @@ class PlotFP_M():
          for (data,color,vector) in zip([self.pt1,self.pt2,self.pt3],colors,vectors):
              for point in data:
                  print(self.x_axis_index)
-                 ax.scatter(point[:,self.x_axis_index], point[:,self.y_axis_index], point[:,self.z_axis_index], color=color, label = vector)
+                 #ax.scatter(point[:,self.x_axis_index], point[:,self.y_axis_index], point[:,self.z_axis_index], color=color, label = vector)
                  
                           
-                 #print(f'data {point} colors {color} vetor {vector}')
+                 print(f'data {point} colors {color} vetor {vector}')
 
          ax.set_xlabel(self.x_axis.value)
          ax.set_ylabel(self.y_axis.value)
