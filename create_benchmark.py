@@ -105,12 +105,12 @@ class CreateBenchmark(InitBenchmark):
             all_data_pandas=pd.concat([all_data_pandas,n] , axis = 0)
         all_data_pandas.reset_index(drop=True, inplace=True)
         return all_data_pandas
-    
-      
 
-  
+    def call_plot_PF_M(self,pt1=[],pt2=[],pt3=[]):
+        plot = PlotFP_M(self.get_M(),np.array(pt1),np.array(pt2),np.array(pt3))
+     
 
-#bk = CreateBenchmark(1,10,7,5)
+#bk = CreateBenchmark(1, 100,7,4)
 #bk.call_benchmark()
 #var1=bk.get_DTLZ().build_in_G()
 #var2=bk.get_DTLZ().build_out_G()
@@ -126,8 +126,9 @@ class CreateBenchmark(InitBenchmark):
 
 #pt3=bk.const_out_g(var2)
 
+
 #pd_fo=bk.create_dataframe(pt1,pt2,pt3)
-#plot = PlotFP_M(pd_fo)
+#bk.call_plot_PF_M(pt1,pt2,pt3)
 #plot.plot_FP_M("Objetivo_1","Objetivo_2","Objetivo_3")
 
 

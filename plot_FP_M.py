@@ -5,31 +5,49 @@ import matplotlib.pyplot as plt
 
 
 class PlotFP_M():
-     def __init__(self,pd_fo):
-         self.pd_fo=pd_fo  
+     def __init__(self,Objectives,pt1=[],pt2=[],pt3=[]):
+         self.pt1=pt1
+         self.pt2=pt2
+         self.pt3=pt3
+         self.list_axis=[f'Objective {i+1}' for i in range(Objectives)]
+
+      
+         self.x_axis = widgets.Dropdown(options=self.list_axis, description="Axis X")
+         self.y_axis = widgets.Dropdown(options=self.list_axis, description="Axis Y")
+         self.z_axis = widgets.Dropdown(options=self.list_axis, description="Axis Z")
+         self.button = widgets.Button(description="Plot")
+         self.button.on_click(self.PlotPF) 
+         display(self.x_axis,self.y_axis,self.z_axis,self.button)
+                
+                  
+
+     def PlotPF(self):
+         print("plotar grafico")
+         self.x_axis_index = int(self.x_axis.value.split()[1])-1
+         self.y_axis_index = int(self.y_axis.value.split()[1])-1
+         self.z_axis_index = int(self.z_axis.value.split()[1])-1
+         colors  = ['azul','verde','amarelo']
+         vectors = ['vetor1','vetor2','vetor3']         
+         fig = plt.figure(figsize=(10, 15))
+         ax = fig.add_subplot(111, projection='3d')
 
 
-         self.objectives = list(self.pd_fo.columns)
-         self.y_axis_widgets = widgets.SelectMultiple(options=self.objectives, description = "MultiObjetivo")
-         self.button=widgets.Button(description="Plotar")
-         self.button.on_click(self.plot_FP_M)
+         for (data,color,vector) in zip([self.pt1,self.pt2,self.pt3],colors,vectors):
+             for point in data:
+                 ax.scatter(point[:,self.x_axis], point[:,self.y_axis_index], point[:,self.z_axis_index], color=color, label = vector)
+                 #print(f'data {point} colors {color} vetor {vector}')
 
-         display(self.y_axis_widgets, self.button)
-       
+         ax.set_xlabel(self.x_axis.value)
+         ax.set_ylabel(self.y_axis.value)
+         ax.set_zlabel(self.z_axis.value)
+         ax.view_init(elev=360, azim=25)
+         ax.legend()
+         plt.show()
+    
+              
 
-     def plot_FP_M(self,b):
-        selected_objectives = list(self.y_axis_widgets.value)
-        plt.figure(figsize=(10,6))
 
-
-        for i in selected_objectives:
-            plt.plot(self.pd_fo.index, self.pd_fo[i], marker='o', label =i)
-        plt.title("Objetives")
-        plt.xlabel("Indice")
-        plt.ylabel("valor")
-        plt.grid()
-        plt.show()
+         
 
 
 
-        
