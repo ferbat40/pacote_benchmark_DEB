@@ -58,7 +58,7 @@ class CreateBenchmark(InitBenchmark):
         self.vet=np.array(vet)
         if len(self.vet)>0:
          data = {
-            f'Objetivo_{index+1}':[i for i in self.vet[:,index]],
+            f'Objective_{index+1}':[i for i in self.vet[:,index]],
            
          }
          return data
@@ -90,7 +90,7 @@ class CreateBenchmark(InitBenchmark):
 
     def call_plot_PF_M(self,pt1=[],pt2=[],pt3=[]):
         if self.K_validate() == True and self.M_validate() == True:
-            plot = PlotFP_M(self.get_M(),pt1,pt2,pt3)
+            PlotFP_M(self.get_M(),pt1,pt2,pt3)
      
 
 #bk = CreateBenchmark(1, 100,7,4)

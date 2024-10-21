@@ -30,6 +30,7 @@ class PlotFP_M():
          colors  = ['red','gray','blue']
          vectors = ['Points one','Points two','Points three']         
          fig = plt.figure(figsize=(10, 15))
+         fig.canvas.draw_idle()
          ax = fig.add_subplot(111, projection='3d')
 
 
