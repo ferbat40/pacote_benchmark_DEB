@@ -40,15 +40,18 @@ class CreateBenchmark(InitBenchmark):
            self.PARAM[self.benchmark]()
 
     def const_in_g(self,vet_out_connstrain):
-        assert isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with two dimension"
+        if self.K_validate() == True and self.M_validate() == True:
+            assert isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with two dimension"
         return vet_out_connstrain[0]
 
     def const_close_g(self,vet_out_connstrain):
-        assert isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with two dimension"
+        if self.K_validate() == True and self.M_validate() == True:
+            assert isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with two dimension"
         return vet_out_connstrain[1]
     
     def const_out_g(self,vet_out_connstrain):
-        assert not isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with one dimension"
+        if self.K_validate() == True and self.M_validate() == True:
+            assert not isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with one dimension"
         return vet_out_connstrain
    
     def transformer_data(self,vet,index):
@@ -69,6 +72,7 @@ class CreateBenchmark(InitBenchmark):
 
         
     def create_dataframe(self,const_in_g=[],const_close_g=[],const_out_g=[]):
+     if self.K_validate() == True and self.M_validate() == True:
         vet_const=[const_in_g,const_close_g,const_out_g]
         all_data=[]
         for index,value in enumerate(vet_const):
