@@ -19,10 +19,14 @@ class PlotFP_M():
          self.button = widgets.Button(description="PLOT")
          self.button.on_click(self.PlotPF) 
          display(self.x_axis,self.y_axis,self.z_axis,self.button)
+
+         self.fig = plt.figure(figsize=(10, 15))
+         self.ax = self.fig.add_subplot(111, projection='3d')
                 
                   
 
      def PlotPF(self,b):
+         self.ax.clear()
          self.x_axis_index = int(self.x_axis.value.split()[-1])-1
          self.y_axis_index = int(self.y_axis.value.split()[-1])-1
          self.z_axis_index = int(self.z_axis.value.split()[-1])-1
@@ -31,20 +35,20 @@ class PlotFP_M():
          vectors = ['Points one','Points two','Points three']         
          fig = plt.figure(figsize=(10, 15))
          fig.canvas.draw_idle()
-         ax = fig.add_subplot(111, projection='3d')
+         
 
 
          for (data,color,vector) in zip([self.pt1,self.pt2,self.pt3],colors,vectors):
              for point in data:
                  if len(point) > 0:
                      ax.scatter(point[:,self.x_axis_index], point[:,self.y_axis_index], point[:,self.z_axis_index], color=color, label = vector)
-         ax.set_xlabel(self.x_axis.value)
-         ax.set_ylabel(self.y_axis.value)
-         ax.set_zlabel(self.z_axis.value)
-         ax.view_init(elev=360, azim=25)
-         ax.legend()
-         ax.set_title("Plot Graph")
-         plt.show()
+         self.ax.set_xlabel(self.x_axis.value)
+         self.ax.set_ylabel(self.y_axis.value)
+         self.ax.set_zlabel(self.z_axis.value)
+         self.ax.view_init(elev=360, azim=25)
+         self.ax.legend()
+         self.ax.set_title("Plot Graph")
+         plt.draw()
     
               
 
