@@ -28,8 +28,8 @@ class PlotFP_M():
          self.y_axis_index = int(self.y_axis.value.split()[-1])-1
          self.z_axis_index = int(self.z_axis.value.split()[-1])-1
          
-         colors  = ['azul','verde','amarelo']
-         vectors = ['vetor1','vetor2','vetor3']         
+         colors  = ['red','cyan','blue']
+         vectors = ['vector1','vector2','vector3']         
          fig = plt.figure(figsize=(10, 15))
          ax = fig.add_subplot(111, projection='3d')
 
