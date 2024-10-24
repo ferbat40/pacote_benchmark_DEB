@@ -3,3 +3,4 @@ ipywidgets
 plotly
 ipython
 pandas
+deap
