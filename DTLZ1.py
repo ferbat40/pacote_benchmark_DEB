@@ -40,6 +40,7 @@ class DTLZ1:
         return index_v_f
     
     
+    
     def FO(self,G,X):
         F_index=[]
         for v in range(0,self.new_benchmark_obj.get_M()):
