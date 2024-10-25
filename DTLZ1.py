@@ -93,11 +93,10 @@ class DTLZ1:
         G = self.F_G(generations[self.new_benchmark_obj.get_M():])
         F= self.FO(G,generations)
         fo_NSGA2 += [F]
-        if np.iscomplexobj(fo_NSGA2):
-            fo_NSGA2=np.real(fo_NSGA2)
+        fo_NSGA2=np.array(fo_NSGA2)
 
 
-        return tuple(fo_NSGA2[0])
+        return fo_NSGA2[0]
 
                             
 

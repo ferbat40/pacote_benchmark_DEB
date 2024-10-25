@@ -96,10 +96,10 @@ class CreateBenchmark(InitBenchmark):
           
      
 
-#bk = CreateBenchmark(1, 3,10,3)
+#bk = CreateBenchmark(1, 3,6,3)
 #bk.call_benchmark()
 #var1=bk.get_DTLZ().build_in_G()
-##var2=bk.get_DTLZ().build_out_G()
+#var2=bk.get_DTLZ().build_out_G()
 
 
 #pt1=bk.const_in_g(var1)
@@ -119,9 +119,13 @@ class CreateBenchmark(InitBenchmark):
 
 
 #NSGA = NSGA_benchmark(bk)
-##NSGA.creator_NSGA()
-#FO_NSGA=NSGA.run_NSGA()
-#print(FO_NSGA)
+#NSGA.creator_NSGA()
+#fop=NSGA.run_NSGA()
+#print(fop)
+#print(bk.get_Nvar())
+
+
+
 
 
 
