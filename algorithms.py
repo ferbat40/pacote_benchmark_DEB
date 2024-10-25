@@ -23,7 +23,7 @@ class NSGA_benchmark(DTLZ1):
         self.toolbox.register("population", tools.initRepeat, list, self.toolbox.individual)
         self.toolbox.register("evaluate",self.build_NSGA2)
         self.toolbox.register("mate", tools.cxSimulatedBinary, eta=15)
-        self.toolbox.register("mutate", tools.mutPolynomialBounded, low=0.0, up=1.0, eta=15, indpb=1/self.n)
+        self.toolbox.register("mutate", tools.mutPolynomialBounded, low=0.0, up=1.0, eta=20, indpb=1/self.n)
         #self.toolbox.register("mutate", tools.mutGaussian, mu=0, sigma=0.1, indpb=1/self.n)
         
         self.toolbox.register("select", tools.selNSGA2)
