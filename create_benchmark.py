@@ -96,21 +96,21 @@ class CreateBenchmark(InitBenchmark):
           
      
 
-#bk = CreateBenchmark(1, 3,6,3)
-#bk.call_benchmark()
-#var1=bk.get_DTLZ().build_in_G()
-#var2=bk.get_DTLZ().build_out_G()
+bk = CreateBenchmark(1, 3,6,3)
+bk.call_benchmark()
+var1=bk.get_DTLZ().build_in_G()
+var2=bk.get_DTLZ().build_out_G()
 
 
-#pt1=bk.const_in_g(var1)
-
-
-
-#pt2=bk.const_close_g(var1)
+pt1=bk.const_in_g(var1)
 
 
 
-#pt3=bk.const_out_g(var2)
+pt2=bk.const_close_g(var1)
+
+
+
+pt3=bk.const_out_g(var2)
 
 
 #pd_fo=bk.create_dataframe(pt1,pt2,pt3)
@@ -118,11 +118,11 @@ class CreateBenchmark(InitBenchmark):
 #plot.plot_FP_M("Objetivo_1","Objetivo_2","Objetivo_3")
 
 
-#NSGA = NSGA_benchmark(bk)
-#NSGA.creator_NSGA()
-#fop=NSGA.run_NSGA()
-#print(fop)
-#print(bk.get_Nvar())
+NSGA = NSGA_benchmark(bk)
+NSGA.creator_NSGA()
+fop=NSGA.run_NSGA()
+print(fop)
+print(bk.get_Nvar())
 
 
 
