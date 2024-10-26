@@ -88,15 +88,20 @@ class DTLZ1:
         return fo_out_g 
     
 
-    def build_NSGA2(self,generations):
-        fo_NSGA2=[]
-        G = self.F_G(generations[self.new_benchmark_obj.get_M():])
-        F= self.FO(G,generations)
-        fo_NSGA2 += [F]
-        fo_NSGA2=np.array(fo_NSGA2)
-
-
-        return fo_NSGA2[0]
+    def build_NSGA2_FO(self,generations):
+        fo_out_g=[]
+        for i,indice in enumerate(generations):
+            G = self.F_G(indice[self.new_benchmark_obj.get_M():])
+            F= self.FO(G,indice)
+            fo_out_g.append(F)
+        return np.array(fo_out_g)
+    
+    def build_NSGA2_G(self,generations):
+         fo_out_g=[]
+         for i,indice in enumerate(generations):
+            G = self.F_G(indice[self.new_benchmark_obj.get_M():])
+            fo_out_g.append(G)
+         return np.array(fo_out_g)
 
                             
 
