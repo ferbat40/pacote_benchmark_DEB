@@ -120,6 +120,7 @@ pt3=bk.const_out_g(var2)
 
 NSGAPy = NSGAPymoo(bk)
 NSGAPy.exec()
+print(bk.get_Nvar(), bk.get_M(), bk.get_K())
 
 
 
