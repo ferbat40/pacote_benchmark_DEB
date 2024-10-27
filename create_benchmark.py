@@ -119,7 +119,9 @@ pt3=bk.const_out_g(var2)
 #plot.plot_FP_M("Objetivo_1","Objetivo_2","Objetivo_3")
 
 NSGAPy = NSGAPymoo(bk)
-NSGAPy.exec()
+pt_nsga= NSGAPy.exec()
+print(pt_nsga.F)
+
 print(bk.get_Nvar(), bk.get_M(), bk.get_K())
 
 

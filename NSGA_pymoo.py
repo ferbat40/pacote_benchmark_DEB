@@ -14,12 +14,12 @@ class NSGAPymoo(Problem):
         
         self.init_benchmark=init_benchmark
         xl = np.full(self.init_benchmark.get_Nvar(),0.1)
-        xu = np.full(self.init_benchmark.get_Nvar(),0.55)
+        xu = np.full(self.init_benchmark.get_Nvar(),0.6)
         self.DTLZ1=DTLZ1(self.init_benchmark)
         
        
         
-        super(). __init__(n_var=6, n_obj=3, n_ieq_constr=0, xl=xl, xu=xu)
+        super(). __init__(n_var=self.init_benchmark.get_Nvar(), n_obj=self.init_benchmark.get_M(), n_ieq_constr=1, xl=xl, xu=xu)
 
 
 
@@ -103,7 +103,7 @@ class NSGAPymoo(Problem):
         
     
     def calc_g(self,x):
-         x[:,self.init_benchmark.get_M()-1:]=0.5
+         #x[:,self.init_benchmark.get_M()-1:]#=0.5
          Gxm=x[:,self.init_benchmark.get_M()-1:]
          Gxm=np.array(Gxm)
          #print("gxm",Gxm)
@@ -114,8 +114,18 @@ class NSGAPymoo(Problem):
          G=np.array(G)  
          G=G.reshape((Gxm.shape[0],1))
          return G
-         
-         
+    
+    def constraits(self,f):
+        f_constraits=np.array(f)
+        f_c=[]
+        for index,linha in enumerate(range(f_constraits.shape[0])):
+            f_c.append(np.sum([ f_c  for  f_c in f_constraits[linha,0:f_constraits.shape[1]]])-0.6)
+        
+        f_c=np.array(f_c)
+        f_c=f_c.reshape(f_constraits.shape[0],1)
+        #print(f_c)
+        #print("all",f_constraits)
+        return f_c
 
         
 
@@ -130,41 +140,38 @@ class NSGAPymoo(Problem):
         F=self.calc_f(x,Gxm)
         #x[:,self.init_benchmark.get_M()-1:]=0.5
 
-        Fg=self.DTLZ1.build_NSGA2_FO(x)
-        out["F"]=np.column_stack([F[0],F[1],F[2]])#Fg
+        #Fg=self.DTLZ1.build_NSGA2_FO(x)
+        F_join = np.column_stack([F[0],F[1],F[2]])
+        out["F"]=F_join#Fg
+        f_c=self.constraits(F_join)
         
         #print("F1",F1,"F2",F2,"F3")
         #print("x",x)
         
         #print("Gxm",Gxm)
         
-        #out["G"]=Gxm
+        out["G"]=f_c
         
 
     def exec(self):
-        ref_dirs = get_reference_directions("das-dennis", 3, n_partitions=1)
+        ref_dirs = get_reference_directions("das-dennis", 3, n_partitions=15)
         popsize = ref_dirs.shape[0] + ref_dirs.shape[0] % 4
         nsga3 = NSGA3(ref_dirs, pop_size=popsize)
         
         
 
         
-        SEED=0
+        SEED=15
         
         
         res_NSGA = minimize(
             NSGAPymoo(self.init_benchmark),
             nsga3,
-            ('n_gen', 2),
+            ('n_gen', 300),
             seed=SEED,
             save_history=True,
             verbose=False
-            )
-        
-        
-        print("Objetivos:", res_NSGA.F)
-       
-        
+            )      
         
         return res_NSGA
 
