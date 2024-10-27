@@ -121,7 +121,7 @@ class CreateBenchmark(InitBenchmark):
 #NSGAPy = NSGAPymoo(bk)
 #pt_nsga= NSGAPy.exec()
 
-#print(len(pt_nsga.F))
+#print(pt_nsga)
 
 #print(bk.get_Nvar(), bk.get_M(), bk.get_K())
 
