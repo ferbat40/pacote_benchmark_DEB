@@ -154,7 +154,7 @@ class NSGAPymoo(Problem):
         
 
     def exec(self):
-        ref_dirs = get_reference_directions("das-dennis", 3, n_partitions=15)
+        ref_dirs = get_reference_directions("das-dennis", 3, n_partitions=30)
         popsize = ref_dirs.shape[0] + ref_dirs.shape[0] % 4
         nsga3 = NSGA3(ref_dirs, pop_size=popsize)
         
