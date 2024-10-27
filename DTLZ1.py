@@ -89,6 +89,7 @@ class DTLZ1:
     
 
     def build_NSGA2_FO(self,generations):
+        print(generations)
         fo_out_g=[]
         for i,indice in enumerate(generations):
             G = self.F_G(indice[self.new_benchmark_obj.get_M():])
