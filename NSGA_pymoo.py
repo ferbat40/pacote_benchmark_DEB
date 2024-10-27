@@ -173,7 +173,7 @@ class NSGAPymoo(Problem):
             verbose=False
             )      
         
-        fo=np.column_stack([res_NSGA.X,res_NSGA.F])
+        fo=np.column_stack([res_NSGA.F])
         
         return fo
 
