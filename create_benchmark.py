@@ -43,17 +43,17 @@ class CreateBenchmark(InitBenchmark):
     def const_in_g(self,vet_out_connstrain):
         if self.K_validate() == True and self.M_validate() == True:
             assert isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with two dimension"
-        return vet_out_connstrain[0]
+        return np.array(vet_out_connstrain[0])
 
     def const_close_g(self,vet_out_connstrain):
         if self.K_validate() == True and self.M_validate() == True:
             assert isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with two dimension"
-        return vet_out_connstrain[1]
+        return np.array(vet_out_connstrain[1])
     
     def const_out_g(self,vet_out_connstrain):
         if self.K_validate() == True and self.M_validate() == True:
             assert not isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with one dimension"
-        return vet_out_connstrain
+        return np.array(vet_out_connstrain)
    
     def transformer_data(self,vet,index):
         self.vet=np.array(vet)
@@ -97,7 +97,7 @@ class CreateBenchmark(InitBenchmark):
           
      
 
-bk = CreateBenchmark(1, 3,6,3)
+#bk = CreateBenchmark(1, 1000,6,3)
 #bk.call_benchmark()
 #var1=bk.get_DTLZ().build_in_G()
 #var2=bk.get_DTLZ().build_out_G()
@@ -112,18 +112,19 @@ bk = CreateBenchmark(1, 3,6,3)
 
 
 #pt3=bk.const_out_g(var2)
+#print(pt1)
 
 
 #pd_fo=bk.create_dataframe(pt1,pt2,pt3)
-#bk.call_plot_PF_M(pt1,pt2,pt3)
+#k.call_plot_PF_M(pt1,pt2,pt3)
 #plot.plot_FP_M("Objetivo_1","Objetivo_2","Objetivo_3")
 
-NSGAPy = NSGAPymoo(bk)
-pt_nsga= NSGAPy.exec()
-pt_nsga=np.array(pt_nsga)
+#NSGAPy = NSGAPymoo(bk)
+#pt_nsga= NSGAPy.exec()
+#pt_nsga=np.array(pt_nsga)
 
 
-print(pt_nsga)
+#print(pt_nsga)
 
 #print(bk.get_Nvar(), bk.get_M(), bk.get_K())
 
