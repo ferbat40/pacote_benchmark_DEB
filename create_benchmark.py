@@ -107,12 +107,12 @@ class CreateBenchmark(InitBenchmark):
 
 
 
-#pt2=bk.const_close_g(var1)
+##pt2=bk.const_close_g(var1)
 
 
 
 #pt3=bk.const_out_g(var2)
-#print(pt1)
+#print(pt3)
 
 
 #pd_fo=bk.create_dataframe(pt1,pt2,pt3)

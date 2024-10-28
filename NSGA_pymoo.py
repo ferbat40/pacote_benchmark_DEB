@@ -13,8 +13,8 @@ class NSGAPymoo(Problem):
     def __init__(self,init_benchmark,population=300, generations=100):
         
         self.init_benchmark=init_benchmark
-        xl = np.full(self.init_benchmark.get_Nvar(),0.1)
-        xu = np.full(self.init_benchmark.get_Nvar(),0.6)
+        xl = np.full(self.init_benchmark.get_Nvar(),0)
+        xu = np.full(self.init_benchmark.get_Nvar(),1)
         self.DTLZ1=DTLZ1(self.init_benchmark)
         
        

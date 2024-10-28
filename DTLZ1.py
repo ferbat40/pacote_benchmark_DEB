@@ -72,6 +72,8 @@ class DTLZ1:
                 fo_in+=[F]
             else:
                 fo_out+=[F]
+        fo_in=np.array(fo_in)
+        fo_out=np.array(fo_out)
         return fo_in,fo_out
        
 
@@ -85,7 +87,7 @@ class DTLZ1:
             FOP_out_g_aval=list(filter(lambda v: v == False, FOP_out_g_[1:] ))
             if len(FOP_out_g_aval) == 0:
                 fo_out_g += [F]
-        return fo_out_g 
+        return np.array(fo_out_g)
     
 
     
