@@ -21,33 +21,11 @@ class NSGAPymoo(Problem):
 
     
     def calc_f(self,x,Gxm,prod_xm1=[],prod_xm2=[]):
-        
-
-        
-        
-        
-
-
-        #for index,linha in enumerate(range(xm1_p.shape[0])):
-           #  prod_xm1.append(np.prod(xm1_p[linha,0:xm1_p.shape[1]]))
-        #prod_xm1=np.array(prod_xm1)
-
-
+       
         xm1_p=np.array(x[:,:self.init_benchmark.get_M()-1])
         prod_xm1 = np.array([ np.prod(xm1_p[row,0:xm1_p.shape[1]]) for index,row in enumerate(range(xm1_p.shape[0]))])
         prod_xm1=prod_xm1.reshape(xm1_p.shape[0],1)
         
-
-
-        
-        
-
-
-
-        #for index,linha in enumerate(range(xm2_p.shape[0])):
-          #   prod_xm2.append(np.prod(xm2_p[linha,0:xm2_p.shape[1]]))
-        #prod_xm2=np.array(prod_xm2)
-        #prod_xm2=prod_xm2.reshape(xm2_p.shape[0],1)
 
         xm2_p=np.array(x[:,:self.init_benchmark.get_M()-2])
         prod_xm2=np.array([np.prod(xm2_p[linha,0:xm2_p.shape[1]])  for index,linha in enumerate(range(xm2_p.shape[0]))])
@@ -59,7 +37,7 @@ class NSGAPymoo(Problem):
         x1=x1.reshape(x.shape[0],1)
 
         xm1=x[:,1:self.init_benchmark.get_M()-1]
-        print("sm",xm1)
+        
 
         f1=1/2*prod_xm1*(1+Gxm)
         f2=1/2*prod_xm2*(1-xm1)*(1+Gxm)
@@ -68,16 +46,29 @@ class NSGAPymoo(Problem):
        
         
     
-    def calc_g(self,x):
-         #x[:,self.init_benchmark.get_M()-1:]#=0.5
-         Gxm=x[:,self.init_benchmark.get_M()-1:]
-         Gxm=np.array(Gxm)
-         G=[]
-         for index,linha in enumerate(range(Gxm.shape[0])):
-             G.append(100*((self.init_benchmark.get_K())+np.sum([((XeXm-0.5)**2)-(np.cos(20*np.pi*(XeXm-0.5))) for XeXm in Gxm[linha,0:len(Gxm)]])))
-         G=np.array(G)  
-         G=G.reshape((Gxm.shape[0],1))
-         return G
+    def calc_g(self,x,G=[]):
+         Gxm=np.array(x[:,self.init_benchmark.get_M()-1:])
+         #for index,linha in enumerate(range(Gxm.shape[0])):
+            # G.append(100*((self.init_benchmark.get_K())+np.sum([((XeXm-0.5)**2)-(np.cos(20*np.pi*(XeXm-0.5))) for XeXm in Gxm[linha,0:len(Gxm)]])))
+         #G=np.array(G)  
+         #G=G.reshape((Gxm.shape[0],1))
+         #print("shap",Gxm.shape)
+
+
+         #G = np.array(100*((self.init_benchmark.get_K())+np.sum((XeXm-0.5)**2)-(np.cos(20*np.pi*(XeXm-0.5))) for XeXm in Gxm[row,0:Gxm.shape[1]]) for index,row in enumerate(range(Gxm.shape[0]))))
+         #G=G.reshape((Gxm.shape[0],1))
+         G = np.array([ 100* ((self.init_benchmark.get_K())+np.sum(((XeXm-0.5)**2)-(np.cos(20*np.pi*(XeXm-0.5))) for XeXm in Gxm[row,0:Gxm.shape[1]]))  for index,row in enumerate(range(Gxm.shape[0]))  ])
+         #G=G.reshape((Gxm.shape[0],1))
+        
+
+
+         
+
+
+
+
+
+         return G.reshape((Gxm.shape[0],1))
     
     def constraits(self,f):
         f_constraits=np.array(f)
