@@ -28,9 +28,14 @@ class NSGAPymoo(Problem):
         xm1_p=np.array(xm1_p)
 
 
-        for index,linha in enumerate(range(xm1_p.shape[0])):
-             prod_xm1.append(np.prod(xm1_p[linha,0:xm1_p.shape[1]]))
-        prod_xm1=np.array(prod_xm1)
+        #for index,linha in enumerate(range(xm1_p.shape[0])):
+           #  prod_xm1.append(np.prod(xm1_p[linha,0:xm1_p.shape[1]]))
+        #prod_xm1=np.array(prod_xm1)
+
+
+
+        prod_xm1 = [ np.prod(xm1_p[row,0:xm1_p.shape[1]]) for index,row in enumerate(range(xm1_p.shape[0]))]
+
         prod_xm1=prod_xm1.reshape(xm1_p.shape[0],1)
         
 
