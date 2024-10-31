@@ -18,7 +18,19 @@ class NSGAPymoo(Problem):
         self.generations=generations
         super(). __init__(n_var=self.init_benchmark.get_Nvar(), n_obj=self.init_benchmark.get_M(), n_ieq_constr=1, xl=xl, xu=xu)
 
-    
+
+    def param_f(self,param_1,param_2,param_3,param_4,param_5,param_6,f_index):
+        parameter = {
+            (0,0) : param_1*(1+param_2),
+            (1,1) : param_3*(1-param_4)*(1+param_2),
+            (2,2) : (1-param_5)*(1+param_2)
+        }
+
+        for index,value in parameter.items():
+            if index[0] <= f_index <= index[1]:
+                return 1/2*value
+        return f_index
+      
     def calc_f(self,x,Gxm,prod_xm1=[],prod_xm2=[]):
        
         xm1_p=np.array(x[:,:self.init_benchmark.get_M()-1])
@@ -34,14 +46,15 @@ class NSGAPymoo(Problem):
         x1=np.array(x[:,0])
         x1=x1.reshape(x.shape[0],1)
 
-        xm1=x[:,1:self.init_benchmark.get_M()-1]
-        
+        x2=np.array(x[:,1])
+        x2=x2.reshape(x.shape[0],1)
 
-        f1=1/2*prod_xm1*(1+Gxm)
-        f2=1/2*prod_xm2*(1-xm1)*(1+Gxm)
-        f3=1/2*(1-x1)*(1+Gxm)
-        return f1,f2,f3     
+        xm1=x[:,1:self.init_benchmark.get_M()-1]
+        f= [self.param_f(prod_xm1,Gxm,prod_xm2,xm1,x1,x2,i) for i in range(self.init_benchmark.get_M())] 
         
+        f=np.array(f)
+        f=np.concatenate(f, axis = 1)
+        return f
     
     def calc_g(self,x,G=[]):
          Gxm=np.array(x[:,self.init_benchmark.get_M()-1:])
@@ -58,9 +71,8 @@ class NSGAPymoo(Problem):
     def _evaluate(self, x, out, *args, **kwargs):   
         Gxm=self.calc_g(x)
         F=self.calc_f(x,Gxm)
-        F_join = np.column_stack([F[0],F[1],F[2]])
-        out["F"]=F_join#Fg
-        f_c=self.constraits(F_join)
+        out["F"]=F
+        f_c=self.constraits(F)
         out["G"]=f_c
         
 
