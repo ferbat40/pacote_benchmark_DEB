@@ -32,7 +32,6 @@ class NSGAPymoo(Problem):
             
             
             if index[0] <= f_index <= index[1]:
-                #print(f_index,index,"df",value)
                 return 1/2*value
         return f_index
     
@@ -48,7 +47,7 @@ class NSGAPymoo(Problem):
         xm1_p=np.array(x[:,:self.init_benchmark.get_M()-1])
         prod_xm1 = np.array([ np.prod(xm1_p[row,0:xm1_p.shape[1]]) for index,row in enumerate(range(xm1_p.shape[0]))])
         prod_xm1=prod_xm1.reshape(xm1_p.shape[0],1)
-        #print("x",x)
+        
         
         
 
@@ -64,16 +63,11 @@ class NSGAPymoo(Problem):
         x2=x2.reshape(x.shape[0],1)
 
         xm1=x[:,self.init_benchmark.get_M()-2:self.init_benchmark.get_M()-1]
-        #print("xm1",xm1)
-        #print("pxm1",xm1_p)
-        #print("pxm2",xm2_p)
-
+        
         f= [self.param_f(prod_xm1,Gxm,prod_xm2,xm1,x1,x2,i,len(F_index)) for i in F_index]
-        #print(f) 
         
         f=np.array(f)
         f=np.concatenate(f, axis = 1)
-        #print(f)
         return f
     
     def calc_g(self,x,G=[]):

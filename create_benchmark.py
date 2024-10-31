@@ -97,8 +97,8 @@ class CreateBenchmark(InitBenchmark):
           
      
 
-bk = CreateBenchmark(1, 300,4,4)
-bk.call_benchmark()
+#bk = CreateBenchmark(1, 300,4,4)
+#bk.call_benchmark()
 #var1=bk.get_DTLZ().build_in_G()
 #var2=bk.get_DTLZ().build_out_G()
 
@@ -118,13 +118,13 @@ bk.call_benchmark()
 #pd_fo=bk.create_dataframe(pt1,pt2,pt3)
 #k.call_plot_PF_M(pt1,pt2,pt3)
 #plot.plot_FP_M("Objetivo_1","Objetivo_2","Objetivo_3")
-print(bk.get_Nvar(), bk.get_M(), bk.get_K())
+#print(bk.get_Nvar(), bk.get_M(), bk.get_K())
 
-NSGAPy = NSGAPymoo(bk)
-pt_nsga= NSGAPy.exec()
-pt_nsga=np.array(pt_nsga)
-print(pt_nsga)
-
+#NSGAPy = NSGAPymoo(bk)
+#pt_nsga= NSGAPy.exec()
+#pt_nsga=np.array(pt_nsga)
+#print(pt_nsga)
+#print("x",x)
 
 
 
