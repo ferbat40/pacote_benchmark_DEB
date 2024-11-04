@@ -120,10 +120,10 @@ bk.call_benchmark()
 #plot.plot_FP_M("Objetivo_1","Objetivo_2","Objetivo_3")
 #print(bk.get_Nvar(), bk.get_M(), bk.get_K())
 
-NSGAPy = NSGAPymoo(bk)
-pt_nsga= NSGAPy.exec()
+#NSGAPy = NSGAPymoo(bk)
+#pt_nsga= NSGAPy.exec()
 #pt_nsga=np.array(pt_nsga)
-print(pt_nsga,"s")
+#print(pt_nsga,"s")
 #print("x",x)
 
 
