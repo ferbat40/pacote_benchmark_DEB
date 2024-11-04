@@ -91,7 +91,7 @@ class CreateBenchmark(InitBenchmark):
 
     def call_plot_PF_M(self,pt1=[],pt2=[],pt3=[]):
         if self.K_validate() == True and self.M_validate() == True:
-            PlotFP_M(self.get_M(),pt1,pt2,pt3)
+         PlotFP_M(self.get_M(),pt1,pt2,pt3)
     
    
           
