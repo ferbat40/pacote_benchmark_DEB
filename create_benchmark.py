@@ -97,8 +97,8 @@ class CreateBenchmark(InitBenchmark):
           
      
 
-bk = CreateBenchmark(1, 300,4,4)
-bk.call_benchmark()
+#bk = CreateBenchmark(1, 300,4,4)
+#bk.call_benchmark()
 #var1=bk.get_DTLZ().build_in_G()
 #var2=bk.get_DTLZ().build_out_G()
 
