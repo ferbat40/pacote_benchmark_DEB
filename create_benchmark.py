@@ -123,7 +123,7 @@ bk.call_benchmark()
 NSGAPy = NSGAPymoo(bk)
 pt_nsga= NSGAPy.exec()
 #pt_nsga=np.array(pt_nsga)
-print(pt_nsga)
+print(pt_nsga,"s")
 #print("x",x)
 
 
