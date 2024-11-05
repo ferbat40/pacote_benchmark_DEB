@@ -97,13 +97,30 @@ class CreateBenchmark(InitBenchmark):
           
      
 
-#bk = CreateBenchmark(1, 300,4,4)
-#bk.call_benchmark()
+bk = CreateBenchmark(1, 20,6,3)
+bk.call_benchmark()
 #var1=bk.get_DTLZ().build_in_G()
+
+x=np.array(bk.get_Point_out_G())
+
+g=bk.get_DTLZ().calc_g(x)
+f=bk.get_DTLZ().calc_f(g,x)
+a=bk.get_DTLZ().aval_constraits(f)
+
+
+#print(g)
+
 #var2=bk.get_DTLZ().build_out_G()
 
 
 #pt1=bk.const_in_g(var1)
+#print(pt1)
+#print("fim")
+#print(f)
+#print("fim")
+print("in",a[0])
+print("out",a[1])
+print("fim",f)
 
 
 
@@ -120,15 +137,15 @@ class CreateBenchmark(InitBenchmark):
 #plot.plot_FP_M("Objetivo_1","Objetivo_2","Objetivo_3")
 #print(bk.get_Nvar(), bk.get_M(), bk.get_K())
 
-#NSGAPy = NSGAPymoo(bk)
-#pt_nsga= NSGAPy.exec()
-#pt_nsga=np.array(pt_nsga)
+NSGAPy = NSGAPymoo(bk)
+pt_nsga= NSGAPy.exec()
+pt_nsga=np.array(pt_nsga)
 #print(pt_nsga,"s")
 #print("x",x)
 
 
 
-#print(bk.get_Nvar(), bk.get_M(), bk.get_K())
+print(bk.get_Nvar(), bk.get_M(), bk.get_K())
 
 
 

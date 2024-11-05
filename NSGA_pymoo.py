@@ -5,11 +5,10 @@ from pymoo.optimize import minimize
 import numpy as np
 from pymoo.util.ref_dirs import get_reference_directions
 
-
                            
 
 class NSGAPymoo(Problem):
-    def __init__(self,init_benchmark,population=100, generations=300):
+    def __init__(self,init_benchmark,population=100, generations=1):
         
         self.init_benchmark=init_benchmark
         xl = np.full(self.init_benchmark.get_Nvar(),0)
@@ -20,41 +19,36 @@ class NSGAPymoo(Problem):
 
 
     def param_f(self,param_1,param_2,param_3,param_4,param_5,param_6,f_index,f_size):
-        parameter = {
+        
+         parameter = {
             (0,0) : param_1*(1+param_2),
             (1,1) : param_3*(1-param_4)*(1+param_2),
             (2,f_size-2) : param_5*(1-param_6)*(1+param_2),
             (f_size-1,f_size-1) : (1-param_5)*(1+param_2)
-        }
-        
-
-        for index,value in parameter.items():
-            
-            
+         }
+         for index,value in parameter.items():  
             if index[0] <= f_index <= index[1]:
                 return 1/2*value
-        return f_index
-    
-
-    #rod_xm1,Gxm,prod_xm2,xm1,x1,x2,i
-      
+         return f_index
+       
+         
     def calc_f(self,x,Gxm,prod_xm1=[],prod_xm2=[]):
         F_index=[]
         for v in range(0,self.init_benchmark.get_M()):
             F_index.append(v)
-        
+
+         
        
         xm1_p=np.array(x[:,:self.init_benchmark.get_M()-1])
         prod_xm1 = np.array([ np.prod(xm1_p[row,0:xm1_p.shape[1]]) for index,row in enumerate(range(xm1_p.shape[0]))])
         prod_xm1=prod_xm1.reshape(xm1_p.shape[0],1)
         
-        
-        
 
         xm2_p=np.array(x[:,:self.init_benchmark.get_M()-2])
         prod_xm2=np.array([np.prod(xm2_p[linha,0:xm2_p.shape[1]])  for index,linha in enumerate(range(xm2_p.shape[0]))])
         prod_xm2=prod_xm2.reshape(xm2_p.shape[0],1)
-        
+
+     
         
         x1=np.array(x[:,0])
         x1=x1.reshape(x.shape[0],1)
@@ -62,12 +56,16 @@ class NSGAPymoo(Problem):
         x2=np.array(x[:,1])
         x2=x2.reshape(x.shape[0],1)
 
+      
+
         xm1=x[:,self.init_benchmark.get_M()-2:self.init_benchmark.get_M()-1]
         
         f= [self.param_f(prod_xm1,Gxm,prod_xm2,xm1,x1,x2,i,len(F_index)) for i in F_index]
-        
+       
+      
         f=np.array(f)
         f=np.concatenate(f, axis = 1)
+       
         return f
     
     def calc_g(self,x,G=[]):
@@ -80,8 +78,8 @@ class NSGAPymoo(Problem):
         f_c = np.array([np.sum([ f_c  for  f_c in f_constraits[linha,0:f_constraits.shape[1]]])-0.6 for index,linha in enumerate(range(f_constraits.shape[0]))  ])
         return f_c.reshape(f_constraits.shape[0],1)
     
-
-
+    
+   
     def _evaluate(self, x, out, *args, **kwargs):   
         Gxm=self.calc_g(x)
         F=self.calc_f(x,Gxm)
@@ -91,7 +89,7 @@ class NSGAPymoo(Problem):
         
 
     def exec(self):
-        ref_dirs = get_reference_directions("das-dennis", self.init_benchmark.get_M(), n_partitions=15)
+        ref_dirs = get_reference_directions("das-dennis", self.init_benchmark.get_M(), n_partitions=1)
         popsize = ref_dirs.shape[0] + ref_dirs.shape[0] % 4
         nsga3 = NSGA3(ref_dirs, pop_size=popsize)
             
