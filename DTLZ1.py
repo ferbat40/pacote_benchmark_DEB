@@ -7,6 +7,7 @@ class DTLZ1:
     def __init__(self,new_benchmark_obj):
         self.new_benchmark_obj=None
         self.new_benchmark_obj=new_benchmark_obj
+        
                 
     def constraits(self,f,f_c=[]):
         f_constraits=np.array(f)
