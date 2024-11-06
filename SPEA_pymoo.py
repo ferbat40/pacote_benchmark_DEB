@@ -28,9 +28,9 @@ class SPEAPymoo(Problem):
         
 
     def exec(self):
-        ref_dirs = get_reference_directions("das-dennis", self.benchmark.get_M(), n_partitions=self.partitions)
-        popsize = ref_dirs.shape[0] + ref_dirs.shape[0] % 4
-        spea2 = SPEA2(pop_size=popsize)
+        #ref_dirs = get_reference_directions("das-dennis", self.benchmark.get_M(), n_partitions=self.partitions)
+        #popsize = ref_dirs.shape[0] + ref_dirs.shape[0] % 4
+        spea2 = SPEA2(pop_size=300)
             
         res_NSGA = minimize(
             SPEAPymoo(self.benchmark),

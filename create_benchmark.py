@@ -96,8 +96,8 @@ class CreateBenchmark(InitBenchmark):
           
      
 
-bk = CreateBenchmark(1, 200,6,3)
-bk.call_benchmark()
+#bk = CreateBenchmark(1, 200,6,3)
+#bk.call_benchmark()
 
 #points_in=bk.get_DTLZ().minimize_DTLZ()
 #points_out=bk.get_DTLZ().maximize_DTLZ()
