@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
-from algorithms import NSGA_benchmark
 from NSGA_pymoo import NSGAPymoo
+from SPEA_pymoo import SPEAPymoo
 from DTLZ1 import DTLZ1
 from DTLZ2 import DTLZ2
 from init_benchmark import InitBenchmark
@@ -96,8 +96,8 @@ class CreateBenchmark(InitBenchmark):
           
      
 
-#bk = CreateBenchmark(1, 200,6,3)
-#bk.call_benchmark()
+bk = CreateBenchmark(1, 200,6,3)
+bk.call_benchmark()
 
 #points_in=bk.get_DTLZ().minimize_DTLZ()
 #points_out=bk.get_DTLZ().maximize_DTLZ()
@@ -111,6 +111,10 @@ class CreateBenchmark(InitBenchmark):
 #pt_nsga= NSGAPy.exec()
 #print(pt_nsga,"s")
 
+
+#SPEA = SPEAPymoo(bk)
+#pt_spea= SPEA.exec()
+#print(pt_spea,"s")
 
 
 #print(bk.get_Nvar(), bk.get_M(), bk.get_K())
