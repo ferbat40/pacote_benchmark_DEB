@@ -9,15 +9,15 @@ class DTLZ1:
         self.new_benchmark_obj=new_benchmark_obj
 
                 
-    def constraits(self,f,f_c=[]):
+    def constraits(self,f,parameter,f_c=[]):
         f_constraits=np.array(f)
-        f_c = np.array([np.sum([ f_c  for  f_c in f_constraits[linha,0:f_constraits.shape[1]]])-0.5 for index,linha in enumerate(range(f_constraits.shape[0]))  ])
+        f_c = np.array([np.sum([ f_c  for  f_c in f_constraits[linha,0:f_constraits.shape[1]]])-parameter for index,linha in enumerate(range(f_constraits.shape[0]))  ])
         return f_c.reshape(f_constraits.shape[0],1)
     
     def aval_constraits(self,f,f_c=[]):
         const_in=[]
         const_out=[]
-        M_constraits=self.constraits(f)
+        M_constraits=self.constraits(f,0.5)
         for index,(fc,fo) in zip( range(M_constraits.shape[0]) ,  zip(M_constraits,f)):
             if fc == 0.0:
                 const_in.append(fo)
@@ -73,6 +73,30 @@ class DTLZ1:
          Gxm=np.array(x[:,self.new_benchmark_obj.get_M()-1:])
          G = np.array([ 100* ((self.new_benchmark_obj.get_K())+np.sum(((XeXm-0.5)**2)-(np.cos(20*np.pi*(XeXm-0.5))) for XeXm in Gxm[row,0:Gxm.shape[1]]))  for index,row in enumerate(range(Gxm.shape[0]))  ])
          return G.reshape((Gxm.shape[0],1))
+    
+
+    def minimize_DTLZ(self):
+        x=np.array(self.new_benchmark_obj.get_Point_in_G())
+        g=self.calc_g(x)
+        f=self.calc_f(x,g)
+        constraits=self.aval_constraits(f)
+        dc_constraits = {
+            "Minimization of G (Function objectives sum same 0.5) Array[1]"  : constraits[0],
+            "Minimization of G (Function objectives sum close 0.5) Array[2]" : constraits[1]                           
+        }
+        return dc_constraits,constraits[0],constraits[1]
+    
+
+    def maximize_DTLZ(self):
+        x=np.array(self.new_benchmark_obj.get_Point_out_G())
+        g=self.calc_g(x)
+        f=self.calc_f(x,g)
+        constraits=self.aval_constraits(f)
+        dc_constraits = {
+            "Minimization of G (Function objectives sum same 0.5) Array[1]"       : constraits[0],
+            "Maximization of G (Function objectives sum far way of 0.5) Array[2]" : constraits[1]                           
+        }
+        return dc_constraits,constraits[0],constraits[1]
     
     
 

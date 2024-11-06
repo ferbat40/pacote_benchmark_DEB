@@ -3,6 +3,7 @@ import pandas as pd
 from algorithms import NSGA_benchmark
 from NSGA_pymoo import NSGAPymoo
 from DTLZ1 import DTLZ1
+from DTLZ2 import DTLZ2
 from init_benchmark import InitBenchmark
 from plot_FP_M import PlotFP_M
 
@@ -33,27 +34,25 @@ class CreateBenchmark(InitBenchmark):
 
     
     def call_DTLZ2(self):
-        print("em construção")
+        if self.K_validate() == True and self.M_validate() == True:
+            self.set_DTLZ(DTLZ2(self))
+      
 
 
     def call_benchmark(self):
         if self.benchmark in self.PARAM:
            self.PARAM[self.benchmark]()
 
-    def const_in_g(self,vet_out_connstrain):
+    def show_points(self,constraits):
         if self.K_validate() == True and self.M_validate() == True:
-            assert isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with two dimension"
-        return np.array(vet_out_connstrain[0])
-
-    def const_close_g(self,vet_out_connstrain):
-        if self.K_validate() == True and self.M_validate() == True:
-            assert isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with two dimension"
-        return np.array(vet_out_connstrain[1])
-    
-    def const_out_g(self,vet_out_connstrain):
-        if self.K_validate() == True and self.M_validate() == True:
-            assert not isinstance(vet_out_connstrain,tuple) and len(vet_out_connstrain)>0, "It is only allowed to vectors with one dimension"
-        return np.array(vet_out_connstrain)
+            assert isinstance(constraits[0],dict) and len(constraits[0])>0, "It is only allowed dictionaries"
+            for point,value in constraits[0].items():
+                print()
+                print(point)
+                print()
+                for values in value:
+                    print(values)
+        
    
     def transformer_data(self,vet,index):
         self.vet=np.array(vet)
@@ -97,55 +96,24 @@ class CreateBenchmark(InitBenchmark):
           
      
 
-bk = CreateBenchmark(1, 300,6,3)
-bk.call_benchmark()
-#var1=bk.get_DTLZ().build_in_G()
+#bk = CreateBenchmark(1, 200,6,3)
+#bk.call_benchmark()
 
-x=np.array(bk.get_Point_out_G())
+#points_in=bk.get_DTLZ().minimize_DTLZ()
+#points_out=bk.get_DTLZ().maximize_DTLZ()
 
-g=bk.get_DTLZ().calc_g(x)
-f=bk.get_DTLZ().calc_f(x,g)
-a=bk.get_DTLZ().aval_constraits(f)
-
-
-#print(g)
-
-#var2=bk.get_DTLZ().build_out_G()
+#bk.show_points(points_out)
+#print("vsf",points_out[1])
+#print("vsf2",points_out[2])
 
 
-#pt1=bk.const_in_g(var1)
-#print(pt1)
-#print("fim")
-#print(f)
-#print("fim")
-#print("in",a[0])
-#print("out",a[1])
-#print("fim",f)
+#NSGAPy = NSGAPymoo(bk)
+#pt_nsga= NSGAPy.exec()
+#print(pt_nsga,"s")
 
 
 
-##pt2=bk.const_close_g(var1)
-
-
-
-#pt3=bk.const_out_g(var2)
-#print(pt3)
-
-
-#pd_fo=bk.create_dataframe(pt1,pt2,pt3)
-#k.call_plot_PF_M(pt1,pt2,pt3)
-#plot.plot_FP_M("Objetivo_1","Objetivo_2","Objetivo_3")
 #print(bk.get_Nvar(), bk.get_M(), bk.get_K())
-
-NSGAPy = NSGAPymoo(bk)
-pt_nsga= NSGAPy.exec()
-pt_nsga=np.array(pt_nsga)
-print(pt_nsga,"s")
-#print("x",x)
-
-
-
-print(bk.get_Nvar(), bk.get_M(), bk.get_K())
 
 
 
