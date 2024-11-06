@@ -7,7 +7,7 @@ class DTLZ1:
     def __init__(self,new_benchmark_obj):
         self.new_benchmark_obj=None
         self.new_benchmark_obj=new_benchmark_obj
-        
+
                 
     def constraits(self,f,f_c=[]):
         f_constraits=np.array(f)
@@ -39,7 +39,7 @@ class DTLZ1:
          return f_index
     
     
-    def calc_f(self,Gxm,x=[],prod_xm1=[],prod_xm2=[]):
+    def calc_f(self,x,Gxm,prod_xm1=[],prod_xm2=[]):
         F_index=[]
         for v in range(0,self.new_benchmark_obj.get_M()):
             F_index.append(v)   

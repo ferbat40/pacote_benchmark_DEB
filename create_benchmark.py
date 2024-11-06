@@ -97,14 +97,14 @@ class CreateBenchmark(InitBenchmark):
           
      
 
-bk = CreateBenchmark(1, 20,6,3)
+bk = CreateBenchmark(1, 300,6,3)
 bk.call_benchmark()
 #var1=bk.get_DTLZ().build_in_G()
 
 x=np.array(bk.get_Point_out_G())
 
 g=bk.get_DTLZ().calc_g(x)
-f=bk.get_DTLZ().calc_f(g,x)
+f=bk.get_DTLZ().calc_f(x,g)
 a=bk.get_DTLZ().aval_constraits(f)
 
 
@@ -118,9 +118,9 @@ a=bk.get_DTLZ().aval_constraits(f)
 #print("fim")
 #print(f)
 #print("fim")
-print("in",a[0])
-print("out",a[1])
-print("fim",f)
+#print("in",a[0])
+#print("out",a[1])
+#print("fim",f)
 
 
 
@@ -140,7 +140,7 @@ print("fim",f)
 NSGAPy = NSGAPymoo(bk)
 pt_nsga= NSGAPy.exec()
 pt_nsga=np.array(pt_nsga)
-#print(pt_nsga,"s")
+print(pt_nsga,"s")
 #print("x",x)
 
 
