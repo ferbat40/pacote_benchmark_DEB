@@ -26,14 +26,12 @@ class SPEAPymoo(Problem):
         Gxm=self.DTLZ.calc_g(x)
         F=self.DTLZ.calc_f(x,Gxm)
         out["F"]=F
-        f_c=self.DTLZ.constraits(F,0.55)
+        f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_SPEA_2())
         out["G"]=f_c
         
 
     def exec(self):
-
         mutation_prob=1/self.benchmark.get_Nvar()
-
         mutation = PolynomialMutation(prob=mutation_prob, eta=20)
         crossover = SBX(prob=1.0, eta=15)
         spea2 = SPEA2(pop_size=300,crossover=crossover,mutation=mutation)

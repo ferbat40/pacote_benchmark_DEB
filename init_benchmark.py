@@ -3,7 +3,7 @@ import numpy as np
 
 class InitBenchmark:
        
-    def __init__(self,P,N,M,DTLZ):
+    def __init__(self,P,N,M,DTLZ,constraits_SPEA_2=0.55,constraits_NSGA_3=0.60):
         self.__P=0
         self.__M=0
         self.__N=0
@@ -21,6 +21,8 @@ class InitBenchmark:
         self.__Point_in_G[:,self.__M-1:self.__N]=0.5
         self.__Point_out_G=np.array([*np.random.random((self.__P,self.__Nvar+1))])
         self.__DTLZ=DTLZ
+        self.__constraits_SPEA_2=constraits_SPEA_2
+        self.__constraits_NSGA_3=constraits_NSGA_3
           
 
     def get_P (self):
@@ -49,6 +51,18 @@ class InitBenchmark:
     
     def set_DTLZ(self,DTLZ_obj):
         self.__DTLZ=DTLZ_obj
+
+    def get_constraits_SPEA_2(self):
+        return self.__constraits_SPEA_2
+    
+    def set_constraits_SPEA_2(self, constraits_SPEA_2):
+         self.__constraits_SPEA_2=constraits_SPEA_2
+
+    def get_constraits_NSGA_3(self):
+        return self.__constraits_NSGA_3
+    
+    def set_constraits_NSGA_3(self, constraits_NSGA_3):
+         self.__constraits_NSGA_3=constraits_NSGA_3
   
     def get_Nvar(self):
         return self.__Nvar
