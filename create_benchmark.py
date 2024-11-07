@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from NSGA_pymoo import NSGAPymoo
 from SPEA_pymoo import SPEAPymoo
+from metrics import Metrics
 from DTLZ1 import DTLZ1
 from DTLZ2 import DTLZ2
 from init_benchmark import InitBenchmark
@@ -52,6 +53,15 @@ class CreateBenchmark(InitBenchmark):
                 print()
                 for values in value:
                     print(values)
+    
+    def show_metrics(self,metrics):
+        if self.K_validate() == True and self.M_validate() == True:
+            assert isinstance(metrics,dict) and len(metrics)>0, "It is only allowed dictionaries"
+            for point,value in metrics.items():
+                print()
+                print(point)
+                print()
+                print(value)
         
    
     def transformer_data(self,vet,index):
@@ -96,10 +106,10 @@ class CreateBenchmark(InitBenchmark):
           
      
 
-#bk = CreateBenchmark(1, 200,6,3)
-#bk.call_benchmark()
+bk = CreateBenchmark(1, 200,6,3)
+bk.call_benchmark()
 
-#points_in=bk.get_DTLZ().minimize_DTLZ()
+points_in=bk.get_DTLZ().minimize_DTLZ()
 #points_out=bk.get_DTLZ().maximize_DTLZ()
 
 #bk.show_points(points_out)
@@ -107,14 +117,29 @@ class CreateBenchmark(InitBenchmark):
 #print("vsf2",points_out[2])
 
 
-#NSGAPy = NSGAPymoo(bk)
-#pt_nsga= NSGAPy.exec()
-#print(pt_nsga,"s")
+NSGAPy = NSGAPymoo(bk)
+pt_nsga= NSGAPy.exec()
+print(pt_nsga,"s")
+metrics=Metrics(points_in[1],pt_nsga)
+metric_result=metrics.M_GD()
+bk.show_metrics(metric_result)
+metric_result_plus=metrics.M_GD_plus()
+bk.show_metrics(metric_result_plus)
+metric_hp=metrics.M_hypervolume()
+bk.show_metrics(metric_hp)
 
 
-#SPEA = SPEAPymoo(bk)
-#pt_spea= SPEA.exec()
-#print(pt_spea,"s")
+
+SPEA = SPEAPymoo(bk)
+pt_spea= SPEA.exec()
+print(pt_spea,"s")
+metrics=Metrics(points_in[1],pt_spea)
+metric_result=metrics.M_GD()
+bk.show_metrics(metric_result)
+metric_result_plus=metrics.M_GD_plus()
+bk.show_metrics(metric_result_plus)
+metric_hp=metrics.M_hypervolume()
+bk.show_metrics(metric_hp)
 
 
 #print(bk.get_Nvar(), bk.get_M(), bk.get_K())
