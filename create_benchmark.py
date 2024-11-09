@@ -117,32 +117,49 @@ points_in=bk.get_DTLZ().minimize_DTLZ()
 #print("vsf2",points_out[2])
 
 
-NSGAPy = NSGAPymoo(bk)
-pt_nsga= NSGAPy.exec()
-print(pt_nsga,"s")
-metrics=Metrics(points_in[1],pt_nsga)
-metric_result=metrics.M_GD()
-bk.show_metrics(metric_result)
-metric_result_plus=metrics.M_GD_plus()
-bk.show_metrics(metric_result_plus)
-metric_hp=metrics.M_hypervolume()
-bk.show_metrics(metric_hp)
+NSGAP = NSGAPymoo(bk)
+pt_nsga= NSGAP.exec()
+
+
+metric = Metrics()
+metric.add_t(NSGAP)
+metric.add_t(pt_nsga)
+metric.add_t(points_in)
+
+
+
+
+
+#metrics=Metrics(points_in[1],pt_nsga)
+#metrics.set_NSGA(NSGAP)
+#metric_result=metrics.M_GD()
+#bk.show_metrics(metric_result)
+#metric_result_plus=metrics.M_GD_plus()
+#bk.show_metrics(metric_result_plus)
+#metric_hp=metrics.M_hypervolume()
+#bk.show_metrics(metric_hp)
 
 
 
 SPEA = SPEAPymoo(bk)
 pt_spea= SPEA.exec()
-print(pt_spea,"s")
-metrics=Metrics(points_in[1],pt_spea)
-metric_result=metrics.M_GD()
-bk.show_metrics(metric_result)
-metric_result_plus=metrics.M_GD_plus()
-bk.show_metrics(metric_result_plus)
-metric_hp=metrics.M_hypervolume()
-bk.show_metrics(metric_hp)
+metric.add_t(SPEA)
+metric.add_t(pt_spea)
 
 
-#print(bk.get_Nvar(), bk.get_M(), bk.get_K())
+
+metric.get_obj()
+#print(pt_spea,"s")
+#metrics=Metrics(points_in[1],pt_spea)
+#metric_result=metrics.M_GD()
+#bk.show_metrics(metric_result)
+#metric_result_plus=metrics.M_GD_plus()
+#bk.show_metrics(metric_result_plus)
+#metric_hp=metrics.M_hypervolume()
+#bk.show_metrics(metric_hp)
+
+
+#print(bk.get_Nvar(), bk.get_M(), bk.get_K(), bk.get_constraits_default(), bk.get_constraits_NSGA_3(), bk.get_constraits_SPEA_2())
 
 
 

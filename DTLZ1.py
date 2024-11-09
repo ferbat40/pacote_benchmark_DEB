@@ -17,7 +17,7 @@ class DTLZ1:
     def aval_constraits(self,f,f_c=[]):
         const_in=[]
         const_out=[]
-        M_constraits=self.constraits(f,0.5)
+        M_constraits=self.constraits(f,self.new_benchmark_obj.get_constraits_default())
         for index,(fc,fo) in zip( range(M_constraits.shape[0]) ,  zip(M_constraits,f)):
             if fc == 0.0:
                 const_in.append(fo)
@@ -84,7 +84,8 @@ class DTLZ1:
             "Minimization of G (Function objectives sum same 0.5) Array[1]"  : constraits[0],
             "Minimization of G (Function objectives sum close 0.5) Array[2]" : constraits[1]                           
         }
-        return dc_constraits,constraits[0],constraits[1]
+       
+        return dc_constraits
     
 
     def maximize_DTLZ(self):
@@ -96,7 +97,7 @@ class DTLZ1:
             "Minimization of G (Function objectives sum same 0.5) Array[1]"       : constraits[0],
             "Maximization of G (Function objectives sum far way of 0.5) Array[2]" : constraits[1]                           
         }
-        return dc_constraits,constraits[0],constraits[1]
+        return dc_constraits
     
     
 

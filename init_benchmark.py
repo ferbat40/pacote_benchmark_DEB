@@ -3,7 +3,7 @@ import numpy as np
 
 class InitBenchmark:
        
-    def __init__(self,P,N,M,DTLZ,constraits_SPEA_2=0.55,constraits_NSGA_3=0.60):
+    def __init__(self,P,N,M,DTLZ,constraits_SPEA_2=0.55,constraits_default=0.5,constraits_NSGA_3=0.60):
         self.__P=0
         self.__M=0
         self.__N=0
@@ -23,6 +23,7 @@ class InitBenchmark:
         self.__DTLZ=DTLZ
         self.__constraits_SPEA_2=constraits_SPEA_2
         self.__constraits_NSGA_3=constraits_NSGA_3
+        self.__constraits_default=constraits_default
           
 
     def get_P (self):
@@ -66,6 +67,13 @@ class InitBenchmark:
   
     def get_Nvar(self):
         return self.__Nvar
+    
+    def set_constraits_Default(self,constraits_default):
+        self.__constraits_default=constraits_default
+
+
+    def get_constraits_default(self):
+        return self.__constraits_default
     
    
  
