@@ -47,12 +47,7 @@ class CreateBenchmark(InitBenchmark):
     def show_points(self,constraits):
         if self.K_validate() == True and self.M_validate() == True:
             assert isinstance(constraits[0],dict) and len(constraits[0])>0, "It is only allowed dictionaries"
-            for point,value in constraits[0].items():
-                print()
-                print(point)
-                print()
-                for values in value:
-                    print(values)
+            
     
     def show_metrics(self,metrics):
         if self.K_validate() == True and self.M_validate() == True:

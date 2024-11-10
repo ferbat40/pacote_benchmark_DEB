@@ -1,5 +1,7 @@
 from pymoo.indicators.gd import GD
 from pymoo.indicators.gd_plus import GDPlus
+from pymoo.indicators.igd import IGD
+from pymoo.indicators.igd_plus import IGDPlus
 from pymoo.indicators.hv import HV
 import numpy as np
 from init_metrics import InitMetrics
@@ -51,7 +53,7 @@ class Metrics(InitMetrics):
                    key_div=key.replace("'","").replace("[","").replace("]","")
                    data_metrics.at[index_aux,key_div]=value_div[1]
                    index_aux=index_aux+1
-                   if index_aux > 2:
+                   if index_aux > data_metrics.shape[0]-1:
                         index_aux=0
          data_metrics_reset=data_metrics.reset_index(drop=True)
          data_metrics_reset.index= pd.Index(range(1, len(data_metrics_reset)+1))
@@ -77,6 +79,8 @@ class Metrics(InitMetrics):
             metric = [
                  self.M_GD,
                  self.M_GD_plus,
+                 self.M_IGD,
+                 self.M_IGD_plus,
                  self.M_hypervolume
                  ]
             
@@ -130,6 +134,26 @@ class Metrics(InitMetrics):
         D_ind = {
 
            "Generational Distance PLUS (GD+)" : float(ind(algorithm))
+
+        }
+        return D_ind
+    
+
+    def M_IGD(self,algorithm,POF):
+        ind = IGD(POF)
+        D_ind = {
+
+           "Inverted Generational Distance (IGD)" : float(ind(algorithm))
+
+        }
+        return D_ind
+    
+
+    def M_IGD_plus(self,algorithm,POF):
+        ind = IGDPlus(POF)
+        D_ind = {
+
+           "Inverted Generational Distance Plus (IGD+)" : float(ind(algorithm))
 
         }
         return D_ind
