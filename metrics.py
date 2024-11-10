@@ -3,6 +3,7 @@ from pymoo.indicators.gd_plus import GDPlus
 from pymoo.indicators.hv import HV
 import numpy as np
 from init_metrics import InitMetrics
+from ordered_set import OrderedSet
 
 class Metrics(InitMetrics):
    
@@ -13,38 +14,72 @@ class Metrics(InitMetrics):
                   return value
         return []
     
-        
-                
-    def param_obj(self,obj):
-        array_algo=[]
-        param={
-            "NSGA" : [],
-            "SPEA" : []           
-        }
+    def build_label_metrics(self,vet_metrics):
+         label=OrderedSet()
+         label.add("Metric")
 
-        self.metric = [
-                self.M_GD,
-                self.M_GD_plus
-        ]
+         metric=OrderedSet()
+         
+         for dict_algorithm_metrics in vet_metrics:
+            for key,value in dict_algorithm_metrics.items():
+                 label.add(key) 
+                 value_div=str(value).replace("'","").replace("{","").replace("}","")
+                 value_div=value_div.split(':')
+                 metric.add(value_div[0])
+         
 
-        for c,func in enumerate(self.metric):
-             print(func)
-             for index,value in param.items():
-                 for i in obj:
-                      if isinstance(i,dict): 
-                        point_algorithm=[]
-                        point_algorithm=self.identify_algorithm(i,index)
-                        if len(point_algorithm) != 0 and len(value) == 0:
-                            #param[index]=self.M_GD(np.array(point_algorithm))
-                              if callable(func):
-                                  print("no if",func)
-                                  param[index]=func(np.array(point_algorithm))
-                              else:
-                                   print(f"Erro: self.metric[{i}] não é uma função.")
-             array_algo.append(param)
+         print("label",np.array(list(label)))
+         print("metrics",np.array(list(metric)))
+
+                   
+              
+         
     
-        return array_algo
+
+    def build_metrics(self,vet_metrics):
+         self.build_label_metrics(vet_metrics)
+         for dict_algorithm_metrics in vet_metrics:
+              for index,value in dict_algorithm_metrics.items():
+                value_div=str(value).replace("'","").replace("{","").replace("}","")
+                value_div=value_div.split(':')
+                print(index,value_div[0],"div",value_div[1])
     
+
+    def dict_algorithm(self):
+            algorithm={
+              "NSGA-3" : [],
+              "SPEA-2" : []           
+              }
+            return algorithm
+            
+
+    def get_algorithm(self):
+            POF=list(self.param_point(self).values())
+            POF=POF[0]
+            dict_algorithm=self.dict_algorithm()
+            vet_metrics=[]
+            
+            
+            metric = [
+                 self.M_GD,
+                 self.M_GD_plus,
+                 self.M_hypervolume
+                 ]
+            
+            for obj in self:
+                  if isinstance(obj,dict): 
+                        same_keys = obj.keys() & dict_algorithm.keys()
+                        if same_keys:
+                             POF_algorithm=np.array(list(obj.values()))
+                             POF_algorithm=POF_algorithm[0]
+                             dict_algorithm_aux=self.dict_algorithm()      
+                             for c,func in enumerate(metric):
+                                  key_algorithm=(str(same_keys)).replace("'","").replace("{","").replace("}","")
+                                  dict_algorithm_aux[key_algorithm]=func(POF_algorithm,POF)
+                                  dict_algorithm_aux_valid={key: value for key,value in dict_algorithm_aux.items() if value}
+                                  vet_metrics.append(dict_algorithm_aux_valid)
+            self.build_metrics(vet_metrics)
+
 
     def param_point(self,obj):
         param={
@@ -63,20 +98,12 @@ class Metrics(InitMetrics):
                
 
 
-    def get_obj(self):
-            POF=list(self.param_point(self).values())
-            self.POF=POF[0]
-            #print("point",self.POF)
-            algorit=self.param_obj(self)
-            
-        
-            
-            print(algorit)
+    
 
         
 
-    def M_GD(self,algorithm):
-        ind = GD(self.POF)
+    def M_GD(self,algorithm,POF):
+        ind = GD(POF)
         D_ind = {
 
            "Generational Distance (GD)" : float(ind(algorithm))
@@ -84,8 +111,8 @@ class Metrics(InitMetrics):
         }
         return D_ind
     
-    def M_GD_plus(self,algorithm):
-        ind = GDPlus(self.POF)
+    def M_GD_plus(self,algorithm,POF):
+        ind = GDPlus(POF)
         D_ind = {
 
            "Generational Distance PLUS (GD+)" : float(ind(algorithm))
@@ -93,12 +120,12 @@ class Metrics(InitMetrics):
         }
         return D_ind
     
-    def M_hypervolume(self):
-        ref_point = [ 1.5  for i in range(self.POF.shape[1])]
+    def M_hypervolume(self,algorithm,POF):
+        ref_point = [ 1.5  for i in range(POF.shape[1])]
         ind = HV(ref_point=ref_point)
         D_ind = {
 
-           "Hypervolume" : ind(self.algorithm)
+           "Hypervolume" : float(ind(algorithm))
 
         }
         return D_ind

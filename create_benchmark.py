@@ -148,7 +148,7 @@ metric.add_t(pt_spea)
 
 
 
-metric.get_obj()
+metric.get_algorithm()
 #print(pt_spea,"s")
 #metrics=Metrics(points_in[1],pt_spea)
 #metric_result=metrics.M_GD()
