@@ -4,6 +4,7 @@ from pymoo.indicators.hv import HV
 import numpy as np
 from init_metrics import InitMetrics
 from ordered_set import OrderedSet
+import pandas as pd
 
 class Metrics(InitMetrics):
    
@@ -30,6 +31,16 @@ class Metrics(InitMetrics):
 
          print("label",np.array(list(label)))
          print("metrics",np.array(list(metric)))
+
+         metric_array=np.array(list(label))
+
+         metric_colum = metric_array.reshape(metric_array.shape[1],1)
+
+         data_metrics=pd.DataFrame(metric_colum,columns=np.array(list(metric)))
+
+         print("data",data_metrics)
+              
+              
 
                    
               
