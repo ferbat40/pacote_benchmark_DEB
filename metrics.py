@@ -15,7 +15,7 @@ class Metrics(InitMetrics):
                   return value
         return []
     
-    def build_label_metrics(self,vet_metrics):
+    def build_metrics(self,vet_metrics):
          label=OrderedSet()
          label.add("Metric")
 
@@ -28,33 +28,43 @@ class Metrics(InitMetrics):
                  value_div=value_div.split(':')
                  metric.add(value_div[0])
          
-
-         print("label",np.array(list(label)))
-         print("metrics",np.array(list(metric)))
-
-         metric_array=np.array(list(label))
-
-         metric_colum = metric_array.reshape(metric_array.shape[1],1)
-
-         data_metrics=pd.DataFrame(metric_colum,columns=np.array(list(metric)))
-
-         print("data",data_metrics)
-              
-              
-
-                   
-              
+         label_data=np.array(list(label))
+         metrics=np.array(list(metric))
          
-    
+         data_metrics=pd.DataFrame(
+              
+              {
+                   label_data[0] : metrics
+              }
+         )
 
-    def build_metrics(self,vet_metrics):
-         self.build_label_metrics(vet_metrics)
-         for dict_algorithm_metrics in vet_metrics:
-              for index,value in dict_algorithm_metrics.items():
-                value_div=str(value).replace("'","").replace("{","").replace("}","")
-                value_div=value_div.split(':')
-                print(index,value_div[0],"div",value_div[1])
-    
+         for index_col in range(1,len(label_data)):
+              data_metrics[label_data[index_col]]=pd.NA
+        
+
+
+              
+         index_aux=0
+         for (label_data) in zip(vet_metrics):
+              for obj in label_data:
+                   value=np.array(list(obj.values()))
+                   value_div=str(value).replace("'","").replace("{","").replace("}","").replace("]","")
+                   value_div=value_div.split(':')
+                   
+                   key=str(np.array(list(obj.keys())))
+                   key_div=key.replace("'","").replace("[","").replace("]","")
+          
+                   print("pos1",obj,"pos2",key_div,value_div[1])
+                   data_metrics.at[index_aux,key_div]=value_div[1]
+
+                   index_aux=index_aux+1
+                   if index_aux > 2:
+                        index_aux=0
+         data_metrics_reset=data_metrics.reset_index(drop=True)
+         data_metrics_reset.index= pd.Index(range(1, len(data_metrics_reset)+1))
+          
+         print(data_metrics)
+
 
     def dict_algorithm(self):
             algorithm={
