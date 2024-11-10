@@ -40,30 +40,23 @@ class Metrics(InitMetrics):
 
          for index_col in range(1,len(label_data)):
               data_metrics[label_data[index_col]]=pd.NA
-        
-
-
               
          index_aux=0
          for (label_data) in zip(vet_metrics):
               for obj in label_data:
                    value=np.array(list(obj.values()))
                    value_div=str(value).replace("'","").replace("{","").replace("}","").replace("]","")
-                   value_div=value_div.split(':')
-                   
+                   value_div=value_div.split(':')   
                    key=str(np.array(list(obj.keys())))
                    key_div=key.replace("'","").replace("[","").replace("]","")
-          
-                   print("pos1",obj,"pos2",key_div,value_div[1])
                    data_metrics.at[index_aux,key_div]=value_div[1]
-
                    index_aux=index_aux+1
                    if index_aux > 2:
                         index_aux=0
          data_metrics_reset=data_metrics.reset_index(drop=True)
          data_metrics_reset.index= pd.Index(range(1, len(data_metrics_reset)+1))
           
-         print(data_metrics)
+         return data_metrics_reset
 
 
     def dict_algorithm(self):
@@ -99,7 +92,7 @@ class Metrics(InitMetrics):
                                   dict_algorithm_aux[key_algorithm]=func(POF_algorithm,POF)
                                   dict_algorithm_aux_valid={key: value for key,value in dict_algorithm_aux.items() if value}
                                   vet_metrics.append(dict_algorithm_aux_valid)
-            self.build_metrics(vet_metrics)
+            return self.build_metrics(vet_metrics)
 
 
     def param_point(self,obj):
