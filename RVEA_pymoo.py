@@ -40,7 +40,7 @@ class RVEAymoo(Problem):
         res_RVEA = minimize(
             RVEAymoo(self.benchmark),
             algorithm_RVEA,
-            ('n_gen', self.generations),
+            termination=('n_gen', self.generations),
             seed=self.seed,
             save_history=True,
             verbose=False
