@@ -4,3 +4,4 @@ plotly
 ipython
 pandas
 deap
+ordered_set
