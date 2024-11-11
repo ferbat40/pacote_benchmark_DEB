@@ -167,7 +167,6 @@ class CreateBenchmark(InitBenchmark):
 
 
 #pd_metric=metric.get_metric()
-#bk.call_plot_PF_M(pt_spea,pt_nsga)
 #print("pd_metric")
 #print(pd_metric)
 

@@ -33,11 +33,13 @@ class RVEAymoo(Problem):
         muttation_prob = 1/self.benchmark.get_Nvar()
         muttation=PolynomialMutation(prob=muttation_prob, eta = 20)
         crossover = SBX(prob=1.0, eta=15)
-        RVEA_ = RVEA(ref_dirs, pop_size=popsize, crossover=crossover,mutation=muttation)      
+        algorithm_RVEA = RVEA(ref_dirs, pop_size=popsize, crossover=crossover,mutation=muttation)    
+         
+          
 
         res_RVEA = minimize(
             RVEAymoo(self.benchmark),
-            RVEA_,
+            algorithm_RVEA,
             ('n_gen', self.generations),
             seed=self.seed,
             save_history=True,
