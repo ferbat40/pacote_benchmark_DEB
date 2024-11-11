@@ -30,12 +30,12 @@ class SPEAPymoo(Problem):
         mutation_prob=1/self.benchmark.get_Nvar()
         mutation = PolynomialMutation(prob=mutation_prob, eta=20)
         crossover = SBX(prob=1.0, eta=15)
-        spea2 = SPEA2(pop_size=300,crossover=crossover,mutation=mutation)
+        algorithm_spea = SPEA2(pop_size=300,crossover=crossover,mutation=mutation)
             
         res_SPEA = minimize(
             SPEAPymoo(self.benchmark, pop_size=self.pop_size),
-            spea2,
-            ('n_gen', self.generations),
+            algorithm_spea,
+            termination=('n_gen', self.generations),
             seed=self.seed,
             save_history=True,
             verbose=False
