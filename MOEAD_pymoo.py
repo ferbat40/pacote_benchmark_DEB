@@ -3,11 +3,12 @@ import numpy as np
 from pymoo.util.ref_dirs import get_reference_directions
 from pymoo.operators.crossover.sbx import SBX
 from pymoo.operators.mutation.pm import PolynomialMutation
+from metrics import Metrics
 from pymoo.core.problem import Problem
-from pymoo.algorithms.moo.rvea import RVEA
+from pymoo.algorithms.moo.moead import MOEAD
 
 
-class RVEAymoo(Problem):
+class MOEADpymoo(Problem):
     def __init__(self,benchmark,partitions=15, generations=300,seed=15,pop_size=100):
         self.benchmark=benchmark
         self.partitions=partitions
@@ -16,7 +17,7 @@ class RVEAymoo(Problem):
         xl = np.full(self.benchmark.get_Nvar(),0)
         xu = np.full(self.benchmark.get_Nvar(),1)
         self.DTLZ=self.benchmark.get_DTLZ()
-        super(). __init__(n_var=self.benchmark.get_Nvar(), n_obj=self.benchmark.get_M(), n_ieq_constr=1, xl=xl, xu=xu)
+        super(). __init__(n_var=self.benchmark.get_Nvar(), n_obj=self.benchmark.get_M(), xl=xl, xu=xu)
 
         
     def _evaluate(self, x, out, *args, **kwargs):   
@@ -24,7 +25,7 @@ class RVEAymoo(Problem):
         F=self.DTLZ.calc_f(x,Gxm)
         out["F"]=F
         f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_NSGA_3())
-        out["G"]=f_c
+        #out["G"]=f_c
         
 
     def exec(self):
@@ -33,19 +34,19 @@ class RVEAymoo(Problem):
         muttation_prob = 1/self.benchmark.get_Nvar()
         muttation=PolynomialMutation(prob=muttation_prob, eta = 20)
         crossover = SBX(prob=1.0, eta=15)
-        RVEA_ = RVEA(ref_dirs, pop_size=popsize, crossover=crossover,mutation=muttation)      
+        MOEAD_ = MOEAD(ref_dirs, crossover=crossover,mutation=muttation)      
 
-        res_RVEA = minimize(
-            RVEAymoo(self.benchmark),
-            RVEA_,
+        res_MOEAD = minimize(
+            MOEADpymoo(self.benchmark),
+            MOEAD_,
             ('n_gen', self.generations),
             seed=self.seed,
             save_history=True,
             verbose=False
             )  
 
-        RVEA_algorithm={
-            "RVEA" :np.column_stack([res_RVEA.F])
+        MOEAD_algorithm={
+            "MOEAD" :np.column_stack([res_MOEAD.F])
         }    
         
-        return RVEA_algorithm
+        return MOEAD_algorithm

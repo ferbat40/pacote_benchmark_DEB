@@ -4,7 +4,6 @@ import numpy as np
 from pymoo.util.ref_dirs import get_reference_directions
 from pymoo.operators.crossover.sbx import SBX
 from pymoo.operators.mutation.pm import PolynomialMutation
-from metrics import Metrics
 from pymoo.core.problem import Problem
 
 
@@ -29,12 +28,12 @@ class NSGAPymoo(Problem):
         
 
     def exec(self):
-        ref_dirs = get_reference_directions("das-dennis", self.benchmark.get_M(), n_partitions=self.partitions)
+        ref_dirs = get_reference_directions("uniform", self.benchmark.get_M(), n_partitions=self.partitions)
         popsize = ref_dirs.shape[0] + ref_dirs.shape[0] % 4
         muttation_prob = 1/self.benchmark.get_Nvar()
         muttation=PolynomialMutation(prob=muttation_prob, eta = 20)
         crossover = SBX(prob=1.0, eta=15)
-        nsga3 = NSGA3(ref_dirs, pop_size=popsize, crossover=crossover,mutation=muttation)      
+        nsga3 = NSGA3(ref_dirs, crossover=crossover,mutation=muttation)      
 
         res_NSGA = minimize(
             NSGAPymoo(self.benchmark),
