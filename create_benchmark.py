@@ -46,18 +46,12 @@ class CreateBenchmark(InitBenchmark):
 
     def show_points(self,constraits):
         if self.K_validate() == True and self.M_validate() == True:
-            assert isinstance(constraits[0],dict) and len(constraits[0])>0, "It is only allowed dictionaries"
-            
-    
-    def show_metrics(self,metrics):
-        if self.K_validate() == True and self.M_validate() == True:
-            assert isinstance(metrics,dict) and len(metrics)>0, "It is only allowed dictionaries"
-            for point,value in metrics.items():
+            assert isinstance(constraits,dict) and len(constraits)>0, "It is only allowed dictionaries"
+            for point,value in constraits.items():
                 print()
                 print(point)
                 print()
                 print(value)
-        
    
     def transformer_data(self,vet,index):
         self.vet=np.array(vet)
@@ -93,9 +87,32 @@ class CreateBenchmark(InitBenchmark):
         all_data_pandas.reset_index(drop=True, inplace=True)
         return all_data_pandas
 
-    def call_plot_PF_M(self,pt1=[],pt2=[],pt3=[]):
+    def call_plot_PF_M(self,pt1_dict={},pt2_dict={}):
+        vet_pt=[]
+        try:
+            vet_pt.append(np.array(list(pt1_dict.values())[0]))
+        except Exception:
+            pass
+        try:    
+            vet_pt.append(np.array(list(pt1_dict.values())[1]))
+        except Exception:
+            pass
+        try:
+            vet_pt.append(np.array(list(pt2_dict.values())[0]))
+        except Exception:
+            pass
+        try:
+            vet_pt.append(np.array(list(pt2_dict.values())[1]))
+        except Exception:
+            pass
+       
+        vet_pt_valid=[i for i in vet_pt if i.size>0]
+        print(vet_pt_valid)
+        
+        assert 0 < len(vet_pt_valid) <= 3, "Number of points allowed is only three, an amount greater than three was received."
+
         if self.K_validate() == True and self.M_validate() == True:
-         PlotFP_M(self.get_M(),pt1,pt2,pt3)
+         PlotFP_M(self.get_M(),vet_pt_valid)
     
    
           
@@ -105,11 +122,10 @@ bk = CreateBenchmark(1, 200,6,3)
 bk.call_benchmark()
 
 points_in=bk.get_DTLZ().minimize_DTLZ()
-#points_out=bk.get_DTLZ().maximize_DTLZ()
+points_out=bk.get_DTLZ().maximize_DTLZ()
 
-#bk.show_points(points_out)
-#print("vsf",points_out[1])
-#print("vsf2",points_out[2])
+
+
 
 
 NSGAP = NSGAPymoo(bk)
@@ -119,20 +135,10 @@ pt_nsga= NSGAP.exec()
 metric = Metrics()
 metric.add_t(NSGAP)
 metric.add_t(pt_nsga)
-metric.add_t(points_in)
+metric.add_t(points_out)
 
 
 
-
-
-#metrics=Metrics(points_in[1],pt_nsga)
-#metrics.set_NSGA(NSGAP)
-#metric_result=metrics.M_GD()
-#bk.show_metrics(metric_result)
-#metric_result_plus=metrics.M_GD_plus()
-#bk.show_metrics(metric_result_plus)
-#metric_hp=metrics.M_hypervolume()
-#bk.show_metrics(metric_hp)
 
 
 
@@ -141,19 +147,18 @@ pt_spea= SPEA.exec()
 metric.add_t(SPEA)
 metric.add_t(pt_spea)
 
+#bk.show_points(points_in)
+#bk.show_points(pt_nsga)
+#bk.show_points(pt_spea)
+
+
+
 
 
 pd_metric=metric.get_algorithm()
+bk.call_plot_PF_M(pt_spea,pt_nsga)
 print("pd_metric")
 print(pd_metric)
-#print(pt_spea,"s")
-#metrics=Metrics(points_in[1],pt_spea)
-#metric_result=metrics.M_GD()
-#bk.show_metrics(metric_result)
-#metric_result_plus=metrics.M_GD_plus()
-#bk.show_metrics(metric_result_plus)
-#metric_hp=metrics.M_hypervolume()
-#bk.show_metrics(metric_hp)
 
 
 #print(bk.get_Nvar(), bk.get_M(), bk.get_K(), bk.get_constraits_default(), bk.get_constraits_NSGA_3(), bk.get_constraits_SPEA_2())

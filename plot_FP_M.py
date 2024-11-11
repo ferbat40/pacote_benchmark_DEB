@@ -6,10 +6,26 @@ import numpy as np
 
 
 class PlotFP_M():
-     def __init__(self,Objectives,pt1=[],pt2=[],pt3=[]):
-         self.pt1=[np.array(pt1)]
-         self.pt2=[np.array(pt2)]
-         self.pt3=[np.array(pt3)]
+     def __init__(self,Objectives,vet_pt=[]):
+         
+         try:
+             self.pt1=[np.array(vet_pt[0])]
+         except Exception:
+             self.pt1=[]
+         
+         try:
+             self.pt2=[np.array(vet_pt[1])]
+         except Exception:
+             self.pt2=[]
+         
+         try:
+             self.pt3=[np.array(vet_pt[2])]
+         except Exception:
+             self.pt3=[]
+         
+         print("pt1",self.pt1)
+         print("pt2",self.pt2)
+         print("pt3",self.pt3)
          self.list_axis=[f'Objective {i+1}' for i in range(Objectives)]
 
       
