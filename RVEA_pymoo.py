@@ -8,7 +8,7 @@ from pymoo.algorithms.moo.rvea import RVEA
 
 
 class RVEAymoo(Problem):
-    def __init__(self,benchmark,partitions=15, generations=300,seed=15,pop_size=100):
+    def __init__(self,benchmark,partitions=12, generations=300,seed=15,pop_size=100):
         self.benchmark=benchmark
         self.partitions=partitions
         self.generations=generations
@@ -29,7 +29,7 @@ class RVEAymoo(Problem):
 
     def exec(self):
         ref_dirs = get_reference_directions("das-dennis", self.benchmark.get_M(), n_partitions=self.partitions)
-        popsize = ref_dirs.shape[0] + ref_dirs.shape[0] % 4
+        popsize = (ref_dirs.shape[0] // 4 )*4 #+ ref_dirs.shape[0] % 4
         muttation_prob = 1/self.benchmark.get_Nvar()
         muttation=PolynomialMutation(prob=muttation_prob, eta = 20)
         crossover = SBX(prob=1.0, eta=15)
