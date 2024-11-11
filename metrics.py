@@ -64,13 +64,16 @@ class Metrics(InitMetrics):
     def dict_algorithm(self):
             algorithm={
               "NSGA-3" : [],
-              "SPEA-2" : []           
+              "SPEA-2" : [],
+              "RVEA"   : [],
+              "MOEAD"  : []          
               }
             return algorithm
             
 
-    def get_algorithm(self):
+    def get_metric(self):
             POF=list(self.param_point(self).values())
+            assert len(POF[0]) > 0, "The matrix for POF is empty, it needs to be greater than 0"
             POF=POF[0]
             dict_algorithm=self.dict_algorithm()
             vet_metrics=[]
@@ -96,12 +99,14 @@ class Metrics(InitMetrics):
                                   dict_algorithm_aux[key_algorithm]=func(POF_algorithm,POF)
                                   dict_algorithm_aux_valid={key: value for key,value in dict_algorithm_aux.items() if value}
                                   vet_metrics.append(dict_algorithm_aux_valid)
+            assert len(np.array(vet_metrics)) > 0, "No matrix for algorithms was sent"
             return self.build_metrics(vet_metrics)
 
 
     def param_point(self,obj):
         param={
-            "Minimization" : [],      
+            "Minimization" : [],     
+            "Maximization" : []
         }
 
        
@@ -112,7 +117,9 @@ class Metrics(InitMetrics):
                         point_algorithm=self.identify_algorithm(i,index)
                         if len(point_algorithm) != 0 and len(value) == 0:
                              param[index]=np.array(point_algorithm)
-        return param
+
+        param_valid={key: value for key,value in param.items() if len(np.array(list(value)))>0}
+        return param_valid
                
 
 

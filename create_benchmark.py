@@ -107,7 +107,6 @@ class CreateBenchmark(InitBenchmark):
             pass
        
         vet_pt_valid=[i for i in vet_pt if i.size>0]
-        print(vet_pt_valid)
         
         assert 0 < len(vet_pt_valid) <= 3, "Number of points allowed is only three, an amount greater than three was received."
 
@@ -135,7 +134,7 @@ pt_nsga= NSGAP.exec()
 metric = Metrics()
 metric.add_t(NSGAP)
 metric.add_t(pt_nsga)
-metric.add_t(points_out)
+metric.add_t(points_in)
 
 
 
@@ -145,7 +144,7 @@ metric.add_t(points_out)
 SPEA = SPEAPymoo(bk)
 pt_spea= SPEA.exec()
 metric.add_t(SPEA)
-metric.add_t(pt_spea)
+#metric.add_t(pt_spea)
 
 #bk.show_points(points_in)
 #bk.show_points(pt_nsga)
@@ -155,8 +154,8 @@ metric.add_t(pt_spea)
 
 
 
-pd_metric=metric.get_algorithm()
-bk.call_plot_PF_M(pt_spea,pt_nsga)
+pd_metric=metric.get_metric()
+#bk.call_plot_PF_M(pt_spea,pt_nsga)
 print("pd_metric")
 print(pd_metric)
 

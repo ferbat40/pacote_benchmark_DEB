@@ -23,9 +23,7 @@ class PlotFP_M():
          except Exception:
              self.pt3=[]
          
-         print("pt1",self.pt1)
-         print("pt2",self.pt2)
-         print("pt3",self.pt3)
+         
          self.list_axis=[f'Objective {i+1}' for i in range(Objectives)]
 
       
