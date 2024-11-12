@@ -8,11 +8,12 @@ from pymoo.algorithms.moo.rvea import RVEA
 
 
 class RVEAymoo(Problem):
-    def __init__(self,benchmark,partitions=30, generations=300,seed=15,pop_size=100):
+    def __init__(self,benchmark,partitions=20, generations=300,seed=15,pop_size=100):
         self.benchmark=benchmark
         self.partitions=partitions
         self.generations=generations
         self.seed=seed
+        self.pop_size=pop_size
         xl = np.full(self.benchmark.get_Nvar(),0)
         xu = np.full(self.benchmark.get_Nvar(),1)
         self.DTLZ=self.benchmark.get_DTLZ()
@@ -29,11 +30,11 @@ class RVEAymoo(Problem):
 
     def exec(self):
         ref_dirs = get_reference_directions("das-dennis", self.benchmark.get_M(), n_partitions=self.partitions)
-        popsize = (ref_dirs.shape[0] // 4 )*4 #+ ref_dirs.shape[0] % 4
+        #popsize = (ref_dirs.shape[0] // 4 )*4 #+ ref_dirs.shape[0] % 4
         muttation_prob = 1/self.benchmark.get_Nvar()
         muttation=PolynomialMutation(prob=muttation_prob, eta = 20)
         crossover = SBX(prob=1.0, eta=15)
-        algorithm_RVEA = RVEA(ref_dirs, pop_size=popsize, crossover=crossover,mutation=muttation)    
+        algorithm_RVEA = RVEA(ref_dirs, pop_size=self.pop_size, crossover=crossover,mutation=muttation)    
          
           
 
