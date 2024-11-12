@@ -124,13 +124,8 @@ class CreateBenchmark(InitBenchmark):
         label_1=[i for i in label_1 if i is not None]
         label_2=[i for i in label_2 if i is not None]
         label_valid=label_1+label_2
-        print(label_valid)
-    
-
-       
-    
-
+        
         if self.K_validate() == True and self.M_validate() == True:
-         PlotFP_M(self.get_M(),vet_pt_valid,label_valid)
+         PlotFP_M(self.get_M(),label_valid,vet_pt_valid)
 
 
