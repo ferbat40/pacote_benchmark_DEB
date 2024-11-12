@@ -9,7 +9,7 @@ from pymoo.algorithms.moo.moead import MOEAD
 
 
 class MOEADpymoo(Problem):
-    def __init__(self,benchmark,partitions=12, generations=300,seed=15,pop_size=100):
+    def __init__(self,benchmark,partitions=20, generations=300,seed=15):
         self.benchmark=benchmark
         self.partitions=partitions
         self.generations=generations
@@ -30,15 +30,14 @@ class MOEADpymoo(Problem):
 
     def exec(self):
         ref_dirs = get_reference_directions("das-dennis", self.benchmark.get_M(), n_partitions=self.partitions)
-        #popsize = ref_dirs.shape[0] + ref_dirs.shape[0] % 4
         muttation_prob = 1/self.benchmark.get_Nvar()
         muttation=PolynomialMutation(prob=muttation_prob, eta = 20)
         crossover = SBX(prob=1.0, eta=15)
-        MOEAD_ = MOEAD(ref_dirs, crossover=crossover,mutation=muttation)      
+        algorithm_MOEAD = MOEAD(ref_dirs, crossover=crossover,mutation=muttation)      
 
         res_MOEAD = minimize(
             MOEADpymoo(self.benchmark),
-            MOEAD_,
+            algorithm_MOEAD,
             termination=('n_gen', self.generations),
             seed=self.seed,
             save_history=True,

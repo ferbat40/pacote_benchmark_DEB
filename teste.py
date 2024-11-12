@@ -18,6 +18,7 @@ points_out=bk.get_DTLZ().maximize_DTLZ()
 
 NSGAP = NSGAPymoo(bk)
 pt_nsga= NSGAP.exec()
+print(pt_nsga)
 
 
 #metric = Metrics()
@@ -32,6 +33,7 @@ pt_nsga= NSGAP.exec()
 
 SPEA = SPEAPymoo(bk)
 pt_spea= SPEA.exec()
+print(pt_spea)
 #metric.add_t(SPEA)
 #metric.add_t(pt_spea)
 
@@ -41,16 +43,18 @@ pt_spea= SPEA.exec()
 
 RVEA_= RVEAymoo(bk)
 pt_rvea = RVEA_.exec()
+print(pt_rvea)
 #metric.add_t(RVEA_)
 #metric.add_t(pt_rvea)
 
 MOEAD_= MOEADpymoo(bk)
 pt_moead = MOEAD_.exec()
+print(pt_moead)
 #metric.add_t(MOEAD_)
 #metric.add_t(pt_moead)
 
 #bk.call_plot_PF_M(points_in,points_in)
-bk.call_plot_PF_M(pt_rvea,pt_moead,pt_nsga)
+#bk.call_plot_PF_M(pt_rvea,pt_moead,pt_nsga)
 
 
 

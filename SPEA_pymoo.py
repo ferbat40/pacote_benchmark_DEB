@@ -4,10 +4,10 @@ import numpy as np
 from pymoo.operators.crossover.sbx import SBX
 from pymoo.operators.mutation.pm import PolynomialMutation
 from pymoo.core.problem import Problem
-
+from pymoo.util.ref_dirs import get_reference_directions
 
 class SPEAPymoo(Problem):
-    def __init__(self,benchmark,partitions=12, generations=300,seed=15,pop_size=100):
+    def __init__(self,benchmark,partitions=20, generations=300,seed=15,pop_size=100):
         self.benchmark=benchmark
         self.partitions=partitions
         self.generations=generations
@@ -28,13 +28,15 @@ class SPEAPymoo(Problem):
         
 
     def exec(self):
+        ref_dirs = get_reference_directions("uniform", self.benchmark.get_M(), n_partitions=self.partitions)
+        self.pop_size = ref_dirs.shape[0] + ref_dirs.shape[0] % 4
         mutation_prob=1/self.benchmark.get_Nvar()
         mutation = PolynomialMutation(prob=mutation_prob, eta=20)
         crossover = SBX(prob=1.0, eta=15)
-        algorithm_spea = SPEA2(pop_size=self.pop_size,crossover=crossover,mutation=mutation)
+        algorithm_spea = SPEA2(ref_dirs=ref_dirs,pop_size=self.pop_size,crossover=crossover,mutation=mutation)
             
         res_SPEA = minimize(
-            SPEAPymoo(self.benchmark),
+            SPEAPymoo(self.benchmark,self.pop_size),
             algorithm_spea,
             termination=('n_gen', self.generations),
             seed=self.seed,
