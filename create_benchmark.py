@@ -127,9 +127,9 @@ class CreateBenchmark(InitBenchmark):
         labels_2 =  {key for key,value in pt2_dict.items() if len(value) > 0 }
         labels_3 =  {key for key,value in pt3_dict.items() if len(value) > 0 }
         for ( labels_1,labels_2,labels_3) in zip_longest (pt1_dict.items(),pt2_dict.items(),pt3_dict.items() , fillvalue=None):
-            key_1 = f'{labels_1[0]} Points {len(labels_1[1])}' if labels_1 is not None and len(labels_1[1])>0 else None
-            key_2 = f'{labels_2[0]} Points {len(labels_2[1])}' if labels_2 is not None and len(labels_2[1])>0 else None
-            key_3 = f'{labels_3[0]} Points {len(labels_3[1])}' if labels_3 is not None and len(labels_3[1])>0 else None
+            key_1 = f'{labels_1[0]} (Points {len(labels_1[1])})' if labels_1 is not None and len(labels_1[1])>0 else None
+            key_2 = f'{labels_2[0]} (Points {len(labels_2[1])})' if labels_2 is not None and len(labels_2[1])>0 else None
+            key_3 = f'{labels_3[0]} (Points {len(labels_3[1])})' if labels_3 is not None and len(labels_3[1])>0 else None
           
             label_1.append(key_1)
             label_2.append(key_2)
