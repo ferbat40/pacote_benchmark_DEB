@@ -114,8 +114,8 @@ class CreateBenchmark(InitBenchmark):
         assert 0 < len(vet_pt_valid) <= 3, "Number of points allowed is only three, an amount greater than three was received."
         label_1=[]
         label_2=[]
-        labels_1 =  {key for key,value in pt1_dict.items() }
-        labels_2 =  {key for key,value in pt2_dict.items() }
+        labels_1 =  {key for key,value in pt1_dict.items() if len(value) > 0 }
+        labels_2 =  {key for key,value in pt2_dict.items() if len(value) > 0 }
         for ( labels_1,labels_2) in zip_longest (pt1_dict.items(),pt2_dict.items() , fillvalue=None):
             key_1 = labels_1[0] if labels_1 is not None else None
             key_2 = labels_2[0] if labels_2 is not None else None
