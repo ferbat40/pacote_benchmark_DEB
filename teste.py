@@ -6,6 +6,7 @@ from RVEA_pymoo import RVEAymoo
 from MOEAD_pymoo import MOEADpymoo
 
 
+
 bk = CreateBenchmark(1, 200,6,3)
 bk.call_benchmark()
 
@@ -18,7 +19,7 @@ points_out=bk.get_DTLZ().maximize_DTLZ()
 
 NSGAP = NSGAPymoo(bk)
 pt_nsga= NSGAP.exec()
-print(pt_nsga)
+
 
 
 #metric = Metrics()
@@ -31,9 +32,8 @@ print(pt_nsga)
 
 
 
-SPEA = SPEAPymoo(bk)
-pt_spea= SPEA.exec()
-print(pt_spea)
+#SPEA = SPEAPymoo(bk)
+#pt_spea= SPEA.exec()
 #metric.add_t(SPEA)
 #metric.add_t(pt_spea)
 
@@ -41,19 +41,21 @@ print(pt_spea)
 #bk.show_points(pt_nsga)
 #bk.show_points(pt_spea)
 
-RVEA_= RVEAymoo(bk)
-pt_rvea = RVEA_.exec()
-print(pt_rvea)
+#RVEA_= RVEAymoo(bk)
+#pt_rvea = RVEA_.exec()
+#print(pt_rvea)
 #metric.add_t(RVEA_)
 #metric.add_t(pt_rvea)
 
-MOEAD_= MOEADpymoo(bk)
-pt_moead = MOEAD_.exec()
-print(pt_moead)
+#MOEAD_= MOEADpymoo(bk)
+#pt_moead = MOEAD_.exec()
+#print(pt_moead)
 #metric.add_t(MOEAD_)
 #metric.add_t(pt_moead)
 
-#bk.call_plot_PF_M(points_in,points_in)
+bk.call_plot_PF_M(points_in,pt_nsga)
+ff=bk.show_points(pt_nsga)
+#print(pand)
 #bk.call_plot_PF_M(pt_rvea,pt_moead,pt_nsga)
 
 

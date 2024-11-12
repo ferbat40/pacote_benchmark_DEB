@@ -11,17 +11,17 @@ class PlotFP_M():
                  
     
          try:
-             self.pt1=[np.array(vet_pt[0])]
+             self.pt1=np.array(vet_pt[0])
          except Exception:
              self.pt1=[]
          
          try:
-             self.pt2=[np.array(vet_pt[1])]
+             self.pt2=np.array(vet_pt[1])
          except Exception:
              self.pt2=[]
          
          try:
-             self.pt3=[np.array(vet_pt[2])]
+             self.pt3=np.array(vet_pt[2])
          except Exception:
              self.pt3=[]
          
@@ -45,7 +45,7 @@ class PlotFP_M():
          
          colors  = ['red','gray','blue']
          vectors = self.labels# ['Points one','Points two','Points three']         
-         fig = plt.figure(figsize=(13, 17))
+         fig = plt.figure(figsize=(11, 15))
          ax = fig.add_subplot(111, projection='3d')
 
 
