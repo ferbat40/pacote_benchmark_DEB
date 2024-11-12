@@ -7,11 +7,12 @@ from pymoo.core.problem import Problem
 
 
 class SPEAPymoo(Problem):
-    def __init__(self,benchmark,partitions=20, generations=300,seed=15,pop_size=100):
+    def __init__(self,benchmark,partitions=12, generations=300,seed=15,pop_size=100):
         self.benchmark=benchmark
         self.partitions=partitions
         self.generations=generations
         self.seed=seed
+        self.pop_size=pop_size
         xl = np.full(self.benchmark.get_Nvar(),0)
         xu = np.full(self.benchmark.get_Nvar(),1)
         self.DTLZ=self.benchmark.get_DTLZ()
@@ -30,10 +31,10 @@ class SPEAPymoo(Problem):
         mutation_prob=1/self.benchmark.get_Nvar()
         mutation = PolynomialMutation(prob=mutation_prob, eta=20)
         crossover = SBX(prob=1.0, eta=15)
-        algorithm_spea = SPEA2(pop_size=300,crossover=crossover,mutation=mutation)
+        algorithm_spea = SPEA2(pop_size=self.pop_size,crossover=crossover,mutation=mutation)
             
         res_SPEA = minimize(
-            SPEAPymoo(self.benchmark, pop_size=self.pop_size),
+            SPEAPymoo(self.benchmark),
             algorithm_spea,
             termination=('n_gen', self.generations),
             seed=self.seed,
