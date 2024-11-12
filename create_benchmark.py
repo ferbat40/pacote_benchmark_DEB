@@ -9,6 +9,7 @@ from DTLZ1 import DTLZ1
 from DTLZ2 import DTLZ2
 from init_benchmark import InitBenchmark
 from plot_FP_M import PlotFP_M
+from itertools import zip_longest
 
 
 class CreateBenchmark(InitBenchmark):
@@ -111,16 +112,25 @@ class CreateBenchmark(InitBenchmark):
         vet_pt_valid=[i for i in vet_pt if i.size>0]
         
         assert 0 < len(vet_pt_valid) <= 3, "Number of points allowed is only three, an amount greater than three was received."
-
-        labels_1 = {key for key,value in pt1_dict.items() }
-        labels_2 = {key for key,value in pt2_dict.items() }
-        labels = np.array(list(labels_1 | labels_2))
-        
+        label_1=[]
+        label_2=[]
+        labels_1 =  {key for key,value in pt1_dict.items() }
+        labels_2 =  {key for key,value in pt2_dict.items() }
+        for ( labels_1,labels_2) in zip_longest (pt1_dict.items(),pt2_dict.items() , fillvalue=None):
+            key_1 = labels_1[0] if labels_1 is not None else None
+            key_2 = labels_2[0] if labels_2 is not None else None
+            label_1.append(key_1)
+            label_2.append(key_2)
+        label_1=[i for i in label_1 if i is not None]
+        label_2=[i for i in label_2 if i is not None]
+        label_valid=label_1+label_2
+        print(label_valid)
+    
 
        
     
 
         if self.K_validate() == True and self.M_validate() == True:
-         PlotFP_M(self.get_M(),vet_pt_valid,labels)
+         PlotFP_M(self.get_M(),vet_pt_valid,label_valid)
 
 
