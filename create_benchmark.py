@@ -90,7 +90,7 @@ class CreateBenchmark(InitBenchmark):
         all_data_pandas.reset_index(drop=True, inplace=True)
         return all_data_pandas
 
-    def call_plot_PF_M(self,pt1_dict={},pt2_dict={}):
+    def call_plot_PF_M(self,pt1_dict={},pt2_dict={},pt3_dict={}):
         vet_pt=[]
         try:
             vet_pt.append(np.array(list(pt1_dict.values())[0]))
@@ -108,18 +108,26 @@ class CreateBenchmark(InitBenchmark):
             vet_pt.append(np.array(list(pt2_dict.values())[1]))
         except Exception:
             pass
+        try:
+            vet_pt.append(np.array(list(pt3_dict.values())[0]))
+        except Exception:
+            pass
+        try:
+            vet_pt.append(np.array(list(pt3_dict.values())[1]))
+        except Exception:
+            pass
+       
        
         vet_pt_valid=[i for i in vet_pt if i.size>0]
-
         
-        assert 0 < len(vet_pt_valid) <= 3, "Number of points allowed is only three, an amount greater than three was received."
+        assert 0 < len(vet_pt_valid) <= 3, "The number of points allowed is only three; an amount greater than three or equal to zero was received."
         label_1=[]
         label_2=[]
         labels_1 =  {key for key,value in pt1_dict.items() if len(value) > 0 }
         labels_2 =  {key for key,value in pt2_dict.items() if len(value) > 0 }
         for ( labels_1,labels_2) in zip_longest (pt1_dict.items(),pt2_dict.items() , fillvalue=None):
-            key_1 = labels_1[0] if labels_1 is not None and len(labels_1[1])>0 else None
-            key_2 = labels_2[0] if labels_2 is not None and len(labels_2[1])>0 else None
+            key_1 = f'{labels_1[0]} Points {len(labels_1[1])}' if labels_1 is not None and len(labels_1[1])>0 else None
+            key_2 = f'{labels_2[0]} Points {len(labels_2[1])}' if labels_2 is not None and len(labels_2[1])>0 else None
             label_1.append(key_1)
             label_2.append(key_2)
         label_1=[i for i in label_1 if i is not None]
@@ -127,6 +135,6 @@ class CreateBenchmark(InitBenchmark):
         label_valid=label_1+label_2
         
         if self.K_validate() == True and self.M_validate() == True:
-         PlotFP_M(self.get_M(),label_valid,vet_pt_valid)
+            PlotFP_M(self.get_M(),label_valid,vet_pt_valid)
 
 
