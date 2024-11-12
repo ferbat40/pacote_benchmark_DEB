@@ -49,7 +49,7 @@ pt_nsga= NSGAP.exec()
 #metric.add_t(MOEAD_)
 #metric.add_t(pt_moead)
 
-bk.call_plot_PF_M(points_in,pt_nsga)
+bk.call_plot_PF_M(points_in,points_out)
 
 
 
