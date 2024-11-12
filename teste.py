@@ -30,8 +30,8 @@ pt_nsga= NSGAP.exec()
 
 
 
-#SPEA = SPEAPymoo(bk)
-#pt_spea= SPEA.exec()
+SPEA = SPEAPymoo(bk)
+pt_spea= SPEA.exec()
 #metric.add_t(SPEA)
 #metric.add_t(pt_spea)
 
@@ -39,17 +39,18 @@ pt_nsga= NSGAP.exec()
 #bk.show_points(pt_nsga)
 #bk.show_points(pt_spea)
 
-#RVEA_= RVEAymoo(bk)
-#pt_rvea = RVEA_.exec()
+RVEA_= RVEAymoo(bk)
+pt_rvea = RVEA_.exec()
 #metric.add_t(RVEA_)
 #metric.add_t(pt_rvea)
 
-#MOEAD_= MOEADpymoo(bk)
-#pt_moead = MOEAD_.exec()
+MOEAD_= MOEADpymoo(bk)
+pt_moead = MOEAD_.exec()
 #metric.add_t(MOEAD_)
 #metric.add_t(pt_moead)
 
-bk.call_plot_PF_M(points_in,points_in)
+#bk.call_plot_PF_M(points_in,points_in)
+bk.call_plot_PF_M(pt_rvea,pt_moead,pt_nsga)
 
 
 
