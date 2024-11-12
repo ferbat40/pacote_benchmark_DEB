@@ -8,7 +8,7 @@ from pymoo.algorithms.moo.rvea import RVEA
 
 
 class RVEAymoo(Problem):
-    def __init__(self,benchmark,partitions=15, generations=300,seed=15,pop_size=100):
+    def __init__(self,benchmark,partitions=30, generations=300,seed=15,pop_size=100):
         self.benchmark=benchmark
         self.partitions=partitions
         self.generations=generations
