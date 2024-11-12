@@ -6,8 +6,10 @@ import numpy as np
 
 
 class PlotFP_M():
-     def __init__(self,Objectives,vet_pt=[]):
-         
+     def __init__(self,Objectives,labels,vet_pt=[]):
+         self.labels=labels
+                 
+    
          try:
              self.pt1=[np.array(vet_pt[0])]
          except Exception:
@@ -42,7 +44,7 @@ class PlotFP_M():
          self.z_axis_index = int(self.z_axis.value.split()[-1])-1
          
          colors  = ['red','gray','blue']
-         vectors = ['Points one','Points two','Points three']         
+         vectors = self.labels# ['Points one','Points two','Points three']         
          fig = plt.figure(figsize=(13, 17))
          ax = fig.add_subplot(111, projection='3d')
 

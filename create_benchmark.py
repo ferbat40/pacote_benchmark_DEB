@@ -112,73 +112,15 @@ class CreateBenchmark(InitBenchmark):
         
         assert 0 < len(vet_pt_valid) <= 3, "Number of points allowed is only three, an amount greater than three was received."
 
-        if self.K_validate() == True and self.M_validate() == True:
-         PlotFP_M(self.get_M(),vet_pt_valid)
+        labels_1 = {key for key,value in pt1_dict.items() }
+        labels_2 = {key for key,value in pt2_dict.items() }
+        labels = np.array(list(labels_1 | labels_2))
+        
+
+       
     
-   
-          
-     
 
-#bk = CreateBenchmark(1, 200,6,3)
-#bk.call_benchmark()
-
-#points_in=bk.get_DTLZ().minimize_DTLZ()
-#points_out=bk.get_DTLZ().maximize_DTLZ()
-
-
-
-
-
-#NSGAP = NSGAPymoo(bk)
-#pt_nsga= NSGAP.exec()
-
-
-#metric = Metrics()
-#metric.add_t(NSGAP)
-#metric.add_t(pt_nsga)
-#metric.add_t(points_in)
-
-
-
-
-
-
-#SPEA = SPEAPymoo(bk)
-#pt_spea= SPEA.exec()
-#metric.add_t(SPEA)
-#metric.add_t(pt_spea)
-
-#bk.show_points(points_in)
-#bk.show_points(pt_nsga)
-#bk.show_points(pt_spea)
-
-#RVEA_= RVEAymoo(bk)
-#pt_rvea = RVEA_.exec()
-#metric.add_t(RVEA_)
-#metric.add_t(pt_rvea)
-
-#MOEAD_= MOEADpymoo(bk)
-#pt_moead = MOEAD_.exec()
-#metric.add_t(MOEAD_)
-#metric.add_t(pt_moead)
-
-
-
-
-
-#pd_metric=metric.get_metric()
-#print("pd_metric")
-#print(pd_metric)
-
-
-#print(bk.get_Nvar(), bk.get_M(), bk.get_K(), bk.get_constraits_default(), bk.get_constraits_NSGA_3(), bk.get_constraits_SPEA_2())
-
-
-
-
-
-
-
-
+        if self.K_validate() == True and self.M_validate() == True:
+         PlotFP_M(self.get_M(),vet_pt_valid,labels)
 
 
