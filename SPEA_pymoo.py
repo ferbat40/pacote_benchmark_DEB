@@ -23,7 +23,7 @@ class SPEAPymoo(Problem):
         Gxm=self.DTLZ.calc_g(x)
         F=self.DTLZ.calc_f(x,Gxm)
         out["F"]=F
-        f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_SPEA_2())
+        f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_NSGA_3())
         out["G"]=f_c
         
 
