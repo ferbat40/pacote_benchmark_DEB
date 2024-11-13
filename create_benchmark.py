@@ -66,7 +66,7 @@ class CreateBenchmark(InitBenchmark):
         pt1_dict_df=[self.build_dataframe(key,values) for key,values in pt1_dict_valid.items()]
         for i in pt1_dict_df:
            print()
-           print(i[0])
+           display(i[0])
            print()
            display(i[1])
       
