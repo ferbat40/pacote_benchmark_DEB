@@ -52,7 +52,7 @@ class CreateBenchmark(InitBenchmark):
     def build_dataframe(self,key,value):
         label=[(f'Objective {i+1}',) for i in range(value.shape[1])]
         column = pd.MultiIndex.from_tuples(label) 
-        point_pandas=pd.DataFrame(value, columns= column)  
+        point_pandas=pd.DataFrame(value, columns=column)  
         point_pandas_valid=point_pandas.reset_index(drop=True)
         point_pandas_valid.index=pd.Index(range(1,len(point_pandas_valid)+1)) 
         return {key: point_pandas_valid}   
@@ -60,15 +60,17 @@ class CreateBenchmark(InitBenchmark):
    
     def show_points(self,pt1_dict={}):
      if self.K_validate() == True and self.M_validate() == True:
-        
+        assert isinstance(pt1_dict,dict) and len(pt1_dict)>0, "It is only allowed dictionaries"   
         pt1_dict_valid={key: values for key,values in pt1_dict.items() if len(values)>0}
         pt1_dict_df=[self.build_dataframe(key,values) for key,values in pt1_dict_valid.items()]
-        for dict_df in  pt1_dict_df:
-           for key,value in dict_df.items():
-               print()
-               display(key)
-               print()
-               display(value)
+        display(pt1_dict_df)
+        #for dict_df in  pt1_dict_df:
+            
+           #for key,value in dict_df.items():
+              # print()
+              # display(key)
+              # print()
+              # display(value)
         return pt1_dict_df
        
         
