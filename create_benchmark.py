@@ -63,14 +63,12 @@ class CreateBenchmark(InitBenchmark):
         assert isinstance(pt1_dict,dict) and len(pt1_dict)>0, "It is only allowed dictionaries"   
         pt1_dict_valid={key: values for key,values in pt1_dict.items() if len(values)>0}
         pt1_dict_df=[self.build_dataframe(key,values) for key,values in pt1_dict_valid.items()]
-        display(pt1_dict_df)
-        #for dict_df in  pt1_dict_df:
-            
-           #for key,value in dict_df.items():
-              # print()
-              # display(key)
-              # print()
-              # display(value)
+        for dict_df in  pt1_dict_df:
+           for key,value in dict_df.items():
+               print()
+               print(key)
+               print()
+               print(value)
         return pt1_dict_df
        
         
