@@ -66,7 +66,7 @@ class CreateBenchmark(InitBenchmark):
         pt1_dict_df=[self.build_dataframe(key,values) for key,values in pt1_dict_valid.items()]
         for i in pt1_dict_df:
            print()
-           display(HTML(f'<h1 style="font-size: 20px;">{i[0]}</h1>'))
+           display(HTML(f'<h1 style="font-size: 15px;">{i[0]}</h1>'))
            print()
            display(i[1])
       
