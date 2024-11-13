@@ -10,7 +10,7 @@ from DTLZ2 import DTLZ2
 from init_benchmark import InitBenchmark
 from plot_FP_M import PlotFP_M
 from itertools import zip_longest
-
+from IPython.display import display,HTML
 
 
 
@@ -66,9 +66,9 @@ class CreateBenchmark(InitBenchmark):
         pt1_dict_df=[self.build_dataframe(key,values) for key,values in pt1_dict_valid.items()]
         for i in pt1_dict_df:
            print()
-           print(i[0])
+           display(HTML(f'<h1 style="font-size: 20px;">{i[0]}</h1>'))
            print()
-           print(i[1])
+           display(i[1])
       
 
         
