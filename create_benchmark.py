@@ -10,6 +10,7 @@ from DTLZ2 import DTLZ2
 from init_benchmark import InitBenchmark
 from plot_FP_M import PlotFP_M
 from itertools import zip_longest
+from IPython.display import display
 
 
 
@@ -55,7 +56,7 @@ class CreateBenchmark(InitBenchmark):
         point_pandas=pd.DataFrame(value, columns=column)  
         point_pandas_valid=point_pandas.reset_index(drop=True)
         point_pandas_valid.index=pd.Index(range(1,len(point_pandas_valid)+1)) 
-        return {key: point_pandas_valid}   
+        return [key,point_pandas_valid]  
     
    
     def show_points(self,pt1_dict={}):
@@ -63,13 +64,12 @@ class CreateBenchmark(InitBenchmark):
         assert isinstance(pt1_dict,dict) and len(pt1_dict)>0, "It is only allowed dictionaries"   
         pt1_dict_valid={key: values for key,values in pt1_dict.items() if len(values)>0}
         pt1_dict_df=[self.build_dataframe(key,values) for key,values in pt1_dict_valid.items()]
-        for pt1_dict in pt1_dict_df:
-            for key,value in pt1_dict.items():
-               print()
-               print(key)
-               print()
-               print(value)
-
+        for i in pt1_dict_df:
+           print()
+           print(i[0])
+           print()
+           display(i[1])
+      
 
         
         
