@@ -66,9 +66,9 @@ class CreateBenchmark(InitBenchmark):
         for dict_df in  pt1_dict_df:
            for key,value in dict_df.items():
                print()
-               print(key)
+               display(key)
                print()
-               print(value)
+               display(value)
         return pt1_dict_df
        
         
