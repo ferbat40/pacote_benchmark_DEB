@@ -7,7 +7,7 @@ from MOEAD_pymoo import MOEADpymoo
 
 
 
-bk = CreateBenchmark(1, 200,6,4)
+bk = CreateBenchmark(1, 200,6,3)
 bk.call_benchmark()
 
 points_in=bk.get_DTLZ().minimize_DTLZ()
@@ -54,8 +54,8 @@ pt_nsga= NSGAP.exec()
 #metric.add_t(pt_moead)
 
 #bk.call_plot_PF_M(points_in,pt_nsga)
-ff=bk.show_points(points_out)
-print(len(ff))
+ff=bk.show_points(pt_nsga)
+
 #bk.call_plot_PF_M(pt_rvea,pt_moead,pt_nsga)
 
 

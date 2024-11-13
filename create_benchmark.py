@@ -56,11 +56,10 @@ class CreateBenchmark(InitBenchmark):
         point_pandas=pd.DataFrame(value, columns=column)  
         point_pandas_valid=point_pandas.reset_index(drop=True)
         point_pandas_valid.index=pd.Index(range(1,len(point_pandas_valid)+1)) 
-        display(HTML(f'<h1 style="font-size: 20px;">{key}</h1>'))
+        display(HTML(f'<h1 style="font-size: 16px;">{key}</h1>'))
         print()
         display(point_pandas_valid)
-       
-    
+          
    
     def show_points(self,pt1_dict={}):
      if self.K_validate() == True and self.M_validate() == True:
@@ -68,14 +67,6 @@ class CreateBenchmark(InitBenchmark):
         pt1_dict_valid={key: values for key,values in pt1_dict.items() if len(values)>0}
         for key,values in pt1_dict_valid.items():
             self.build_dataframe(key,values) 
-
-      
-      
-
-        
-        
-       
-       
         
      
     def valid_points(self,pt1_dict={},pt2_dict={},pt3_dict={}):
