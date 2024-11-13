@@ -56,24 +56,25 @@ class CreateBenchmark(InitBenchmark):
         point_pandas=pd.DataFrame(value, columns=column)  
         point_pandas_valid=point_pandas.reset_index(drop=True)
         point_pandas_valid.index=pd.Index(range(1,len(point_pandas_valid)+1)) 
-        return [key,point_pandas_valid]  
+        display(HTML(f'<h1 style="font-size: 20px;">{key}</h1>'))
+        print()
+        display(point_pandas_valid)
+       
     
    
     def show_points(self,pt1_dict={}):
      if self.K_validate() == True and self.M_validate() == True:
         assert isinstance(pt1_dict,dict) and len(pt1_dict)>0, "It is only allowed dictionaries"   
         pt1_dict_valid={key: values for key,values in pt1_dict.items() if len(values)>0}
-        pt1_dict_df=[self.build_dataframe(key,values) for key,values in pt1_dict_valid.items()]
-        for i in pt1_dict_df:
-           print()
-           display(HTML(f'<h1 style="font-size: 20px;">{i[0]}</h1>'))
-           print()
-           display(i[1])
+        for key,values in pt1_dict_valid.items():
+            self.build_dataframe(key,values) 
+
+      
       
 
         
         
-        return pt1_dict_df
+       
        
         
      
