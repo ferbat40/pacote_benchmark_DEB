@@ -10,7 +10,7 @@ from DTLZ2 import DTLZ2
 from init_benchmark import InitBenchmark
 from plot_FP_M import PlotFP_M
 from itertools import zip_longest
-from IPython.display import display
+
 
 
 
@@ -63,12 +63,16 @@ class CreateBenchmark(InitBenchmark):
         assert isinstance(pt1_dict,dict) and len(pt1_dict)>0, "It is only allowed dictionaries"   
         pt1_dict_valid={key: values for key,values in pt1_dict.items() if len(values)>0}
         pt1_dict_df=[self.build_dataframe(key,values) for key,values in pt1_dict_valid.items()]
-        for dict_df in  pt1_dict_df:
-           for key,value in dict_df.items():
+        for pt1_dict in pt1_dict_df:
+            for key,value in pt1_dict.items():
                print()
-               display(key)
+               print(key)
                print()
-               display(value)
+               print(value)
+
+
+        
+        
         return pt1_dict_df
        
         
