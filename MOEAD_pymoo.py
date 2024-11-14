@@ -9,7 +9,7 @@ from pymoo.algorithms.moo.moead import MOEAD
 
 
 class MOEADpymoo(Problem):
-    def __init__(self,benchmark,partitions=12, generations=300,seed=15):
+    def __init__(self,benchmark,partitions=13, generations=300,seed=15):
         self.benchmark=benchmark
         self.partitions=partitions
         self.generations=generations
