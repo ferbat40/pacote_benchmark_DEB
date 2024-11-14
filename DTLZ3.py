@@ -99,8 +99,8 @@ class DTLZ3:
         f=self.calc_f(x,g)
         constraits=self.aval_constraits(f)
         dc_constraits = {
-            "Minimization of G (Function objectives sum same 0.5)"       : constraits[0],
-            "Maximization of G (Function objectives sum far way of 0.5)" : constraits[1]                           
+            "Minimization of G (Function objectives sum same 1.0)"       : constraits[0],
+            "Maximization of G (Function objectives sum far way of 1.0)" : constraits[1]                           
         }
         return dc_constraits
          

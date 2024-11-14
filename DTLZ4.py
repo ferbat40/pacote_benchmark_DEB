@@ -1,11 +1,12 @@
 import numpy as np
 
-class DTLZ2:
+class DTLZ4:
 
 
-    def __init__(self,new_benchmark_obj):
+    def __init__(self,new_benchmark_obj,alpha=100):
         self.new_benchmark_obj=None
         self.new_benchmark_obj=new_benchmark_obj
+        self.alpha=alpha
 
 
     def constraits(self,f,parameter,f_c=[]):
@@ -45,25 +46,25 @@ class DTLZ2:
         for v in range(0,self.new_benchmark_obj.get_M()):
             F_index.append(v)   
         xm2_p = np.array(x[:,:self.new_benchmark_obj.get_M()-2])
-        prod_xm2 = np.array([np.prod(np.cos(xm2_p[linha,0:xm2_p.shape[1]]*np.pi/2))  for index,linha in enumerate(range(xm2_p.shape[0]))])
+        prod_xm2 = np.array([np.prod(np.cos(xm2_p[linha,0:xm2_p.shape[1]]**self.alpha*np.pi/2))  for index,linha in enumerate(range(xm2_p.shape[0]))])
         prod_xm2 = prod_xm2.reshape(xm2_p.shape[0],1)
 
         xm3_p = np.array(x[:,:self.new_benchmark_obj.get_M()-3])
-        prod_xm3 = np.array([np.prod(np.cos(xm3_p[linha,0:xm3_p.shape[1]]*np.pi/2))  for index,linha in enumerate(range(xm3_p.shape[0]))])
+        prod_xm3 = np.array([np.prod(np.cos(xm3_p[linha,0:xm3_p.shape[1]]**self.alpha*np.pi/2))  for index,linha in enumerate(range(xm3_p.shape[0]))])
         prod_xm3 = prod_xm3.reshape(xm3_p.shape[0],1)
 
         xm1_c=x[:,self.new_benchmark_obj.get_M()-2:self.new_benchmark_obj.get_M()-1]
-        prod_xm1_c = np.array([np.prod(np.cos(xm1_c[linha,0:xm1_c.shape[1]]*np.pi/2))  for index,linha in enumerate(range(xm1_c.shape[0]))])
+        prod_xm1_c = np.array([np.prod(np.cos(xm1_c[linha,0:xm1_c.shape[1]]**self.alpha*np.pi/2))  for index,linha in enumerate(range(xm1_c.shape[0]))])
         prod_xm1_c = prod_xm1_c.reshape(prod_xm1_c.shape[0],1)
 
-        prod_xm1_s = np.array([np.prod(np.sin(xm1_c[linha,0:xm1_c.shape[1]]*np.pi/2))  for index,linha in enumerate(range(xm1_c.shape[0]))])
+        prod_xm1_s = np.array([np.prod(np.sin(xm1_c[linha,0:xm1_c.shape[1]]**self.alpha*np.pi/2))  for index,linha in enumerate(range(xm1_c.shape[0]))])
         prod_xm1_s = prod_xm1_s.reshape(prod_xm1_s.shape[0],1)
 
         xm2_s=x[:,self.new_benchmark_obj.get_M()-3:self.new_benchmark_obj.get_M()-2]
-        prod_xm2_s = np.array([np.prod(np.sin(xm2_s[linha,0:xm2_s.shape[1]]*np.pi/2))  for index,linha in enumerate(range(xm2_s.shape[0]))])
+        prod_xm2_s = np.array([np.prod(np.sin(xm2_s[linha,0:xm2_s.shape[1]]**self.alpha*np.pi/2))  for index,linha in enumerate(range(xm2_s.shape[0]))])
         prod_xm2_s = prod_xm2_s.reshape(prod_xm2_s.shape[0],1)
 
-        x1_s=np.array(np.sin(x[:,0]*np.pi/2))
+        x1_s=np.array(np.sin(x[:,0]**self.alpha*np.pi/2))
         x1_s=x1_s.reshape(x.shape[0],1)
 
         f= [self.param_f(prod_xm2,Gxm,prod_xm1_c,prod_xm1_s,prod_xm2_s,prod_xm3,x1_s,i,len(F_index)) for i in F_index]
@@ -103,5 +104,3 @@ class DTLZ2:
             "Maximization of G (Function objectives sum far way of 1.0)" : constraits[1]                           
         }
         return dc_constraits
-         
-         

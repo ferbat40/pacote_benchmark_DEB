@@ -8,6 +8,7 @@ from metrics import Metrics
 from DTLZ1 import DTLZ1
 from DTLZ2 import DTLZ2
 from DTLZ3 import DTLZ3
+from DTLZ4 import DTLZ4
 from init_benchmark import InitBenchmark
 from plot_FP_M import PlotFP_M
 from itertools import zip_longest
@@ -27,6 +28,7 @@ class CreateBenchmark(InitBenchmark):
                 1:  self.call_DTLZ1,
                 2:  self.call_DTLZ2,
                 3:  self.call_DTLZ3,
+                4:  self.call_DTLZ4
                 }
         pd.set_option('display.float_format', '{:.15f}'.format)
        
@@ -57,6 +59,13 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_NSGA_3(1.2)
             self.set_constraits_SPEA_2(1.1)
             self.set_DTLZ(DTLZ3(self))
+
+    def call_DTLZ4(self):
+        if self.K_validate() == True and self.M_validate() == True:
+            self.set_constraits_Default(1.0)
+            self.set_constraits_NSGA_3(1.2)
+            self.set_constraits_SPEA_2(1.1)
+            self.set_DTLZ(DTLZ4(self))
       
       
 
@@ -72,6 +81,7 @@ class CreateBenchmark(InitBenchmark):
         point_pandas_valid=point_pandas.reset_index(drop=True)
         point_pandas_valid.index=pd.Index(range(1,len(point_pandas_valid)+1)) 
         display(HTML(f'<h1 style="font-size: 16px;">{key}</h1>'))
+        print(key)
         print()
         display(point_pandas_valid)
           
