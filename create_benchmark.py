@@ -45,6 +45,7 @@ class CreateBenchmark(InitBenchmark):
     def call_DTLZ2(self):
         if self.K_validate() == True and self.M_validate() == True:
             self.set_constraits_Default(1.0)
+            self.set_constraits_NSGA_3(1.2)
             self.set_DTLZ(DTLZ2(self))
       
 
