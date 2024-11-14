@@ -26,6 +26,8 @@ class CreateBenchmark(InitBenchmark):
                 1:  self.call_DTLZ1,
                 2:  self.call_DTLZ2,
                 }
+        pd.set_option('display.float_format', '{:.15f}'.format)
+       
           
     def K_validate(self):
         assert self.N-self.M+1 > 0, "this value of 'k' is not valid, it must be greater than 0" 
@@ -42,6 +44,7 @@ class CreateBenchmark(InitBenchmark):
     
     def call_DTLZ2(self):
         if self.K_validate() == True and self.M_validate() == True:
+            self.set_constraits_Default(1.0)
             self.set_DTLZ(DTLZ2(self))
       
 
