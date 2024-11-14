@@ -91,5 +91,17 @@ class DTLZ2:
         }      
         
          return dc_constraits
+    
+
+    def maximize_DTLZ(self):
+        x=np.array(self.new_benchmark_obj.get_Point_out_G())
+        g=self.calc_g(x)
+        f=self.calc_f(x,g)
+        constraits=self.aval_constraits(f)
+        dc_constraits = {
+            "Minimization of G (Function objectives sum same 0.5)"       : constraits[0],
+            "Maximization of G (Function objectives sum far way of 0.5)" : constraits[1]                           
+        }
+        return dc_constraits
          
          
