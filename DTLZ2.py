@@ -24,8 +24,6 @@ class DTLZ2:
                 const_out.append(fo)   
         return np.array(const_in),np.array(const_out)
 
-
-    #prod_xm2,Gxm,prod_xm1_c,prod_xm1_s,prod_xm2_s,prod_xm3,
     def param_f(self,param_1,param_2,param_3,param_4,param_5,param_6,param_7,f_index,f_size):
         
         parameter = {
@@ -75,28 +73,11 @@ class DTLZ2:
        
         return f
         
-       
-        #print("x",x)
-        #print("xm3_p",xm3_p)
-        #print("prod_xm3",prod_xm3)
-        #print("x1_s",x1_s)
-        #print("xm2_s",xm2_s)
-        #print("prod_xm2_s",prod_xm2_s)
-        #print("xm2_p",xm2_p)
-        #print("xm1_c",xm1_c)
-        #print("prod_xm1_c",prod_xm1_c)
-        #print("prod_xm1_s",prod_xm1_s)
-        
-        #print("prod_xm2",prod_xm2)
-
 
     def calc_g(self,x=[],G=[]):
          Gxm=np.array(x[:,self.new_benchmark_obj.get_M()-1:])
          G = np.array([np.sum((XeXm-0.5)**2 for XeXm in Gxm[row,0:Gxm.shape[1]]) for index, row in enumerate(range(Gxm.shape[0]))])
          return G.reshape((Gxm.shape[0],1))
-
-              
-         
 
 
     def minimize_DTLZ(self):

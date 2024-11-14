@@ -7,6 +7,7 @@ from MOEAD_pymoo import MOEADpymoo
 from metrics import Metrics
 from DTLZ1 import DTLZ1
 from DTLZ2 import DTLZ2
+from DTLZ2 import DTLZ3
 from init_benchmark import InitBenchmark
 from plot_FP_M import PlotFP_M
 from itertools import zip_longest
@@ -25,6 +26,7 @@ class CreateBenchmark(InitBenchmark):
         self.PARAM = {
                 1:  self.call_DTLZ1,
                 2:  self.call_DTLZ2,
+                3:  self.call_DTLZ3,
                 }
         pd.set_option('display.float_format', '{:.15f}'.format)
        
@@ -47,6 +49,14 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_Default(1.0)
             self.set_constraits_NSGA_3(1.2)
             self.set_DTLZ(DTLZ2(self))
+
+    def call_DTLZ3(self):
+        if self.K_validate() == True and self.M_validate() == True:
+            self.set_constraits_Default(1.0)
+            self.set_constraits_NSGA_3(1.2)
+            self.set_constraits_SPEA_2(1.1)
+            self.set_DTLZ(DTLZ3(self))
+      
       
 
     def call_benchmark(self):
