@@ -7,12 +7,12 @@ from MOEAD_pymoo import MOEADpymoo
 
 
 
-bk = CreateBenchmark(5, 3,7,4)
+bk = CreateBenchmark(1,1500,7,4)
 bk.call_benchmark()
 
 points_in=bk.get_DTLZ().minimize_DTLZ()
 #points_out=bk.get_DTLZ().maximize_DTLZ()
-#bk.show_points(points_in)
+bk.show_points(points_in)
 
 
 
