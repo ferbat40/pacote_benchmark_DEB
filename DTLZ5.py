@@ -26,15 +26,33 @@ class DTLZ5:
         return np.array(const_in),np.array(const_out)
 
     def calc_prod(self,theta):
+        #print("theta",theta)
         return np.array(np.prod(theta,axis=1)).reshape(theta.shape[0],1)
+    
+
+    def find_in_matrix(self,x,x1=[]):
+        x1_find=x1.copy()
+        x1_find=x1_find.flatten()
+        return np.where(np.all(x==x1_find[:,np.newaxis],axis=0))[0][0]
+
         
 
-    def calc_theta_until(self,Gxm,x1=[],x_until=[]):
-        theta_until=x_until.copy()
-        theta_until=(np.pi/(4*(1+Gxm)))*(1+2*Gxm*theta_until)
-        theta_x1=x1.copy()
-        theta_x1=theta_x1*np.pi/2
-        theta=np.concatenate((theta_x1,theta_until), axis=1)
+    def calc_theta_until(self,Gxm,x,x1=[]):
+        print("x1",x1)
+        
+        
+        
+        if len(x1) and self.find_in_matrix(x,x1)>0:   
+            theta=x1.copy()       
+            theta=(np.pi/(4*(1+Gxm)))*(1+2*Gxm*theta)
+        else:
+            print("aqui")
+            theta=x1.copy()
+            theta=theta*np.pi/2
+
+
+       
+        #theta=np.concatenate((theta_x1,theta_until), axis=1)
         return theta
     
     def param_f(self,param_1,param_2,param_3,param_4,param_5,param_6,param_7,f_index,f_size):
@@ -57,19 +75,28 @@ class DTLZ5:
         F_index=[]
         for v in range(0,self.new_benchmark_obj.get_M()):
             F_index.append(v)  
-        theta_x1_xm2_cos=self.calc_prod(np.array(list(map(lambda xi: np.cos(xi), self.calc_theta_until(Gxm,x[:,0:1],x[:,1:self.new_benchmark_obj.get_M()-2])))))
-        theta_xm1_cos=self.calc_prod(np.array(list(map(lambda xi: np.cos(xi), self.calc_theta_until(Gxm,x[:,self.new_benchmark_obj.get_M()-2:self.new_benchmark_obj.get_M()-1])))))
-        theta_xm1_sin=self.calc_prod(np.array(list(map(lambda xi: np.sin(xi), self.calc_theta_until(Gxm,x[:,self.new_benchmark_obj.get_M()-2:self.new_benchmark_obj.get_M()-1])))))
-        theta_x1_xm3_cos=self.calc_prod(np.array(list(map(lambda xi: np.cos(xi), self.calc_theta_until(Gxm,x[:,0:1],x[:,1:self.new_benchmark_obj.get_M()-3])))))
-        theta_xm2_sin=self.calc_prod(np.array(list(map(lambda xi: np.sin(xi), self.calc_theta_until(Gxm,x[:,self.new_benchmark_obj.get_M()-3:self.new_benchmark_obj.get_M()-2])))))
-        theta_x1_sin=self.calc_prod(np.array(list(map(lambda xi: np.sin(xi), self.calc_theta_until(Gxm,x[:,0:1])))))
+        print("x",x)
        
-        f= [self.param_f(Gxm,theta_x1_xm2_cos,theta_xm1_cos,theta_xm1_sin,theta_x1_xm3_cos,theta_xm2_sin,theta_x1_sin,i,len(F_index)) for i in F_index]
+        print("theta_x1_xm2_cos")
+        theta_x1_xm2_cos=self.calc_prod(np.array(list(map(lambda xi: np.cos(xi), self.calc_theta_until(Gxm,x,x[:,1:self.new_benchmark_obj.get_M()-2])))))
+        #theta_xm1_cos=self.calc_prod(np.array(list(map(lambda xi: np.cos(xi), self.calc_theta_until(Gxm,x[:,self.new_benchmark_obj.get_M()-2:self.new_benchmark_obj.get_M()-1])))))
+        #theta_xm1_sin=self.calc_prod(np.array(list(map(lambda xi: np.sin(xi), self.calc_theta_until(Gxm,x[:,self.new_benchmark_obj.get_M()-2:self.new_benchmark_obj.get_M()-1])))))
+        #print("theta_x1_xm3_cos")
+        #theta_x1_xm3_cos=self.calc_prod(np.array(list(map(lambda xi: np.cos(xi), self.calc_theta_until(Gxm,x,x[:,0:1],x[:,1:self.new_benchmark_obj.get_M()-3])))))
+        #print(theta_x1_xm3_cos)
+    
+        print("theta_x1_sin")
+        theta_xm2_sin=self.calc_prod(np.array(list(map(lambda xi: np.sin(xi), self.calc_theta_until(Gxm,x,x[:,self.new_benchmark_obj.get_M()-3:self.new_benchmark_obj.get_M()-2])))))
         
-        f=np.array(f)
-        f=np.concatenate(f, axis = 1)
         
-        return f
+        #theta_x1_sin=self.calc_prod(np.array(list(map(lambda xi: np.sin(xi), self.calc_theta_until(Gxm,x[:,0:1])))))
+       
+        #f= [self.param_f(Gxm,theta_x1_xm2_cos,theta_xm1_cos,theta_xm1_sin,theta_x1_xm3_cos,theta_xm2_sin,theta_x1_sin,i,len(F_index)) for i in F_index]
+        
+        #f=np.array(f)
+        #f=np.concatenate(f, axis = 1)
+        
+       # return f
        
        
          
@@ -85,12 +112,12 @@ class DTLZ5:
          x=np.array(self.new_benchmark_obj.get_Point_in_G())
          g=self.calc_g(x)
          f=self.calc_f(x,g)
-         constraits=self.aval_constraits(f)
-         dc_constraits = {
-            "Minimization of G (Function objectives sum same 1.0)"  : constraits[0],
-            "Minimization of G (Function objectives sum close 1.0)" : constraits[1]                           
-        }      
+         #constraits=self.aval_constraits(f)
+         #dc_constraits = {
+          #  "Minimization of G (Function objectives sum same 1.0)"  : constraits[0],
+           # "Minimization of G (Function objectives sum close 1.0)" : constraits[1]                           
+        #}      
         
-         return dc_constraits
+        # return dc_constraits
          
        
