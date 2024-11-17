@@ -101,7 +101,7 @@ class CreateBenchmark(InitBenchmark):
         point_pandas=pd.DataFrame(value, columns=column)  
         point_pandas_valid=point_pandas.reset_index(drop=True)
         point_pandas_valid.index=pd.Index(range(1,len(point_pandas_valid)+1)) 
-        display(HTML(f'<h1 style="font-size: 16px;">{key}</h1>'))
+        display(HTML(f'<h1 style="font-size: 18px;">{key}</h1>'))
         print(key)
         print()
         display(point_pandas_valid)
