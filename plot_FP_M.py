@@ -6,7 +6,7 @@ import numpy as np
 
 
 class PlotFP_M():
-     def __init__(self,Objectives,labels,vet_pt=[],angle=25):
+     def __init__(self,Objectives,labels,vet_pt=[],angle=45):
          self.labels=labels
          self.angle=angle
                  
