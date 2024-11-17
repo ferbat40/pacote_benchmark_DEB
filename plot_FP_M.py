@@ -57,7 +57,7 @@ class PlotFP_M():
          ax.set_ylabel(self.y_axis.value)
          ax.set_zlabel(self.z_axis.value)
          #ax.view_init(elev=360, azim=25)
-         #ax.view_init(elev=30, azim=30)
+         ax.view_init(elev=30, azim=30)
          ax.legend()
          ax.set_title("Plot Graph")
          plt.draw()
