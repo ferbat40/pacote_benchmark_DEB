@@ -171,6 +171,6 @@ class CreateBenchmark(InitBenchmark):
             label_2=[i for i in label_2 if i is not None]
             label_3=[i for i in label_3 if i is not None]
             label_valid=label_1+label_2+label_3
-            PlotFP_M(self.get_M(),label_valid,vet_pt_valid)
+            PlotFP_M(self.get_M(),label_valid,vet_pt_valid,self.get_angle())
 
 
