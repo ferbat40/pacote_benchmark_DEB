@@ -6,8 +6,9 @@ import numpy as np
 
 
 class PlotFP_M():
-     def __init__(self,Objectives,labels,vet_pt=[]):
+     def __init__(self,Objectives,labels,vet_pt=[],angle=25):
          self.labels=labels
+         self.angle=angle
                  
     
          try:
@@ -56,8 +57,7 @@ class PlotFP_M():
          ax.set_xlabel(self.x_axis.value)
          ax.set_ylabel(self.y_axis.value)
          ax.set_zlabel(self.z_axis.value)
-         #ax.view_init(elev=360, azim=25)
-         ax.view_init(elev=30, azim=20)
+         ax.view_init(elev=30, azim=self.angle)
          ax.legend()
          ax.set_title("Plot Graph")
          plt.draw()

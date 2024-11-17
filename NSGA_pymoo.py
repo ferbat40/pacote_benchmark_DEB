@@ -31,7 +31,6 @@ class NSGAPymoo(Problem):
     def exec(self):
         ref_dirs = get_reference_directions("uniform", self.benchmark.get_M(), n_partitions=self.partitions)
         self.pop_size = ref_dirs.shape[0] + ref_dirs.shape[0] % 4
-        print("pop_size", self.pop_size)
         muttation_prob = 1/self.benchmark.get_Nvar()
         muttation=PolynomialMutation(prob=muttation_prob, eta = 20)
         crossover = SBX(prob=1.0, eta=15)
