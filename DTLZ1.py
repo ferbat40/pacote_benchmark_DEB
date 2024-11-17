@@ -18,9 +18,9 @@ class DTLZ1:
         const_out=[]
         M_constraits=self.constraits(f,self.new_benchmark_obj.get_constraits_default())
         for index,(fc,fo) in zip( range(M_constraits.shape[0]) ,  zip(M_constraits,f)):
-            if fc == 0.0:
+            if fc == 0.0000000000:
                 const_in.append(fo)
-            if fc != 0.0:
+            if fc != 0.0000000000:
                 const_out.append(fo)   
         return np.array(const_in),np.array(const_out)
         

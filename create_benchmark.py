@@ -10,11 +10,11 @@ from DTLZ2 import DTLZ2
 from DTLZ3 import DTLZ3
 from DTLZ4 import DTLZ4
 from DTLZ5 import DTLZ5
+from DTLZ6 import DTLZ6
 from init_benchmark import InitBenchmark
 from plot_FP_M import PlotFP_M
 from itertools import zip_longest
 from IPython.display import display,HTML
-
 
 
 
@@ -30,7 +30,8 @@ class CreateBenchmark(InitBenchmark):
                 2:  self.call_DTLZ2,
                 3:  self.call_DTLZ3,
                 4:  self.call_DTLZ4,
-                5:  self.call_DTLZ5
+                5:  self.call_DTLZ5,
+                6:  self.call_DTLZ6
                 }
         pd.set_option('display.float_format', '{:.15f}'.format)
        
@@ -78,6 +79,15 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_NSGA_3(1.2)
             self.set_constraits_SPEA_2(1.1)
             self.set_DTLZ(DTLZ5(self))
+    
+    
+    def call_DTLZ6(self):
+        if self.K_validate() == True and self.M_validate() == True:
+            self.set_constraits_Default(1.0)
+            self.set_constraits_NSGA_3(1.2)
+            self.set_constraits_SPEA_2(1.1)
+            self.set_POF(0.0)
+            self.set_DTLZ(DTLZ6(self))
          
 
     def call_benchmark(self):

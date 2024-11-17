@@ -1,13 +1,12 @@
 import numpy as np
 
-class DTLZ5:
+class DTLZ6:
 
 
     def __init__(self,new_benchmark_obj):
         self.new_benchmark_obj=None
         self.new_benchmark_obj=new_benchmark_obj
-
-
+    
     def constraits(self,f,parameter,f_c=[]):
         f_constraits=np.array(f)
         f_c = np.array([np.sum([ f_c**2  for  f_c in f_constraits[linha,0:f_constraits.shape[1]]])-parameter for index,linha in enumerate(range(f_constraits.shape[0]))  ])
@@ -101,7 +100,7 @@ class DTLZ5:
        
     def calc_g(self,x=[],G=[]):
          Gxm=np.array(x[:,self.new_benchmark_obj.get_M()-1:])
-         G = np.array([np.sum((XeXm-0.5)**2 for XeXm in Gxm[row,0:Gxm.shape[1]]) for index, row in enumerate(range(Gxm.shape[0]))])
+         G = np.array([np.sum((XeXm)**0.1 for XeXm in Gxm[row,0:Gxm.shape[1]]) for index, row in enumerate(range(Gxm.shape[0]))])
          return G.reshape((Gxm.shape[0],1))
 
 
@@ -127,5 +126,3 @@ class DTLZ5:
             "Maximization of G (Function objectives sum far way of 1.0)" : constraits[1]                           
         }
         return dc_constraits
-         
-       
