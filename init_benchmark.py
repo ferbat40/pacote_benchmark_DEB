@@ -3,7 +3,7 @@ import numpy as np
 
 class InitBenchmark:
        
-    def __init__(self,P,N,M,DTLZ,constraits_SPEA_2=1.00,constraits_default=0.5,constraits_NSGA_3=0.60,POF=0.5,angle=40):
+    def __init__(self,P,N,M,DTLZ,constraits_SPEA_2=1.00,constraits_default=0.5,constraits_NSGA_3=0.60,POF=0.5,angle=35):
         self.__P=0
         self.__M=0
         self.__N=0
