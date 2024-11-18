@@ -20,7 +20,7 @@ class InitBenchmark:
         self.__POF=POF
         self.__Point_in_G=np.array([*np.random.random((self.__P,self.__Nvar))])
         self.__Point_in_G[:,self.__M-1:self.__N]=self.__POF
-        self.__Point_out_G=np.array([*np.random.random((self.__P,self.__Nvar+1))])
+        self.__Point_out_G=np.array([*np.random.random((self.__P,self.__Nvar))])
         self.__DTLZ=DTLZ
         self.__constraits_SPEA_2=constraits_SPEA_2
         self.__constraits_NSGA_3=constraits_NSGA_3
