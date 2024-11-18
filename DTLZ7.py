@@ -20,7 +20,13 @@ class DTLZ7:
 
 
     def calc_Fm(self,Fm,x,Gxm):
-        Fm=(1+Gxm)*self.calc_h(x,Gxm)
+        h=self.calc_h(x,Gxm)
+        Fm=(1+Gxm)*h
+        #print("(1+Gxm)",(1+Gxm))
+        #print("h",h)
+        #print("Fm",Fm)
+
+        
         return Fm
 
 
@@ -33,7 +39,8 @@ class DTLZ7:
 
     def calc_g(self,x=[],G=[]):
         Gxm=np.array(x[:,self.new_benchmark_obj.get_M()-1:])
-        return np.array([1+9/self.new_benchmark_obj.get_K()*np.sum(i for i in Gxm[row,0:Gxm.shape[1]]) for row in range(0,Gxm.shape[0])]).reshape(Gxm.shape[0],1)
+        #print("GXM",Gxm)
+        return np.array([(1+9/self.new_benchmark_obj.get_K())*np.sum(i for i in Gxm[row,0:Gxm.shape[1]]) for row in range(0,Gxm.shape[0])]).reshape(Gxm.shape[0],1)
        
 
     def minimize_DTLZ(self):
