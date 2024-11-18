@@ -128,6 +128,7 @@ class Metrics(InitMetrics):
         
 
     def M_GD(self,algorithm,POF):
+        print("POF",POF)
         ind = GD(POF)
         D_ind = {
 
