@@ -7,7 +7,7 @@ from MOEAD_pymoo import MOEADpymoo
 
 
 
-bk = CreateBenchmark(7,1500,6,3)
+bk = CreateBenchmark(7,1500,22,3)
 print(bk.get_Nvar(), bk.get_M(), bk.get_K())
 
 
@@ -16,7 +16,7 @@ points_in=bk.get_DTLZ().minimize_DTLZ()
 #points_out=bk.get_DTLZ().maximize_DTLZ()
 bk.show_points(points_in)
 #bk.show_points(points_out)
-NSGA = NSGAPymoo(bk,20)
+NSGA = NSGAPymoo(bk)
 pt_n=NSGA.exec()
 bk.show_points(pt_n)
 
