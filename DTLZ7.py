@@ -41,9 +41,10 @@ class DTLZ7:
         Gxm=np.array(x[:,self.new_benchmark_obj.get_M()-1:])
         #print("GXM",Gxm)
         #return 
-        epsilon = 1e-8 
-        sd = np.array([ 1+9 /np.sum(np.abs(Gxm[row, :])+epsilon)  for row in range(Gxm.shape[0])]).reshape(Gxm.shape[0],1)
-        #print(sd)
+        epsilon  = 1e-8
+        sd = np.array([ 1+9 /(np.sum(np.abs(Gxm[row, :]))+epsilon)  for row in range(Gxm.shape[0])]).reshape(Gxm.shape[0],1)
+        #sd=1
+        print("se",sd)
         return sd
         #g_values = np.array([ 1+9 /np.sum(np.abs(Gxm[row, :]))  for row in range(Gxm.shape[0])]).reshape(Gxm.shape[0],1)
        
