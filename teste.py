@@ -13,10 +13,10 @@ print(bk.get_Nvar(), bk.get_M(), bk.get_K())
 
 bk.call_benchmark()
 points_in=bk.get_DTLZ().minimize_DTLZ()
-points_out=bk.get_DTLZ().maximize_DTLZ()
+#points_out=bk.get_DTLZ().maximize_DTLZ()
 bk.show_points(points_in)
-bk.show_points(points_out)
-NSGA = NSGAPymoo(bk)
+#bk.show_points(points_out)
+NSGA = NSGAPymoo(bk,20)
 pt_n=NSGA.exec()
 bk.show_points(pt_n)
 
