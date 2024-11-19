@@ -37,7 +37,7 @@ class DTLZ7:
     def calc_g(self,x=[],G=[]):
         Gxm=np.array(x[:,self.new_benchmark_obj.get_M()-1:])
         g_sum = np.array([ (np.sum(np.abs(Gxm[row, :])))  for row in range(Gxm.shape[0])]).reshape(Gxm.shape[0],1)
-        g = np.where(g_sum>0,9/g_sum,g_sum)
+        g = np.where(g_sum>0,9/self.new_benchmark_obj.get_K()*g_sum,g_sum)
         g=g+1
         #print("g",g)
         return g
