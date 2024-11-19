@@ -39,21 +39,10 @@ class DTLZ7:
 
     def calc_g(self,x=[],G=[]):
         Gxm=np.array(x[:,self.new_benchmark_obj.get_M()-1:])
-        #print("GXM",Gxm)
-        #return 
-        
         g_sum = np.array([ (np.sum(np.abs(Gxm[row, :])))  for row in range(Gxm.shape[0])]).reshape(Gxm.shape[0],1)
         g = np.where(g_sum>0,1+9/(g_sum),g_sum)
-        print(g)
-        
-        
         return g
-        #g_values = np.array([ 1+9 /np.sum(np.abs(Gxm[row, :]))  for row in range(Gxm.shape[0])]).reshape(Gxm.shape[0],1)
-       
-        #print("ad",ad)
-           
-       
-
+     
     def minimize_DTLZ(self):
         x=np.array(self.new_benchmark_obj.get_Point_in_G())
         g=self.calc_g(x)

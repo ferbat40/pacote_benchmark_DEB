@@ -17,15 +17,16 @@ class NSGAPymoo(Problem):
         xl = np.full(self.benchmark.get_Nvar(),0)
         xu = np.full(self.benchmark.get_Nvar(),1)
         self.DTLZ=self.benchmark.get_DTLZ()
-        super(). __init__(n_var=self.benchmark.get_Nvar(), n_obj=self.benchmark.get_M(), n_ieq_constr=1, xl=xl, xu=xu)
+        super(). __init__(n_var=self.benchmark.get_Nvar(), n_obj=self.benchmark.get_M(), n_ieq_constr=self.benchmark.get_n_ieq_constr(), xl=xl, xu=xu)
 
         
     def _evaluate(self, x, out, *args, **kwargs):   
         Gxm=self.DTLZ.calc_g(x)
         F=self.DTLZ.calc_f(x,Gxm)
         out["F"]=F
-        f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_NSGA_3())
-        out["G"]=f_c
+        if self.benchmark.get_n_ieq_constr()>0:
+            f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_NSGA_3())
+            out["G"]=f_c
         
 
     def exec(self):
