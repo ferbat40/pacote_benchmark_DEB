@@ -9,28 +9,39 @@ class DTLZ7:
 
 
 
-    def calc_h(self,x,G):
-        xi=np.array(x[0:,:self.new_benchmark_obj.get_M()-1])
-        h_c = np.hstack([x[:,col:index]/1+G*(1+np.sin(3*np.pi*x[:,col:index])) for index,col in enumerate(range(0,xi.shape[1]),start=1)])
+    def calc_h(self,x,f,g):
+        print("x",x)
+        print("f",f)
+        print("g",g)
+        for col in range(0,f.shape[1]-1):
+           h= f[:,col]/1+g*(1+np.sin(3*np.pi*f[:,col]))
+           print("h",h)
+        
+               
+
+        #xi=np.array(x[0:,:self.new_benchmark_obj.get_M()-1])
+        #h_c = np.hstack([x[:,col:index]/1+G*(1+np.sin(3*np.pi*x[:,col:index])) for index,col in enumerate(range(0,xi.shape[1]),start=1)])
         #print("x",x)
         #print("h",h)
-        h_sum = np.array(np.sum(h_c,axis=1))
-        h=self.new_benchmark_obj.get_M()-h_sum
-        h_sum_v = h_sum.reshape(h.shape[0],1)
-        return h_sum_v 
+        #h_sum = np.array(np.sum(h_c,axis=1))
+        #h=self.new_benchmark_obj.get_M()-h_sum
+        #h_sum_v = h_sum.reshape(h.shape[0],1)
+        return 1
 
 
 
-    def calc_Fm(self,Fm,x,Gxm):
-        h=self.calc_h(x,Gxm)
-        Fm=(1+Gxm)*h
-        return Fm
+    def calc_Fm(self,f,x,Gxm):
+        h=self.calc_h(x,f,Gxm)
+        #Fm=(1+Gxm)*h
+        return 1
 
 
     def calc_f(self,x,Gxm):
-        fx=[np.array(x[:,i]).reshape(x.shape[0],1) if index != self.new_benchmark_obj.get_M() else self.calc_Fm(np.array(x[:,i]).reshape(x.shape[0],1),x,Gxm) for index,i in enumerate(range(0,self.new_benchmark_obj.get_M()),start=1)]
-        fx_col=np.array(np.hstack(fx))
-        return fx_col
+        fx=[np.array(x[:,i]).reshape(x.shape[0],1)  for index,i in enumerate(range(0,self.new_benchmark_obj.get_M()-1),start=1)]
+        f=np.array(np.hstack(fx))
+        #if index != self.new_benchmark_obj.get_M() else self.calc_Fm(np.array(x[:,i]).reshape(x.shape[0],1),x,Gxm)
+        self.calc_Fm(f,x,Gxm)
+        return 1
 
 
 
