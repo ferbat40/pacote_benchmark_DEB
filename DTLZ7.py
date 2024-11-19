@@ -9,10 +9,12 @@ class DTLZ7:
 
 
 
-    def calc_h(self,x,Gxm):
+    def calc_h(self,x,G):
         xi=np.array(x[0:,:self.new_benchmark_obj.get_M()-1])
-        h_c = np.hstack([x[:,col:index]/(1+Gxm)*(1+np.sin(3*np.pi*x[:,col:index])) for index,col in enumerate(range(0,xi.shape[1]),start=1)])
+        h_c = np.hstack([x[:,col:index]/1+G*(1+np.sin(3*np.pi*x[:,col:index])) for index,col in enumerate(range(0,xi.shape[1]),start=1)])
         h=self.new_benchmark_obj.get_M()-h_c
+        #print("x",x)
+        #print("h",h)
         h_sum = np.array(np.sum(h,axis=1))
         h_sum_v = h_sum.reshape(h.shape[0],1)
         return h_sum_v 
@@ -22,11 +24,6 @@ class DTLZ7:
     def calc_Fm(self,Fm,x,Gxm):
         h=self.calc_h(x,Gxm)
         Fm=(1+Gxm)*h
-        #print("(1+Gxm)",(1+Gxm))
-        #print("h",h)
-        #print("Fm",Fm)
-
-        
         return Fm
 
 
@@ -39,9 +36,10 @@ class DTLZ7:
 
     def calc_g(self,x=[],G=[]):
         Gxm=np.array(x[:,self.new_benchmark_obj.get_M()-1:])
-        #print("Gxm",Gxm)
         g_sum = np.array([ (np.sum(np.abs(Gxm[row, :])))  for row in range(Gxm.shape[0])]).reshape(Gxm.shape[0],1)
-        g = np.where(g_sum>0,1+(9/self.new_benchmark_obj.get_K())*g_sum,g_sum)
+        g = np.where(g_sum>0,9/g_sum,g_sum)
+        g=g+1
+        #print("g",g)
         return g
      
     def minimize_DTLZ(self):
