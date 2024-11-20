@@ -18,7 +18,7 @@ class DTLZ7:
         h_sum= np.array(np.sum(h,axis=1)).reshape(h.shape[0],1)
         #print("h",h)
         #print("h_sum",h_sum)
-        h_m=self.new_benchmark_obj.get_M()-1-h_sum
+        h_m=self.new_benchmark_obj.get_M()-h_sum
         #print("h_m",h_m)
 
           
