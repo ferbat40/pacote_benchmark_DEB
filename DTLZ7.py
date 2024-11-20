@@ -14,7 +14,7 @@ class DTLZ7:
         #print("f",f)
         #print("g",g)
         #print("g h",g)
-        h=np.hstack([np.array(f[:,col:col+1]/1+g*(1+np.sin(3*np.pi*f[:,col:col+1]))) for col in range(0,f.shape[1])])
+        h=np.hstack([np.array(f[:,col:col+1]/(1+g)*(1+np.sin(3*np.pi*f[:,col:col+1]))) for col in range(0,f.shape[1])])
         h_sum= np.array(np.sum(h,axis=1)).reshape(h.shape[0],1)
         #print("h",h)
         #print("h_sum",h_sum)
