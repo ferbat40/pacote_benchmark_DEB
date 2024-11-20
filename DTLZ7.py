@@ -10,7 +10,7 @@ class DTLZ7:
 
 
     def calc_h(self,x,f,g):
-        h=np.hstack([f[:,col:col+1]/(1+g)*(1+np.sin(3*np.pi*f[:,col:col+1])) for col in range(0,f.shape[1])])
+        h=np.hstack([f[:,col:col+1]/1+g*(1+np.sin(3*np.pi*f[:,col:col+1])) for col in range(0,f.shape[1])])
         h_sum= np.array(np.sum(h,axis=1)).reshape(h.shape[0],1)
         h_m=self.new_benchmark_obj.get_M()-h_sum
         return h_m
@@ -21,7 +21,7 @@ class DTLZ7:
         h=self.calc_h(x,f,Gxm)
         #print("h",h)
         #print("g",Gxm)
-        Fm=(1+Gxm)**h  
+        Fm=(1+Gxm)*h  
         #print("Gxm",Gxm) 
         return Fm
 
