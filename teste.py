@@ -8,7 +8,7 @@ from MOEAD_pymoo import MOEADpymoo
 
 
 bk = CreateBenchmark(7,1500,22,3)
-print(bk.get_Nvar(), bk.get_M(), bk.get_K())
+#print(bk.get_Nvar(), bk.get_M(), bk.get_K())
 
 
 bk.call_benchmark()

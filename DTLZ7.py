@@ -18,7 +18,7 @@ class DTLZ7:
         h_sum= np.array(np.sum(h,axis=1)).reshape(h.shape[0],1)
         #print("h",h)
         #print("h_sum",h_sum)
-        h_m=self.new_benchmark_obj.get_M()-h_sum
+        h_m=self.new_benchmark_obj.get_M()-1-h_sum
         #print("h_m",h_m)
 
           
@@ -40,8 +40,7 @@ class DTLZ7:
         h=self.calc_h(x,f,Gxm)
         #print("h",h)
         #print("g",Gxm)
-        Fm=(1+Gxm)*h
-        #print("Fm",Fm)
+        Fm=(1+Gxm)*h      
         return Fm
 
 
@@ -60,9 +59,8 @@ class DTLZ7:
 
     def calc_g(self,x=[],G=[]):
         Gxm=np.array(x[:,self.new_benchmark_obj.get_M()-1:])
-        g_sum = np.array([ (np.sum(np.abs(Gxm[row, :])))  for row in range(Gxm.shape[0])]).reshape(Gxm.shape[0],1)
-        #g = np.where(g_sum > 0, 1+(9/g_sum) , 1)
-        g=1+(9/g_sum)
+        g_sum = np.array([ (np.sum(Gxm[row, :]))  for row in range(Gxm.shape[0])]).reshape(Gxm.shape[0],1)
+        g = np.where(g_sum > 0, 1+(np.abs(9/g_sum)) , 1)
         #print("g",g)
         #g=g+1
         #print("g",Gxm)
@@ -71,6 +69,10 @@ class DTLZ7:
      
     def minimize_DTLZ(self):
         x=np.array(self.new_benchmark_obj.get_Point_in_G())
+        for index,row in enumerate(x, start=1):
+            for val in row:
+                if val>=1:
+                    print("val<0",val,index)
         g=self.calc_g(x)
         f=self.calc_f(x,g)
         #print("f f",f)
