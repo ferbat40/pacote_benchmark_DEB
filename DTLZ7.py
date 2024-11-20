@@ -10,28 +10,9 @@ class DTLZ7:
 
 
     def calc_h(self,x,f,g):
-        #print("x",x)
-        #print("f",f)
-        #print("g",g)
-        #print("g h",g)
-        h=np.hstack([(np.array(f[:,col:col+1]/(1+g))*(1+np.sin(3*np.pi*f[:,col:col+1]))) for col in range(0,f.shape[1])])
+        h=np.hstack([f[:,col:col+1]/(1+g)*(1+np.sin(3*np.pi*f[:,col:col+1])) for col in range(0,f.shape[1])])
         h_sum= np.array(np.sum(h,axis=1)).reshape(h.shape[0],1)
-        #print("h",h)
-        #print("h_sum",h_sum)
-        h_m=self.new_benchmark_obj.get_M()-1-h_sum
-        #print("h_m",h_m)
-
-          
-        
-               
-
-        #xi=np.array(x[0:,:self.new_benchmark_obj.get_M()-1])
-        #h_c = np.hstack([x[:,col:index]/1+G*(1+np.sin(3*np.pi*x[:,col:index])) for index,col in enumerate(range(0,xi.shape[1]),start=1)])
-        #print("x",x)
-        #print("h",h)
-        #h_sum = np.array(np.sum(h_c,axis=1))
-        #h=self.new_benchmark_obj.get_M()-h_sum
-        #h_sum_v = h_sum.reshape(h.shape[0],1)
+        h_m=self.new_benchmark_obj.get_M()-h_sum
         return h_m
 
 
@@ -40,7 +21,8 @@ class DTLZ7:
         h=self.calc_h(x,f,Gxm)
         #print("h",h)
         #print("g",Gxm)
-        Fm=(1+Gxm)*h      
+        Fm=(1+Gxm)**h  
+        #print("Gxm",Gxm) 
         return Fm
 
 
