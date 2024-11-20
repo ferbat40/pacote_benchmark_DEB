@@ -18,7 +18,7 @@ class InitBenchmark:
         self.__K = self.__N-self.__M+1
         self.__Nvar = self.__K+self.__M-1
         self.__POF=POF
-        self.__Point_in_G=np.array([*np.random.random((self.__P,self.__Nvar))*0.5])
+        self.__Point_in_G=np.array([*np.random.random((self.__P,self.__Nvar))])
         self.__Point_in_G[:,self.__M-1:self.__N]=self.__POF
         self.__Point_out_G=np.array([*np.random.random((self.__P,self.__Nvar))])
         self.__DTLZ=DTLZ
