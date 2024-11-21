@@ -10,7 +10,10 @@ class DTLZ7:
 
 
     def calc_h(self,x,f,g):
-        h=np.hstack([f[:,col:col+1]/(1+g)*(1+np.sin(3*np.pi*f[:,col:col+1])) for col in range(0,f.shape[1])])
+        g_aux = np.tile(g, (1, f.shape[1] - 1))
+        #print(g_aux)
+        #print(g)
+        h=np.hstack([f[:,col:col+1]/(1+g_aux)*(1+np.sin(3*np.pi*f[:,col:col+1])) for col in range(0,f.shape[1])])
         h_sum= np.array(np.sum(h,axis=1)).reshape(h.shape[0],1)
         #h_m=self.new_benchmark_obj.get_M()-h_sum
         return h_sum
@@ -35,7 +38,7 @@ class DTLZ7:
     def calc_g(self,x=[],G=[]):
         Gxm=np.array(x[:,self.new_benchmark_obj.get_M()-1:])
         g_sum = np.array([ (np.sum(Gxm[row, :]))  for row in range(Gxm.shape[0])]).reshape(Gxm.shape[0],1)
-        g=1+(9*g_sum)/self.new_benchmark_obj.get_K()
+        g=1+9/self.new_benchmark_obj.get_K()*g_sum
         return g
      
     def minimize_DTLZ(self):
