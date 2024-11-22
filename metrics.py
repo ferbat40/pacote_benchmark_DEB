@@ -121,14 +121,9 @@ class Metrics(InitMetrics):
         param_valid={key: value for key,value in param.items() if len(np.array(list(value)))>0}
         return param_valid
                
-
-
-    
-
         
 
     def M_GD(self,algorithm,POF):
-        print("POF",POF)
         ind = GD(POF)
         D_ind = {
 
