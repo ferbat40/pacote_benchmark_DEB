@@ -3,10 +3,9 @@ import numpy as np
 
 class InitBenchmark:
        
-    def __init__(self,P,N,M,DTLZ,constraits_SPEA_2=1.00,constraits_default=0.5,constraits_NSGA_3=0.60,POF=0.5,angle=45,n_ieq_constr=1):
+    def __init__(self,P,k,M,DTLZ,constraits_SPEA_2=1.00,constraits_default=0.5,constraits_NSGA_3=0.60,POF=0.5,angle=45,n_ieq_constr=1):
         self.__P=0
         self.__M=0
-        self.__N=0
         self.__K=0
         self.__Nvar=0
         self.__Point_in_G=[]
@@ -14,12 +13,11 @@ class InitBenchmark:
         self.__DTLZ=None
         self.__P=P
         self.__M=M
-        self.__N=N
-        self.__K = self.__N-self.__M+1
-        self.__Nvar = self.__K+self.__M-1
+        self.__K=k
+        self.__Nvar = k+M-1
         self.__POF=POF
         self.__Point_in_G=np.array([*np.random.random((self.__P,self.__Nvar))])
-        self.__Point_in_G[:,self.__M-1:self.__N]=self.__POF
+        self.__Point_in_G[:,self.__M-1:self.__Nvar+1]=self.__POF
         self.__Point_out_G=np.array([*np.random.random((self.__P,self.__Nvar))])
         self.__DTLZ=DTLZ
         self.__constraits_SPEA_2=constraits_SPEA_2
@@ -35,9 +33,6 @@ class InitBenchmark:
  
     def get_M (self):
         return self.__M
-    
-    def get_N (self):
-        return self.__N
     
     def get_K (self):
         return self.__K
@@ -81,7 +76,7 @@ class InitBenchmark:
     
 
     def set_POF(self,POF):
-        self.__Point_in_G[:,self.__M-1:self.__N]=POF
+        self.__Point_in_G[:,self.__M-1:self.__Nvar]=POF
         self.__POF=POF
     
 

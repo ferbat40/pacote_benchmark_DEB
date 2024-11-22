@@ -21,9 +21,9 @@ from IPython.display import display,HTML
 
 class CreateBenchmark(InitBenchmark):
     
-    def __init__(self,benchmark,P,N,M,DTLZ=None):
-        super().__init__(P,N,M,DTLZ)
-        self.N=N
+    def __init__(self,benchmark,P,K,M,DTLZ=None):
+        super().__init__(P,K,M,DTLZ)
+        self.K=K
         self.M=M
         self.benchmark=benchmark
         self.PARAM = {
@@ -39,7 +39,7 @@ class CreateBenchmark(InitBenchmark):
        
           
     def K_validate(self):
-        assert self.N-self.M+1 > 0, "this value of 'k' is not valid, it must be greater than 0" 
+        assert self.K > 0, "this value of 'k' is not valid, it must be greater than 0" 
         return True
     
     def M_validate(self):
@@ -101,6 +101,7 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_SPEA_2(1.1)
             self.set_n_ieq_constr(0)
             self.set_POF(0.0)
+            self.set_angle(10)
             self.set_DTLZ(DTLZ7(self))
          
 
