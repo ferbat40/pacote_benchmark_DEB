@@ -8,7 +8,7 @@ from pymoo.core.problem import Problem
 
 
 class NSGAPymoo(Problem):
-    def __init__(self,benchmark,partitions=13, generations=300,seed=15,pop_size=100):
+    def __init__(self,benchmark,partitions=15, generations=300,seed=15,pop_size=100):
         self.benchmark=benchmark
         self.partitions=partitions
         self.generations=generations
@@ -38,7 +38,7 @@ class NSGAPymoo(Problem):
         nsga3 = NSGA3(ref_dirs=ref_dirs, pop_size=self.pop_size, crossover=crossover,mutation=muttation)      
 
         res_NSGA = minimize(
-            NSGAPymoo(self.benchmark,self.pop_size),
+            NSGAPymoo(self.benchmark,self.partitions, self.generations,self.seed, self.pop_size),
             nsga3,
             termination=('n_gen', self.generations),
             seed=self.seed,
@@ -51,19 +51,3 @@ class NSGAPymoo(Problem):
         }    
         
         return NSGA_algorithm
-    
-
-
-        
-        
-
-
-
-    
-
-
-
-
-
-        
-

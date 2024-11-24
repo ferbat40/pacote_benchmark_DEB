@@ -23,6 +23,8 @@ class SPEAPymoo(Problem):
         Gxm=self.DTLZ.calc_g(x)
         F=self.DTLZ.calc_f(x,Gxm)
         out["F"]=F
+        if np.any(np.isnan(F)) or np.any(np.isinf(F)):
+            print("valores invalidos")
         if self.benchmark.get_n_ieq_constr()>0:
             f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_SPEA_2())
             out["G"]=f_c
@@ -37,7 +39,7 @@ class SPEAPymoo(Problem):
         algorithm_spea = SPEA2(ref_dirs=ref_dirs,pop_size=self.pop_size,crossover=crossover,mutation=mutation)
             
         res_SPEA = minimize(
-            SPEAPymoo(self.benchmark,self.pop_size),
+            SPEAPymoo(self.benchmark,self.partitions, self.generations,self.seed, self.pop_size),
             algorithm_spea,
             termination=('n_gen', self.generations),
             seed=self.seed,

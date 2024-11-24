@@ -12,6 +12,7 @@ from DTLZ4 import DTLZ4
 from DTLZ5 import DTLZ5
 from DTLZ6 import DTLZ6
 from DTLZ7 import DTLZ7
+from DTLZ8 import DTLZ8
 from init_benchmark import InitBenchmark
 from plot_FP_M import PlotFP_M
 from itertools import zip_longest
@@ -21,9 +22,9 @@ from IPython.display import display,HTML
 
 class CreateBenchmark(InitBenchmark):
     
-    def __init__(self,benchmark,P,K,M,DTLZ=None):
-        super().__init__(P,K,M,DTLZ)
-        self.K=K
+    def __init__(self,benchmark,P,K_N,M,DTLZ=None):
+        super().__init__(P,M,DTLZ)
+        self.K_N=K_N
         self.M=M
         self.benchmark=benchmark
         self.PARAM = {
@@ -33,13 +34,14 @@ class CreateBenchmark(InitBenchmark):
                 4:  self.call_DTLZ4,
                 5:  self.call_DTLZ5,
                 6:  self.call_DTLZ6,
-                7:  self.call_DTLZ7
+                7:  self.call_DTLZ7,
+                8:  self.call_DTLZ8
                 }
         pd.set_option('display.float_format', '{:.15f}'.format)
        
           
     def K_validate(self):
-        assert self.K > 0, "this value of 'k' is not valid, it must be greater than 0" 
+        assert self.K_N > 0, "this value of 'k' is not valid, it must be greater than 0" 
         return True
     
     def M_validate(self):
@@ -49,6 +51,11 @@ class CreateBenchmark(InitBenchmark):
     def call_DTLZ1(self):
         if self.K_validate() == True and self.M_validate() == True:
             self.set_DTLZ(DTLZ1(self))
+            self.set_K(self.K_N)
+            self.set_NVar()
+            self.set_Point()
+            
+            
 
     
     def call_DTLZ2(self):
@@ -57,6 +64,9 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_NSGA_3(1.2)
             self.set_constraits_SPEA_2(1.1)
             self.set_DTLZ(DTLZ2(self))
+            self.set_K(self.K_N)
+            self.set_NVar()
+            self.set_Point()
 
     
     def call_DTLZ3(self):
@@ -65,6 +75,9 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_NSGA_3(1.2)
             self.set_constraits_SPEA_2(1.1)
             self.set_DTLZ(DTLZ3(self))
+            self.set_K(self.K_N)
+            self.set_NVar()
+            self.set_Point()
 
     
     def call_DTLZ4(self):
@@ -73,6 +86,10 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_NSGA_3(1.2)
             self.set_constraits_SPEA_2(1.1)
             self.set_DTLZ(DTLZ4(self))
+            self.set_K(self.K_N)
+            self.set_NVar()
+            self.set_Point()
+
 
     
     def call_DTLZ5(self):
@@ -82,16 +99,25 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_SPEA_2(1.1)
             self.set_angle(10)
             self.set_DTLZ(DTLZ5(self))
+            self.set_K(self.K_N)
+            self.set_NVar()
+            self.set_Point()
+            self.set_Point()
+            self.set_POF(0.5)
     
     
     def call_DTLZ6(self):
         if self.K_validate() == True and self.M_validate() == True:
             self.set_constraits_Default(1.0)
             self.set_constraits_NSGA_3(1.2)
-            self.set_constraits_SPEA_2(1.1)
-            self.set_POF(0.0)
+            self.set_constraits_SPEA_2(1.3)
             self.set_angle(10)
             self.set_DTLZ(DTLZ6(self))
+            self.set_K(self.K_N)
+            self.set_NVar()
+            self.set_Point()
+            self.set_POF(0.0)
+           
 
     
     def call_DTLZ7(self):
@@ -100,9 +126,27 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_NSGA_3(1.2)
             self.set_constraits_SPEA_2(1.1)
             self.set_n_ieq_constr(0)
-            self.set_POF(0.0)
             self.set_angle(10)
             self.set_DTLZ(DTLZ7(self))
+            self.set_K(self.K_N)
+            self.set_NVar()
+            self.set_Point()
+            self.set_POF(0.0)
+           
+    
+
+    def call_DTLZ8(self):
+        if self.K_validate() == True and self.M_validate() == True:
+            self.set_constraits_Default(1.0)
+            self.set_constraits_NSGA_3(1.2)
+            self.set_constraits_SPEA_2(1.1)
+            self.set_n_ieq_constr(0)
+            self.set_angle(10)
+            self.set_DTLZ(DTLZ8(self))
+            self.set_K(self.K_N)
+            self.set_NVar()
+            self.set_NTimes()
+                    
          
 
     def call_benchmark(self):

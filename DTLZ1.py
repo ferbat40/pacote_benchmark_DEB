@@ -10,6 +10,7 @@ class DTLZ1:
                 
     def constraits(self,f,parameter,f_c=[]):
         f_constraits=np.array(f)
+        #print("f",f)
         f_c = np.array([np.sum([ f_c  for  f_c in f_constraits[linha,0:f_constraits.shape[1]]])-parameter for index,linha in enumerate(range(f_constraits.shape[0]))  ])
         return f_c.reshape(f_constraits.shape[0],1)
     
@@ -76,6 +77,7 @@ class DTLZ1:
 
     def minimize_DTLZ(self):
         x=np.array(self.new_benchmark_obj.get_Point_in_G())
+        print(x.shape,"x")
         g=self.calc_g(x)
         f=self.calc_f(x,g)
         constraits=self.aval_constraits(f)
