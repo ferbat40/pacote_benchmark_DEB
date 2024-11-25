@@ -8,7 +8,6 @@ class InitBenchmark:
         self.__M=0
         self.__K=0
         self.__Nvar=0
-        self.__NTimes=0
         self.__Point_in_G=[]
         self.__Point_out_G=[]
         self.__DTLZ=None
@@ -37,18 +36,13 @@ class InitBenchmark:
     def get_K (self):
         return self.__K
     
-    def get_NTimes(self):
-        return self.__NTimes
-    
-    def set_NTimes(self):
-        self.__NTimes=self.get_P()
     
    
     def set_NVar (self):
         number_DTLZ =  int(str(type(self.get_DTLZ()).__name__)[4:5])
         if number_DTLZ <=7:
             self.__Nvar = self.get_K()+self.get_M()-1
-        else:
+        elif number_DTLZ == 8:
             self.__Nvar = self.get_M()*self.get_K()
         
     
@@ -57,9 +51,9 @@ class InitBenchmark:
     
     
     def set_Point(self):
-        self.__Point_in_G=np.array([*np.random.random((self.get_P(),self.get_Nvar()))])
-        self.__Point_out_G=np.array([*np.random.random((self.get_P(),self.get_Nvar()))])
-        
+            self.__Point_in_G=np.array([*np.random.random((self.get_P(),self.get_Nvar()))*1.0])
+            self.__Point_out_G=np.array([*np.random.random((self.get_P(),self.get_Nvar()))*1.0])
+  
       
   
     def get_Point_in_G  (self):

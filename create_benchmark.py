@@ -145,7 +145,8 @@ class CreateBenchmark(InitBenchmark):
             self.set_DTLZ(DTLZ8(self))
             self.set_K(self.K_N)
             self.set_NVar()
-            self.set_NTimes()
+            self.set_Point()
+       
                     
          
 
