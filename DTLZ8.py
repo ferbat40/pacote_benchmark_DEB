@@ -16,7 +16,7 @@ class DTLZ8:
         fi=np.array(fix_cp[:,:M-1])
         gmx_min=[]
 
-       
+        #print("fjx",fjx)
 
         for index,(index_fj,index_fmx) in enumerate(zip (fj,fi)):
             #print("index_f",index_fj)
@@ -31,7 +31,7 @@ class DTLZ8:
         #print("fjx",fjx_cp)
         condition=np.all(gmx >= 0, axis = 1)
         fjx_constraits=fjx_cp[condition]
-        print(fjx)
+        #print(fjx)
         #print("fjx_constraits",fjx_constraits)
         return fjx_constraits
 
@@ -42,6 +42,10 @@ class DTLZ8:
         fj=np.array(fjx_cp[:,:M-1])
         condition=np.all(fmx+4*fj-1 >= 0, axis = 1)
         gj_constraits=fjx_cp[condition]
+        #print("fjx",fjx)
+        #print("fmx",fmx)
+        #print("fj",fj)
+        #print("gj_constraits",gj_constraits)
         return gj_constraits
         
 
@@ -49,15 +53,14 @@ class DTLZ8:
     def calc_f(self,i,N,M):
         fjx_arr=[]
         for fxi in range(0,M):
-            print(i[fxi])
-            fxi_v=np.array(fxi)
-            sum_xi= np.array(np.sum(fxi_v, axis=1)).reshape(fxi_v.shape[1],1)
-            print(sum_xi)
-            #sum_xi= np.array(np.sum(fxi, axis=1)).reshape(i.shape[1],1)
-            #print(sum_xi,"sum_xi")
-            #fjx=(1/(N/M))*sum_xi
-            #fjx_arr.append(np.hstack(fjx))
-        #print("fjx_arr",fjx_arr)
+            #print(i[fxi])
+            fxi_v=np.array(i[fxi])
+            sum_xi= np.array(np.sum(fxi_v, axis=1)).reshape(fxi_v.shape[0],1)
+            #print(sum_xi)
+            fjx=np.array((1/(N/M))*sum_xi)
+            fjx_arr.append(np.array(fjx))
+            #print("fjx d",fjx)
+        fjx_arr=np.hstack(fjx_arr)
         return np.array(fjx_arr)
 
 
@@ -79,8 +82,13 @@ class DTLZ8:
 
         fix=self.calc_m_const(self.new_benchmark_obj.get_Nvar(),self.new_benchmark_obj.get_M(),self.new_benchmark_obj.get_Point_in_G ())
         fjx=self.calc_f(fix,self.new_benchmark_obj.get_Nvar(),self.new_benchmark_obj.get_M())
-        #constraits_gjx=self.calc_gjx(fjx,self.new_benchmark_obj.get_M())
-        #constraits_gmx=self.calc_gmx(fjx,fix,self.new_benchmark_obj.get_M())
+        #print("fjx",fjx)
+        constraits_gmx=self.calc_gmx(fjx,fix,self.new_benchmark_obj.get_M())
+        constraits_gjx=self.calc_gjx(constraits_gmx,self.new_benchmark_obj.get_M())
         #print("constraits_gmx",constraits_gmx)
+        dc_constraits = {
+             "G Constraits Allowed"  : constraits_gjx                          
+        }  
+        return dc_constraits
        
      
