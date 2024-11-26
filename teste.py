@@ -7,7 +7,7 @@ from MOEAD_pymoo import MOEADpymoo
 
 
 
-bk = CreateBenchmark(8,5,4,5)
+bk = CreateBenchmark(8,5,4,3)
 
 
 
