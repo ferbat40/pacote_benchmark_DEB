@@ -8,86 +8,61 @@ class DTLZ8:
         self.new_benchmark_obj=new_benchmark_obj
 
 
-    def calc_gmx(self,fjx,fix,M):
-        fjx_cp=np.copy(fjx)
-        fmx=np.array(fjx_cp[:,M-1]).reshape(fjx_cp.shape[0],1)
-        fj=np.array(fjx_cp[:,:M-1])
-        fix_cp=np.copy(fix)
-        fi=np.array(fix_cp[:,:M-1])
-        gmx_min=[]
 
-        #print("fjx",fjx)
-
-        for index,(index_fj,index_fmx) in enumerate(zip (fj,fi)):
-            #print("index_f",index_fj)
-            for index_aux,i in enumerate(index_fmx,start=1):
-                #print("index_fmx",i,index,index_aux,len(index_fj))
-                if index_aux==len(index_fj):
-                    #print(np.min(index_fj),np.min(index_fmx))
-                    gmx_min.append([float(np.min(index_fj)),float(np.min(index_fmx))])
-        #print(np.array(gmx_min))
-        gmx=2*fmx+(gmx_min[0]+gmx_min[1])-1
-        #print("gmx",gmx)
-        #print("fjx",fjx_cp)
-        condition=np.all(gmx >= 0, axis = 1)
-        fjx_constraits=fjx_cp[condition]
-        #print(fjx)
-        #print("fjx_constraits",fjx_constraits)
-        return fjx_constraits
+    def const_gjx(self,fjx,m):
+        gjx_const=[]
+        for col_end,col_begin in enumerate(range(0,m-1), start=1):
+            gjx_const.append(fjx[:,m-1:m]+4*fjx[:,col_begin:col_end]-1)
+        gjx_const_valid=np.hstack(np.array(gjx_const))
+        #condition=np.all(gjx_const_valid>=0, axis=1)
+        #gjx_const_valid=fjx[condition]
+        #print(gjx_const_valid.shape)
+        return np.array(gjx_const_valid)
 
 
-    def calc_gjx(self,fjx,M):
-        fjx_cp=np.copy(fjx)
-        fmx=np.array(fjx_cp[:,M-1]).reshape(fjx_cp.shape[0],1)
-        fj=np.array(fjx_cp[:,:M-1])
-        condition=np.all(fmx+4*fj-1 >= 0, axis = 1)
-        gj_constraits=fjx_cp[condition]
-        #print("fjx",fjx)
-        #print("fmx",fmx)
-        #print("fj",fj)
-        #print("gj_constraits",gj_constraits)
-        return gj_constraits
-        
+
+    def const_gmx(self,fjx,fix,m):
+        gmx_const=[]
+        for index, (fjx_aux,fix_aux) in enumerate(zip(fjx,fix)):
+            sum_xi=[]
+            for ff in fix_aux[:m-1]:
+                sum_xi.append(np.sum(ff))
+            gmx=2*fjx_aux[m-1:m]+(np.min(fjx_aux[:m-1])+np.min(sum_xi))-1
+            #if gmx < 0:
+            gmx_const.append(gmx)
+        #print(gmx_const)
+        gjx_const=self.const_gjx(fjx,m)    
+        gmx_const_gjx_const=np.column_stack([gmx_const,gjx_const])
+        #print("pingdf",gmx_const_gjx_const)
+
+        return np.array(gmx_const_gjx_const)
 
 
-    def calc_f(self,i,N,M):
-        fjx_arr=[]
-        for fxi in range(0,M):
-            #print(i[fxi])
-            fxi_v=np.array(i[fxi])
-            sum_xi= np.array(np.sum(fxi_v, axis=1)).reshape(fxi_v.shape[0],1)
-            #print(sum_xi)
-            fjx=np.array((1/(N/M))*sum_xi)
-            fjx_arr.append(np.array(fjx))
-            #print("fjx d",fjx)
-        fjx_arr=np.hstack(fjx_arr)
-        return np.array(fjx_arr)
 
-
-    
-    def calc_m_const(self,N,M,P):
-        fj=M
-        i_part=[]
-        #print(P)
-
-        for fji,j in enumerate(range(0,fj), start = 1):
-            i=[P[:,NPart].reshape(P.shape[0],1) for NPart in range(int(((fji-1)*(N/M))),int(((fji)*(N/M))))]
-            i_part.append(np.hstack(np.array(i)))
-        #print(np.array(i_part))
-        return np.array(i_part)
+    def calc_i(self,x,n,m):
+        m_part=[]
+        fjx=np.zeros((x.shape[0],m))
+        fix=np.zeros((x.shape[0],m) , dtype=object)
+        for fj,index in enumerate(range(0,m), start=1):
+            m_part=x[:,int(((fj-1)*(n/m))):int((fj*(n/m)))]
+            for row,index in enumerate(range(0,m_part.shape[0]) , start=1):
+                fjx[row-1][fj-1]=(1/(n/m))*np.sum(x[index:row,int(((fj-1)*(n/m))):int((fj*(n/m)))])
+                fix[row-1][fj-1]=np.array(x[index:row,int(((fj-1)*(n/m))):int((fj*(n/m)))])
+        return fjx,fix
           
         
 
     def minimize_DTLZ(self):
+        fjx,fix=self.calc_i(self.new_benchmark_obj.get_Point_in_G (),self.new_benchmark_obj.get_Nvar(),self.new_benchmark_obj.get_M())
+        gmx_const=self.const_gmx(fjx,fix,self.new_benchmark_obj.get_M())
+        try:
+           fjx_valid = np.delete(fjx,gmx_const, axis = 0)
+        except Exception as e:
+           fjx_valid=fjx
+        gjx_const=self.const_gjx(fjx_valid,self.new_benchmark_obj.get_M())
 
-        fix=self.calc_m_const(self.new_benchmark_obj.get_Nvar(),self.new_benchmark_obj.get_M(),self.new_benchmark_obj.get_Point_in_G ())
-        fjx=self.calc_f(fix,self.new_benchmark_obj.get_Nvar(),self.new_benchmark_obj.get_M())
-        #print("fjx",fjx)
-        constraits_gmx=self.calc_gmx(fjx,fix,self.new_benchmark_obj.get_M())
-        constraits_gjx=self.calc_gjx(constraits_gmx,self.new_benchmark_obj.get_M())
-        #print("constraits_gmx",constraits_gmx)
         dc_constraits = {
-             "G Constraits Allowed"  : constraits_gjx                          
+            "G Constraits Allowed"  : gjx_const                          
         }  
         return dc_constraits
        

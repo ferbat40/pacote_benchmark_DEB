@@ -21,14 +21,27 @@ class NSGAPymoo(Problem):
 
         
     def _evaluate(self, x, out, *args, **kwargs):   
-        Gxm=self.DTLZ.calc_g(x)
-        F=self.DTLZ.calc_f(x,Gxm)
-        out["F"]=F
-        if self.benchmark.get_n_ieq_constr()>0:
-            f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_NSGA_3())
-            out["G"]=f_c
-        
+        number_DTLZ =  int(str(type(self.benchmark.get_DTLZ()).__name__)[4:5])
+        if number_DTLZ <=7:
+            Gxm=self.DTLZ.calc_g(x)
+            F=self.DTLZ.calc_f(x,Gxm)
+            out["F"]=F
+            if self.benchmark.get_n_ieq_constr()>0:
+                f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_NSGA_3())
+                out["G"]=f_c
+            print("aqui")
 
+
+        elif number_DTLZ==8:
+            fjx,fix=self.DTLZ.calc_i(x,self.benchmark.get_Nvar(),self.benchmark.get_M())
+            out["F"]=fjx
+            gmx_const=self.DTLZ.const_gmx(fjx,fix,self.benchmark.get_M())
+            gjx_const=self.DTLZ.const_gjx(fjx,self.benchmark.get_M())
+            out["G"]=gjx_const
+            out["G"]=gmx_const
+            
+
+       
     def exec(self):
         ref_dirs = get_reference_directions("uniform", self.benchmark.get_M(), n_partitions=self.partitions)
         self.pop_size = ref_dirs.shape[0] + ref_dirs.shape[0] % 4
