@@ -34,11 +34,14 @@ class NSGAPymoo(Problem):
 
         elif number_DTLZ==8:
             fjx,fix=self.DTLZ.calc_i(x,self.benchmark.get_Nvar(),self.benchmark.get_M())
-            out["F"]=fjx
-            gmx_const=self.DTLZ.const_gmx(fjx,fix,self.benchmark.get_M())
             gjx_const=self.DTLZ.const_gjx(fjx,self.benchmark.get_M())
-            out["G"]=gjx_const
-            out["G"]=gmx_const
+            gmx_const=self.DTLZ.const_gmx(fjx,fix,self.benchmark.get_M())
+            constraits_f=np.column_stack([gjx_const,gmx_const])
+            out["F"]=constraits_f
+           
+            constraits_g=constraits_f-1.0
+            
+            out["G"]=constraits_g
             
 
        
