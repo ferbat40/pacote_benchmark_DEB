@@ -39,7 +39,7 @@ class NSGAPymoo(Problem):
             constraits_f=np.column_stack([gjx_const,gmx_const])
             out["F"]=fjx
            
-            constraits_g=constraits_f
+            constraits_g=constraits_f-1
             
             out["G"]=-constraits_g
             
