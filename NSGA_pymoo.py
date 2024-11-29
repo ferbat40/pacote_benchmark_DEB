@@ -37,11 +37,11 @@ class NSGAPymoo(Problem):
             gjx_const=self.DTLZ.const_gjx(fjx,self.benchmark.get_M())
             gmx_const=self.DTLZ.const_gmx(fjx,fix,self.benchmark.get_M())
             constraits_f=np.column_stack([gjx_const,gmx_const])
-            out["F"]=constraits_f
+            out["F"]=fjx
            
-            constraits_g=constraits_f-1.0
+            constraits_g=constraits_f-0.8
             
-            out["G"]=constraits_g
+            out["G"]=-constraits_g
             
 
        
