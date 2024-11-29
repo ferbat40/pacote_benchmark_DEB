@@ -32,7 +32,7 @@ class DTLZ8:
             gmx_const.append(gmx)
         #print(gmx_const)
         gjx_const=self.const_gjx(fjx,m)    
-        gmx_const_gjx_const=np.column_stack([gmx_const,gjx_const])
+        gmx_const_gjx_const=np.column_stack([gjx_const,gmx_const])
         #print("pingdf",gmx_const_gjx_const)
 
         return np.array(gmx_const_gjx_const)
