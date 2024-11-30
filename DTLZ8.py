@@ -21,10 +21,10 @@ class DTLZ8:
     def const_gmx(self,fjx,fix,m):
         gmx_const=[]
         for index, (fjx_aux,fix_aux) in enumerate(zip(fjx,fix)):
-            sum_xi_M=[]
+            xi_M=[]
             for xi in fix_aux[:m-1]:
-                sum_xi_M.append(xi)
-            gmx=2*fjx_aux[m-1:m]+(np.min(fjx_aux[:m-1])+np.min(sum_xi_M))-1
+                xi_M.append(xi)
+            gmx=2*fjx_aux[m-1:m]+(np.min(fjx_aux[:m-1])+np.min(xi_M))-1
             gmx_const.append(gmx)
         return np.array(gmx_const)
 
