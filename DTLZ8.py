@@ -23,7 +23,7 @@ class DTLZ8:
         for index, (fjx_aux,fix_aux) in enumerate(zip(fjx,fix)):
             sum_xi_M=[]
             for xi in fix_aux[:m]:
-                sum_xi_M.append(np.sum(np.sum(xi)))
+                sum_xi_M.append(np.sum(xi))
             gmx=2*fjx_aux[m-1:m]+(np.min(fjx_aux[:m-1])+np.min(sum_xi_M))-1
             gmx_const.append(gmx)
         return np.array(gmx_const)
