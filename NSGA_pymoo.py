@@ -29,18 +29,14 @@ class NSGAPymoo(Problem):
             if self.benchmark.get_n_ieq_constr()>0:
                 f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_NSGA_3())
                 out["G"]=f_c
-            print("aqui")
-
+  
 
         elif number_DTLZ==8:
             fjx,fix=self.DTLZ.calc_i(x,self.benchmark.get_Nvar(),self.benchmark.get_M())
             out["F"]=fjx
-           
             gjx_const=self.DTLZ.const_gjx(fjx,self.benchmark.get_M())
             gmx_const=self.DTLZ.const_gmx(fjx,fix,self.benchmark.get_M())
-            constraits_g=np.column_stack([gjx_const,gmx_const])
-           
-            
+            constraits_g=np.column_stack([gjx_const])
             out["G"]=-constraits_g
             
 

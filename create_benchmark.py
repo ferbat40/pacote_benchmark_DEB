@@ -140,7 +140,7 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_Default(1.0)
             self.set_constraits_NSGA_3(1.2)
             self.set_constraits_SPEA_2(1.1)
-            self.set_n_ieq_constr(3)
+            self.set_n_ieq_constr(2)
             self.set_angle(10)
             self.set_DTLZ(DTLZ8(self))
             self.set_K(self.K_N)
