@@ -22,7 +22,7 @@ points_in=bk.get_DTLZ().minimize_DTLZ()
 #bk.show_points(pt_NSGA )
 
 
-SPEA_2 = SPEAPymoo(bk,40,500)
+SPEA_2 = SPEAPymoo(bk,20,500)
 pt_SPEA_2=SPEA_2.exec()
 bk.show_points(pt_SPEA_2)
 
