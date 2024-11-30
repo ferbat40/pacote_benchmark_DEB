@@ -54,5 +54,14 @@ class DTLZ8:
             "Minimization of G"  : constraits_valid                          
         }  
         return dc_constraits
+    
+
+
+    def maximize_DTLZ(self):
+        fjx,fix=self.calc_i(self.new_benchmark_obj.get_Point_in_G (),self.new_benchmark_obj.get_Nvar(),self.new_benchmark_obj.get_M())
+        dc_constraits = {
+            "Minimization of G"  : fjx                          
+        }  
+        return dc_constraits
        
      
