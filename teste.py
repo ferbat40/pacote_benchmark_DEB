@@ -17,14 +17,14 @@ points_in=bk.get_DTLZ().minimize_DTLZ()
 #points_out=bk.get_DTLZ().maximize_DTLZ()
 #bk.show_points(points_in)
 #bk.show_points(points_out)
-NSGA = NSGAPymoo(bk,40,500)
-pt_NSGA =NSGA.exec()
-bk.show_points(pt_NSGA )
+#NSGA = NSGAPymoo(bk,40,500)
+#pt_NSGA =NSGA.exec()
+#bk.show_points(pt_NSGA )
 
 
-#SPEA_2 = SPEAPymoo(bk,20,300)
-#pt_SPEA_2=SPEA_2.exec()
-#bk.show_points(pt_SPEA_2)
+SPEA_2 = SPEAPymoo(bk,40,500)
+pt_SPEA_2=SPEA_2.exec()
+bk.show_points(pt_SPEA_2)
 
 
 #RVEA = RVEAymoo(bk,20)
