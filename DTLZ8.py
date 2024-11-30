@@ -51,7 +51,7 @@ class DTLZ8:
         condition=np.all(constraits>=0, axis=1)
         constraits_valid=fjx[condition]
         dc_constraits = {
-            "G Constraits Allowed"  : constraits_valid                          
+            "Minimization of G"  : constraits_valid                          
         }  
         return dc_constraits
        
