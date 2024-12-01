@@ -15,20 +15,29 @@ class DTLZ8:
             gjx=fjx[:,m-1:m]+4*fjx[:,col_begin:col_end]-1
             gjx_const.append(gjx)
         return np.hstack(np.array(gjx_const))
+     
+     
 
-
-
-    def const_gmx(self,fjx,fix,m):
-        gmx_const=[]
-        for index, (fjx_aux,fix_aux) in enumerate(zip(fjx,fix)):
-            xi_M=[]
-            for xi in fix_aux[:m]:
-                xi_M.append(xi)
-            gmx=2*fjx_aux[m-1:m]+(np.min(fjx_aux[:m-1])+np.min(xi_M))-1
-            gmx_const.append(gmx)
-        return np.array(gmx_const)
-
-
+    def const_gmx(self,fjx,N,M):
+        #print(fjx)
+        #print(N)
+        gmx_arr=[]
+        for f, (fjx_ind, fix_ind) in enumerate(zip(fjx[:,:M],N[:,:M]) , start = 1):
+            sum_fj_fi=[]
+            for item, (fjx_item, fix_item) in enumerate(zip (fjx_ind,fix_ind), start = 1):
+                if item < M:
+                    #print("f",f,"item",item,fjx_item,"N_ind",fix_item,"sum",fjx_item+fix_item)
+                    sum_fj_fi.append(fjx_item+fix_item)
+                if item == M:
+                    #print(f,"min",np.min(sum_fj_fi),fjx_item)
+                    gmx=2*fjx_item+np.min(sum_fj_fi)-1
+                    #print("gmx",gmx)
+                    gmx_arr.append(gmx)
+        gmx_arr=np.array(gmx_arr).reshape(N.shape[0],1)
+        #print("gmx_arr",gmx_arr)
+        return gmx_arr
+              
+          
 
     def calc_i(self,x,n,m):
        m_part=[]
@@ -45,7 +54,7 @@ class DTLZ8:
 
     def minimize_DTLZ(self):
         fjx,fix=self.calc_i(self.new_benchmark_obj.get_Point_in_G (),self.new_benchmark_obj.get_Nvar(),self.new_benchmark_obj.get_M())
-        gmx_const=self.const_gmx(fjx,fix,self.new_benchmark_obj.get_M())
+        gmx_const=self.const_gmx(fjx,np.array(self.new_benchmark_obj.get_Point_in_G ()),self.new_benchmark_obj.get_M())
         gjx_const=self.const_gjx(fjx,self.new_benchmark_obj.get_M())
         constraits=np.column_stack([gjx_const,gmx_const])
         condition=np.all(constraits>=0, axis=1)

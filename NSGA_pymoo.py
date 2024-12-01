@@ -30,6 +30,7 @@ class NSGAPymoo(Problem):
                 f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_NSGA_3())
                 out["G"]=f_c
   
+  
 
         elif number_DTLZ==8:
             fjx,fix=self.DTLZ.calc_i(x,self.benchmark.get_Nvar(),self.benchmark.get_M())
