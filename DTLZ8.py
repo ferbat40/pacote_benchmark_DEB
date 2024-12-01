@@ -16,25 +16,19 @@ class DTLZ8:
             gjx_const.append(gjx)
         return np.hstack(np.array(gjx_const))
      
-     
+
 
     def const_gmx(self,fjx,N,M):
-        #print(fjx)
-        #print(N)
         gmx_arr=[]
         for f, (fjx_ind, fix_ind) in enumerate(zip(fjx[:,:M],N[:,:M]) , start = 1):
             sum_fj_fi=[]
             for item, (fjx_item, fix_item) in enumerate(zip (fjx_ind,fix_ind), start = 1):
                 if item < M:
-                    #print("f",f,"item",item,fjx_item,"N_ind",fix_item,"sum",fjx_item+fix_item)
                     sum_fj_fi.append(fjx_item+fix_item)
                 if item == M:
-                    #print(f,"min",np.min(sum_fj_fi),fjx_item)
                     gmx=2*fjx_item+np.min(sum_fj_fi)-1
-                    #print("gmx",gmx)
                     gmx_arr.append(gmx)
         gmx_arr=np.array(gmx_arr).reshape(N.shape[0],1)
-        #print("gmx_arr",gmx_arr)
         return gmx_arr
               
           
