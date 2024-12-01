@@ -30,7 +30,7 @@ class NSGAPymoo(Problem):
                 f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_NSGA_3())
                 out["G"]=f_c
   
-  
+
 
         elif number_DTLZ==8:
             fjx,fix=self.DTLZ.calc_i(x,self.benchmark.get_Nvar(),self.benchmark.get_M())
@@ -38,7 +38,8 @@ class NSGAPymoo(Problem):
             gjx_const=self.DTLZ.const_gjx(fjx,self.benchmark.get_M())
             gmx_const=self.DTLZ.const_gmx(fjx,fix,self.benchmark.get_M())
             constraits_g=np.column_stack([gjx_const,gmx_const])
-            out["G"]=-constraits_g
+            constraits_g_v=constraits_g-1.1
+            out["G"]=-constraits_g_v
             
 
        
