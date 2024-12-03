@@ -151,7 +151,7 @@ class CreateBenchmark(InitBenchmark):
     
     def call_DTLZ9(self):
         if self.K_validate() == True and self.M_validate() == True:
-            self.set_n_ieq_constr(self.M)
+            self.set_n_ieq_constr(self.M-1)
             self.set_DTLZ(DTLZ9(self))
             self.set_K(self.K_N)
             self.set_NVar()
