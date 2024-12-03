@@ -80,8 +80,7 @@ class DTLZ8:
 
     def minimize_DTLZ(self):
         fjx,fix=self.calc_i(self.new_benchmark_obj.get_Point_in_G (),self.new_benchmark_obj.get_Nvar(),self.new_benchmark_obj.get_M())
-        c_fj_fi=self.combinate_fj_fi(self.new_benchmark_obj.get_M())
-        gmx_const=self.const_gmx(fjx,c_fj_fi,self.new_benchmark_obj.get_M())
+        gmx_const=self.const_gmx(fjx,self.new_benchmark_obj.get_c_fj_fi(),self.new_benchmark_obj.get_M())
         gjx_const=self.const_gjx(fjx,self.new_benchmark_obj.get_M())
         constraits=np.column_stack([gjx_const,gmx_const])
         condition=np.all(constraits>=0, axis=1)
@@ -96,7 +95,7 @@ class DTLZ8:
     def maximize_DTLZ(self):
         fjx,fix=self.calc_i(self.new_benchmark_obj.get_Point_in_G (),self.new_benchmark_obj.get_Nvar(),self.new_benchmark_obj.get_M())
         dc_constraits = {
-            "Minimization of G"  : fjx                          
+            "Maximization of G"  : fjx                          
         }  
         return dc_constraits
        

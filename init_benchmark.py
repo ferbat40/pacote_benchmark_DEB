@@ -20,6 +20,7 @@ class InitBenchmark:
         self.__constraits_default=constraits_default
         self.__angle=angle
         self.__n_ieq_constr=n_ieq_constr
+        self.__c_fj_fi=[]
             
 
     def get_P (self):
@@ -125,6 +126,14 @@ class InitBenchmark:
 
     def get_n_ieq_constr(self):
         return self.__n_ieq_constr
+    
+
+    def set_c_fj_fi(self,c_fj_fi):
+       self.__c_fj_fi=c_fj_fi
+
+
+    def get_c_fj_fi(self):
+        return self.__c_fj_fi
     
    
  
