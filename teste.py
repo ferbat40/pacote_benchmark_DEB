@@ -18,9 +18,9 @@ points_in=bk.get_DTLZ().minimize_DTLZ()
 bk.show_points(points_in)
 #bk.show_points(points_out)
 
-NSGA = NSGAPymoo(bk,30,500)
-pt_NSGA =NSGA.exec()
-bk.show_points(pt_NSGA )
+#NSGA = NSGAPymoo(bk,30,500)
+#pt_NSGA =NSGA.exec()
+#bk.show_points(pt_NSGA )
 
 
 #SPEA_2 = SPEAPymoo(bk,30,500)
