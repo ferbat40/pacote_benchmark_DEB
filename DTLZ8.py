@@ -16,33 +16,32 @@ class DTLZ8:
             gjx_const.append(gjx)
         return np.hstack(np.array(gjx_const))
      
+
+
     def const_gmx(self,fjx,c_fj_fi,M):
-        print("combination fj and fi")
-        #print(c_fj_fi)
-        print(fjx)
-        for end,begin in enumerate(range(0,c_fj_fi.shape[1]), start=1):
-            print(c_fj_fi[:,begin:end])
-            f_first=c_fj_fi[:,begin:end][0][0]
-            f_second=c_fj_fi[:,begin:end][1][0]
-            print("first",fjx[:,f_first-1:f_first],"second",fjx[:,f_second-1:f_second],"sum",fjx[:,f_first-1:f_first]+fjx[:,f_second-1:f_second])
-            
-
-
+        fj=[]
+        fi=[]
+        s_fj_fi=[]
+        gmx_arr=[]
         
+        for end,begin in enumerate(range(0,c_fj_fi.shape[1]), start=1):
+            f_first=int(c_fj_fi[:,begin:end][0][0])
+            f_second=int(c_fj_fi[:,begin:end][1][0])
+            fj.append(fjx[:,f_first-1:f_first])
+            fi.append(fjx[:,f_second-1:f_second])
+            s_fj_fi.append(fjx[:,f_first-1:f_first]+fjx[:,f_second-1:f_second])
+        fj=np.array(fj)
+        fi=np.array(fi)
+        s_fj_fi=np.array(np.hstack(s_fj_fi))
+        for fjx_ind,s_fj_fi_ind in zip(fjx,s_fj_fi):
+            for end, fm in enumerate(fjx_ind, start=1):
+                if end == M:
+                    gmx=2*fm+np.min(s_fj_fi_ind)-1
+                    gmx_arr.append(gmx)             
+        gmx_arr=np.array(gmx_arr).reshape(fjx.shape[0],1)
+        return gmx_arr
 
 
-        #gmx_arr=[]
-        #for f, (fjx_ind, fix_ind) in enumerate(zip(fjx[:,:M],N[:,:M]) , start = 1):
-            #sum_fj_fi=[]
-            #for item, (fjx_item, fix_item) in enumerate(zip (fjx_ind,fix_ind), start = 1):
-                #if item < M:
-                 #   sum_fj_fi.append(fjx_item+fix_item)
-                #if item == M:
-                   # gmx=2*fjx_item+np.min(sum_fj_fi)-1
-                  #  gmx_arr.append(gmx)
-        #gmx_arr=np.array(gmx_arr).reshape(N.shape[0],1)
-        return 0#gmx_arr
-    
 
     def combinate_fj_fi(self,M):
         combination=[]
@@ -83,14 +82,14 @@ class DTLZ8:
         fjx,fix=self.calc_i(self.new_benchmark_obj.get_Point_in_G (),self.new_benchmark_obj.get_Nvar(),self.new_benchmark_obj.get_M())
         c_fj_fi=self.combinate_fj_fi(self.new_benchmark_obj.get_M())
         gmx_const=self.const_gmx(fjx,c_fj_fi,self.new_benchmark_obj.get_M())
-        #gjx_const=self.const_gjx(fjx,self.new_benchmark_obj.get_M())
-        #constraits=np.column_stack([gjx_const,gmx_const])
-        #condition=np.all(constraits>=0, axis=1)
-        #constraits_valid=fjx[condition]
-        #dc_constraits = {
-         #   "Minimization of G"  : constraits_valid                          
-        #}  
-        #return dc_constraits
+        gjx_const=self.const_gjx(fjx,self.new_benchmark_obj.get_M())
+        constraits=np.column_stack([gjx_const,gmx_const])
+        condition=np.all(constraits>=0, axis=1)
+        constraits_valid=fjx[condition]
+        dc_constraits = {
+           "Minimization of G"  : constraits_valid                          
+        }  
+        return dc_constraits
     
 
 
