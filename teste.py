@@ -7,7 +7,7 @@ from MOEAD_pymoo import MOEADpymoo
 
 
 
-bk = CreateBenchmark(8,1500,10,4)
+bk = CreateBenchmark(8,1500,10,3)
 
 
 
@@ -32,9 +32,9 @@ bk.show_points(points_in)
 #bk.show_points(pt_RVEA)
 
 
-#MOEDA = MOEADpymoo(bk,20)
-#pt_MOEDA=MOEDA.exec()
-#bk.show_points(pt_MOEDA)
+MOEDA = MOEADpymoo(bk,20)
+pt_MOEDA=MOEDA.exec()
+bk.show_points(pt_MOEDA)
 
 
 

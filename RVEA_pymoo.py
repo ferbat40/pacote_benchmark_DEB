@@ -21,12 +21,23 @@ class RVEAymoo(Problem):
 
         
     def _evaluate(self, x, out, *args, **kwargs):   
-        Gxm=self.DTLZ.calc_g(x)
-        F=self.DTLZ.calc_f(x,Gxm)
-        out["F"]=F
-        if self.benchmark.get_n_ieq_constr() > 0:
-            f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_NSGA_3())
-            out["G"]=f_c
+        number_DTLZ =  int(str(type(self.benchmark.get_DTLZ()).__name__)[4:5])
+        if number_DTLZ <=7:
+            Gxm=self.DTLZ.calc_g(x)
+            F=self.DTLZ.calc_f(x,Gxm)
+            out["F"]=F
+            if self.benchmark.get_n_ieq_constr() > 0:
+                f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_NSGA_3())
+                out["G"]=f_c
+
+
+        elif number_DTLZ==8:
+            fjx,fix=self.DTLZ.calc_i(x,self.benchmark.get_Nvar(),self.benchmark.get_M())
+            out["F"]=fjx
+            gjx_const=self.DTLZ.const_gjx(fjx,self.benchmark.get_M())
+            gmx_const=self.DTLZ.const_gmx(fjx,self.benchmark.get_c_fj_fi(),self.benchmark.get_M())
+            constraits_g=np.column_stack([gjx_const,gmx_const])
+            out["G"]=-constraits_g
         
 
     def exec(self):

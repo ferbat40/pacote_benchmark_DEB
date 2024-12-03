@@ -21,10 +21,17 @@ class MOEADpymoo(Problem):
 
         
     def _evaluate(self, x, out, *args, **kwargs):   
-        Gxm=self.DTLZ.calc_g(x)
-        F=self.DTLZ.calc_f(x,Gxm)
-        out["F"]=F
+        number_DTLZ =  int(str(type(self.benchmark.get_DTLZ()).__name__)[4:5])
+        if number_DTLZ <=7:
+            Gxm=self.DTLZ.calc_g(x)
+            F=self.DTLZ.calc_f(x,Gxm)
+            out["F"]=F
+
         
+        elif number_DTLZ==8:
+            fjx,fix=self.DTLZ.calc_i(x,self.benchmark.get_Nvar(),self.benchmark.get_M())
+            out["F"]=fjx
+            
 
     def exec(self):
         ref_dirs = get_reference_directions("das-dennis", self.benchmark.get_M(), n_partitions=self.partitions)
