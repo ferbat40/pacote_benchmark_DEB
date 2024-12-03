@@ -43,7 +43,7 @@ class InitBenchmark:
         number_DTLZ =  int(str(type(self.get_DTLZ()).__name__)[4:5])
         if number_DTLZ <=7:
             self.__Nvar = self.get_K()+self.get_M()-1
-        elif number_DTLZ == 8:
+        elif number_DTLZ > 7:
             self.__Nvar = self.get_M()*self.get_K()
         
     

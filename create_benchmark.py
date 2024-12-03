@@ -13,6 +13,7 @@ from DTLZ5 import DTLZ5
 from DTLZ6 import DTLZ6
 from DTLZ7 import DTLZ7
 from DTLZ8 import DTLZ8
+from DTLZ9 import DTLZ9
 from init_benchmark import InitBenchmark
 from plot_FP_M import PlotFP_M
 from itertools import zip_longest
@@ -35,7 +36,8 @@ class CreateBenchmark(InitBenchmark):
                 5:  self.call_DTLZ5,
                 6:  self.call_DTLZ6,
                 7:  self.call_DTLZ7,
-                8:  self.call_DTLZ8
+                8:  self.call_DTLZ8,
+                9:  self.call_DTLZ9,
                 }
         pd.set_option('display.float_format', '{:.15f}'.format)
        
@@ -137,9 +139,6 @@ class CreateBenchmark(InitBenchmark):
 
     def call_DTLZ8(self):
         if self.K_validate() == True and self.M_validate() == True:
-            self.set_constraits_Default(1.0)
-            self.set_constraits_NSGA_3(1.2)
-            self.set_constraits_SPEA_2(1.1)
             self.set_n_ieq_constr(self.M)
             self.set_angle(-40)
             self.set_DTLZ(DTLZ8(self))
@@ -147,8 +146,17 @@ class CreateBenchmark(InitBenchmark):
             self.set_NVar()
             self.set_Point()
             self.set_c_fj_fi(self.get_DTLZ().combinate_fj_fi(self.M))
-       
-                    
+
+
+    
+    def call_DTLZ9(self):
+        if self.K_validate() == True and self.M_validate() == True:
+            self.set_n_ieq_constr(self.M)
+            self.set_DTLZ(DTLZ9(self))
+            self.set_K(self.K_N)
+            self.set_NVar()
+            self.set_Point()
+                               
          
 
     def call_benchmark(self):
