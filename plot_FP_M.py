@@ -6,11 +6,10 @@ import numpy as np
 
 
 class PlotFP_M():
-     def __init__(self,Objectives,labels,vet_pt=[],angle_azim=45,angle_elevate=30):
+     def __init__(self,Objectives,labels,vet_pt=[],angle_azim=None,angle_elevate=None):
          self.labels=labels
          self.angle_azim=angle_azim
-         self.angle_elevate=angle_elevate
-                  
+         self.angle_elevate=angle_elevate                  
     
          try:
              self.pt1=[np.array(vet_pt[0])]
@@ -46,8 +45,8 @@ class PlotFP_M():
          self.z_axis_index = int(self.z_axis.value.split()[-1])-1
          
          colors  = ['red','gray','blue']
-         vectors = self.labels# ['Points one','Points two','Points three']         
-         fig = plt.figure(figsize=(9, 13))
+         vectors = self.labels        
+         fig = plt.figure(figsize=(13, 11))
          ax = fig.add_subplot(111, projection='3d')
 
 
