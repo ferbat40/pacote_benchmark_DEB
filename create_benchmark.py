@@ -104,7 +104,7 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_Default(1.0)
             self.set_constraits_NSGA_3(1.2)
             self.set_constraits_SPEA_2(1.1)
-            self.set_angle(10)
+            self.set_angle_azim(10)
             self.set_DTLZ(DTLZ5(self))
             self.set_K(self.K_N)
             self.set_NVar()
@@ -117,7 +117,7 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_Default(1.0)
             self.set_constraits_NSGA_3(1.2)
             self.set_constraits_SPEA_2(1.3)
-            self.set_angle(10)
+            self.set_angle_azim(10)
             self.set_DTLZ(DTLZ6(self))
             self.set_K(self.K_N)
             self.set_NVar()
@@ -132,7 +132,7 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_NSGA_3(1.2)
             self.set_constraits_SPEA_2(1.1)
             self.set_n_ieq_constr(0)
-            self.set_angle(10)
+            self.set_angle_azim(10)
             self.set_DTLZ(DTLZ7(self))
             self.set_K(self.K_N)
             self.set_NVar()
@@ -144,7 +144,7 @@ class CreateBenchmark(InitBenchmark):
     def call_DTLZ8(self):
         if self.K_validate() == True and self.M_validate() == True:
             self.set_n_ieq_constr(self.M)
-            self.set_angle(-40)
+            self.set_angle_azim(-40)
             self.set_DTLZ(DTLZ8(self))
             self.set_K(self.K_N)
             self.set_NVar()
@@ -156,7 +156,7 @@ class CreateBenchmark(InitBenchmark):
     def call_DTLZ9(self):
         if self.K_validate() == True and self.M_validate() == True:
             self.set_n_ieq_constr(self.M-1)
-            self.set_angle(15)
+            self.set_angle_azim(15)
             self.set_DTLZ(DTLZ9(self))
             self.set_K(self.K_N)
             self.set_NVar()
@@ -242,6 +242,6 @@ class CreateBenchmark(InitBenchmark):
             label_2=[i for i in label_2 if i is not None]
             label_3=[i for i in label_3 if i is not None]
             label_valid=label_1+label_2+label_3
-            PlotFP_M(self.get_M(),label_valid,vet_pt_valid,self.get_angle())
+            PlotFP_M(self.get_M(),label_valid,vet_pt_valid,self.get_angle_azim())
 
 
