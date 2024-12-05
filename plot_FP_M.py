@@ -45,8 +45,8 @@ class PlotFP_M():
          self.z_axis_index = int(self.z_axis.value.split()[-1])-1
          
          colors  = ['red','gray','blue']
-         vectors = self.labels        
-         fig = plt.figure(figsize=(23, 11))
+         vectors = self.labels         
+         fig = plt.figure(figsize=(9, 13))
          ax = fig.add_subplot(111, projection='3d')
 
 
