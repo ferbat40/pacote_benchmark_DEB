@@ -6,10 +6,11 @@ import numpy as np
 
 
 class PlotFP_M():
-     def __init__(self,Objectives,labels,vet_pt=[],angle=45):
+     def __init__(self,Objectives,labels,vet_pt=[],angle_azim=45,angle_elevate=30):
          self.labels=labels
-         self.angle=angle
-                 
+         self.angle_azim=angle_azim
+         self.angle_elevate=angle_elevate
+                  
     
          try:
              self.pt1=[np.array(vet_pt[0])]
@@ -57,7 +58,7 @@ class PlotFP_M():
          ax.set_xlabel(self.x_axis.value)
          ax.set_ylabel(self.y_axis.value)
          ax.set_zlabel(self.z_axis.value)
-         ax.view_init(elev=15, azim=self.angle)
+         ax.view_init(elev=self.angle_elevate, azim=self.angle_azim)
          ax.legend()
          ax.set_title("Plot Graph")
          plt.draw()

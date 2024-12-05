@@ -47,10 +47,12 @@ class CreateBenchmark(InitBenchmark):
         assert self.K_N > 0, "this value of 'k' is not valid, it must be greater than 0" 
         return True
     
+
     def M_validate(self):
         assert self.M >= 3, "this value of 'M' is not valid, it must be greater or equal than 3" 
         return True
         
+
     def call_DTLZ1(self):
         if self.K_validate() == True and self.M_validate() == True:
             self.set_DTLZ(DTLZ1(self))
@@ -58,8 +60,10 @@ class CreateBenchmark(InitBenchmark):
             self.set_NVar()
             self.set_Point()
             self.set_POF(0.5)
-            
-
+            self.set_angle_azim(45) if self.get_angle_azim() is None else self.set_angle_azim(self.get_angle_azim())
+            self.set_angle_elevate(30) if self.get_angle_elevate() is None else self.set_angle_elevate(self.get_angle_elevate())   
+          
+      
     
     def call_DTLZ2(self):
         if self.K_validate() == True and self.M_validate() == True:
@@ -71,6 +75,9 @@ class CreateBenchmark(InitBenchmark):
             self.set_NVar()
             self.set_Point()
             self.set_POF(0.5)
+            self.set_angle_azim(45) if self.get_angle_azim() is None else self.set_angle_azim(self.get_angle_azim())
+            self.set_angle_elevate(30) if self.get_angle_elevate() is None else self.set_angle_elevate(self.get_angle_elevate())   
+          
             
 
     
@@ -84,6 +91,9 @@ class CreateBenchmark(InitBenchmark):
             self.set_NVar()
             self.set_Point()
             self.set_POF(0.5)
+            self.set_angle_azim(45) if self.get_angle_azim() is None else self.set_angle_azim(self.get_angle_azim())
+            self.set_angle_elevate(30) if self.get_angle_elevate() is None else self.set_angle_elevate(self.get_angle_elevate())   
+          
 
     
     def call_DTLZ4(self):
@@ -96,6 +106,9 @@ class CreateBenchmark(InitBenchmark):
             self.set_NVar()
             self.set_Point()
             self.set_POF(0.5)
+            self.set_angle_azim(45) if self.get_angle_azim() is None else self.set_angle_azim(self.get_angle_azim())
+            self.set_angle_elevate(30) if self.get_angle_elevate() is None else self.set_angle_elevate(self.get_angle_elevate())   
+          
 
 
     
@@ -104,12 +117,14 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_Default(1.0)
             self.set_constraits_NSGA_3(1.2)
             self.set_constraits_SPEA_2(1.1)
-            self.set_angle_azim(10)
             self.set_DTLZ(DTLZ5(self))
             self.set_K(self.K_N)
             self.set_NVar()
             self.set_Point()
             self.set_POF(0.5)
+            self.set_angle_azim(10) if self.get_angle_azim() is None else self.set_angle_azim(self.get_angle_azim())
+            self.set_angle_elevate(30) if self.get_angle_elevate() is None else self.set_angle_elevate(self.get_angle_elevate())   
+          
     
     
     def call_DTLZ6(self):
@@ -117,14 +132,15 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_Default(1.0)
             self.set_constraits_NSGA_3(1.2)
             self.set_constraits_SPEA_2(1.3)
-            self.set_angle_azim(10)
             self.set_DTLZ(DTLZ6(self))
             self.set_K(self.K_N)
             self.set_NVar()
             self.set_Point()
             self.set_POF(0.0)
+            self.set_angle_azim(10) if self.get_angle_azim() is None else self.set_angle_azim(self.get_angle_azim())
+            self.set_angle_elevate(30) if self.get_angle_elevate() is None else self.set_angle_elevate(self.get_angle_elevate())   
+          
            
-
     
     def call_DTLZ7(self):
         if self.K_validate() == True and self.M_validate() == True:
@@ -132,36 +148,40 @@ class CreateBenchmark(InitBenchmark):
             self.set_constraits_NSGA_3(1.2)
             self.set_constraits_SPEA_2(1.1)
             self.set_n_ieq_constr(0)
-            self.set_angle_azim(10)
             self.set_DTLZ(DTLZ7(self))
             self.set_K(self.K_N)
             self.set_NVar()
             self.set_Point()
             self.set_POF(0.0)
-           
-    
+            self.set_angle_azim(10) if self.get_angle_azim() is None else self.set_angle_azim(self.get_angle_azim())
+            self.set_angle_elevate(30) if self.get_angle_elevate() is None else self.set_angle_elevate(self.get_angle_elevate())   
+          
+            
 
     def call_DTLZ8(self):
         if self.K_validate() == True and self.M_validate() == True:
             self.set_n_ieq_constr(self.M)
-            self.set_angle_azim(-40)
             self.set_DTLZ(DTLZ8(self))
             self.set_K(self.K_N)
             self.set_NVar()
             self.set_Point()
             self.set_c_fj_fi(self.get_DTLZ().combinate_fj_fi(self.M))
-
+            self.set_angle_azim(-40) if self.get_angle_azim() is None else self.set_angle_azim(self.get_angle_azim())
+            self.set_angle_elevate(15) if self.get_angle_elevate() is None else self.set_angle_elevate(self.get_angle_elevate())   
+          
 
     
     def call_DTLZ9(self):
         if self.K_validate() == True and self.M_validate() == True:
             self.set_n_ieq_constr(self.M-1)
-            self.set_angle_azim(15)
+            self.set_angle_azim(15) if self.get_angle_azim() is None else self.set_angle_azim(self.get_angle_azim())
             self.set_DTLZ(DTLZ9(self))
             self.set_K(self.K_N)
             self.set_NVar()
             self.set_Point()
-                               
+            self.set_angle_azim(15) if self.get_angle_azim() is None else self.set_angle_azim(self.get_angle_azim())
+            self.set_angle_elevate(30) if self.get_angle_elevate() is None else self.set_angle_elevate(self.get_angle_elevate())   
+                                        
          
 
     def call_benchmark(self):
@@ -242,6 +262,6 @@ class CreateBenchmark(InitBenchmark):
             label_2=[i for i in label_2 if i is not None]
             label_3=[i for i in label_3 if i is not None]
             label_valid=label_1+label_2+label_3
-            PlotFP_M(self.get_M(),label_valid,vet_pt_valid,self.get_angle_azim())
+            PlotFP_M(self.get_M(),label_valid,vet_pt_valid,self.get_angle_azim(),self.get_angle_elevate())
 
 

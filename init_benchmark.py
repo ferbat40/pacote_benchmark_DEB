@@ -3,7 +3,7 @@ import numpy as np
 
 class InitBenchmark:
        
-    def __init__(self,P,M,DTLZ,constraits_SPEA_2=1.00,constraits_default=0.5,constraits_NSGA_3=0.60,POF=0.5,angle_azim=45,n_ieq_constr=1):
+    def __init__(self,P,M,DTLZ,constraits_SPEA_2=1.00,constraits_default=0.5,constraits_NSGA_3=0.60,POF=0.5,n_ieq_constr=1):
         self.__P=0
         self.__M=0
         self.__K=0
@@ -18,7 +18,8 @@ class InitBenchmark:
         self.__constraits_SPEA_2=constraits_SPEA_2
         self.__constraits_NSGA_3=constraits_NSGA_3
         self.__constraits_default=constraits_default
-        self.__angle_azim=angle_azim
+        self.__angle_azim=None
+        self.__angle_elevate=None
         self.__n_ieq_constr=n_ieq_constr
         self.__c_fj_fi=[]
             
@@ -118,6 +119,14 @@ class InitBenchmark:
 
     def get_angle_azim(self):
         return self.__angle_azim
+    
+
+    def set_angle_elevate(self, angle_elevate):
+        self.__angle_elevate=angle_elevate
+
+    
+    def get_angle_elevate(self):
+        return self.__angle_elevate
     
     
     def set_n_ieq_constr(self,n_ieq_constr):

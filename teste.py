@@ -54,6 +54,10 @@ metric.add_t(pt_UNSGA)
 pds = metric.get_metric()
 print(pds)
 
+#bk.set_angle_elevate(235)
+#bk.set_angle_azim(140)
+bk.call_plot_PF_M(pt_UNSGA)
+
 
 
 
