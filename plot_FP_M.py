@@ -46,7 +46,7 @@ class PlotFP_M():
          
          colors  = ['red','gray','blue']
          vectors = self.labels        
-         fig = plt.figure(figsize=(14, 8))
+         fig = plt.figure(figsize=(16, 8))
          ax = fig.add_subplot(111, projection='3d')
 
 
