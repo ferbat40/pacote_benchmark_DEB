@@ -9,8 +9,14 @@ from DTLZ6 import DTLZ6
 from DTLZ7 import DTLZ7
 from DTLZ8 import DTLZ8
 from DTLZ9 import DTLZ9
+from NSGA_pymoo import NSGAPymoo
+from UNSGA_pymoo import UNSGAPymoo
+from SPEA_pymoo import SPEAPymoo
+from RVEA_pymoo import RVEAymoo
+from MOEAD_pymoo import MOEADpymoo
 from init_benchmark import InitBenchmark
 from plot_FP_M import PlotFP_M
+from metrics import Metrics
 from itertools import zip_longest
 from IPython.display import display,HTML
 
