@@ -29,6 +29,7 @@ class SPEAPymoo(Problem):
                 f_c=self.DTLZ.constraits(F,self.benchmark.get_constraits_SPEA_2())
                 out["G"]=f_c
 
+
         elif number_DTLZ==8:
             fjx,fix=self.DTLZ.calc_i(x,self.benchmark.get_Nvar(),self.benchmark.get_M())
             out["F"]=fjx
@@ -36,6 +37,13 @@ class SPEAPymoo(Problem):
             gmx_const=self.DTLZ.const_gmx(fjx,self.benchmark.get_c_fj_fi(),self.benchmark.get_M())
             constraits_g=np.column_stack([gjx_const,gmx_const])
             out["G"]=-constraits_g
+
+
+        elif number_DTLZ==9:
+            fjx,fix=self.DTLZ.calc_i(x,self.benchmark.get_Nvar(),self.benchmark.get_M())
+            out["F"]=fjx
+            gjx_const=self.DTLZ.const_gjx(fjx,self.benchmark.get_M())
+            out["G"]=-gjx_const
         
 
     def exec(self):

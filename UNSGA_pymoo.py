@@ -1,4 +1,4 @@
-from pymoo.algorithms.moo.nsga3 import NSGA3
+from pymoo.algorithms.moo.unsga3 import UNSGA3
 from pymoo.optimize import minimize
 import numpy as np
 from pymoo.util.ref_dirs import get_reference_directions
@@ -7,8 +7,8 @@ from pymoo.operators.mutation.pm import PolynomialMutation
 from pymoo.core.problem import Problem
 
 
-class NSGAPymoo(Problem):
-    def __init__(self,benchmark,partitions=15, generations=300,seed=15,pop_size=100):
+class UNSGAPymoo(Problem):
+    def __init__(self,benchmark,partitions=15, generations=300,seed=5,pop_size=100):
         self.benchmark=benchmark
         self.partitions=partitions
         self.generations=generations
@@ -53,19 +53,19 @@ class NSGAPymoo(Problem):
         muttation_prob = 1/self.benchmark.get_Nvar()
         muttation=PolynomialMutation(prob=muttation_prob, eta = 20)
         crossover = SBX(prob=1.0, eta=15)
-        nsga3 = NSGA3(ref_dirs=ref_dirs, pop_size=self.pop_size, crossover=crossover,mutation=muttation)      
-
-        res_NSGA = minimize(
-            NSGAPymoo(self.benchmark,self.partitions, self.generations,self.seed, self.pop_size),
-            nsga3,
+        AUNSGA = UNSGA3(ref_dirs=ref_dirs, pop_size=self.pop_size, crossover=crossover,mutation=muttation)  
+      
+        res_UNSGA = minimize(
+            UNSGAPymoo(self.benchmark,self.partitions, self.generations,self.seed, self.pop_size),
+            AUNSGA,
             termination=('n_gen', self.generations),
             seed=self.seed,
             save_history=True,
             verbose=False
             )  
 
-        NSGA_algorithm={
-            "NSGA-3" :np.column_stack([res_NSGA.F])
+        UNSGA_algorithm={
+            "UNSGA-3" :np.column_stack([res_UNSGA.F])
         }    
         
-        return NSGA_algorithm
+        return UNSGA_algorithm

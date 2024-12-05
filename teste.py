@@ -1,5 +1,6 @@
 from create_benchmark import CreateBenchmark
 from NSGA_pymoo import NSGAPymoo
+from UNSGA_pymoo import UNSGAPymoo
 from metrics import Metrics
 from SPEA_pymoo import SPEAPymoo
 from RVEA_pymoo import RVEAymoo
@@ -7,7 +8,7 @@ from MOEAD_pymoo import MOEADpymoo
 
 
 
-bk = CreateBenchmark(9,1500,10,3)
+bk = CreateBenchmark(8,1500,10,3)
 
 
 
@@ -36,6 +37,17 @@ bk.show_points(points_in)
 #MOEDA = MOEADpymoo(bk,20)
 #pt_MOEDA=MOEDA.exec()
 #bk.show_points(pt_MOEDA)
+
+
+SMSEMOA = SMSEMOAPymoo(bk,15,500)
+pt_SMSEMOA = SMSEMOA.exec()
+bk.show_points(pt_SMSEMOA)
+
+
+UNSGA3 = UNSGAPymoo(bk,20,500)
+pt_UNSGA = UNSGA3.exec()
+bk.show_points(pt_UNSGA)
+
 
 
 

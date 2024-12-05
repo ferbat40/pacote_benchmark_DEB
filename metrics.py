@@ -17,9 +17,9 @@ class Metrics(InitMetrics):
                   return value
         return []
     
-    def build_metrics(self,vet_metrics):
+    def build_metrics(self,vet_metrics,name_DTLZ):
          label=OrderedSet()
-         label.add("Metric")
+         label.add(f'Metrics for {name_DTLZ} ')
 
          metric=OrderedSet()
          
@@ -63,10 +63,11 @@ class Metrics(InitMetrics):
 
     def dict_algorithm(self):
             algorithm={
-              "NSGA-3" : [],
-              "SPEA-2" : [],
-              "RVEA"   : [],
-              "MOEAD"  : []          
+              "NSGA-3"   : [],
+              "SPEA-2"   : [],
+              "RVEA"     : [],
+              "MOEAD"    : [],
+              "UNSGA-3"  : []        
               }
             return algorithm
             
@@ -77,7 +78,7 @@ class Metrics(InitMetrics):
             POF=POF[0]
             dict_algorithm=self.dict_algorithm()
             vet_metrics=[]
-            
+            name_DTLZ=""
             
             metric = [
                  self.M_GD,
@@ -88,6 +89,7 @@ class Metrics(InitMetrics):
                  ]
             
             for obj in self:
+                  name_DTLZ = type(obj).__name__ if str(type(obj).__name__)[0:4] == "DTLZ" and len(name_DTLZ)==0 else name_DTLZ
                   if isinstance(obj,dict): 
                         same_keys = obj.keys() & dict_algorithm.keys()
                         if same_keys:
@@ -100,7 +102,7 @@ class Metrics(InitMetrics):
                                   dict_algorithm_aux_valid={key: value for key,value in dict_algorithm_aux.items() if value}
                                   vet_metrics.append(dict_algorithm_aux_valid)
             assert len(np.array(vet_metrics)) > 0, "No matrix for algorithms was sent"
-            return self.build_metrics(vet_metrics)
+            return self.build_metrics(vet_metrics,name_DTLZ)
 
 
     def param_point(self,obj):

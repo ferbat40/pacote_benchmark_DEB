@@ -31,7 +31,12 @@ class MOEADpymoo(Problem):
         elif number_DTLZ==8:
             fjx,fix=self.DTLZ.calc_i(x,self.benchmark.get_Nvar(),self.benchmark.get_M())
             out["F"]=fjx
-            
+
+        
+        elif number_DTLZ==9:
+            fjx,fix=self.DTLZ.calc_i(x,self.benchmark.get_Nvar(),self.benchmark.get_M())
+            out["F"]=fjx
+             
 
     def exec(self):
         ref_dirs = get_reference_directions("das-dennis", self.benchmark.get_M(), n_partitions=self.partitions)
