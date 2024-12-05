@@ -57,7 +57,7 @@ class CreateBenchmark(InitBenchmark):
             self.set_K(self.K_N)
             self.set_NVar()
             self.set_Point()
-            
+            self.set_POF(0.5)
             
 
     
@@ -70,6 +70,8 @@ class CreateBenchmark(InitBenchmark):
             self.set_K(self.K_N)
             self.set_NVar()
             self.set_Point()
+            self.set_POF(0.5)
+            
 
     
     def call_DTLZ3(self):
@@ -81,6 +83,7 @@ class CreateBenchmark(InitBenchmark):
             self.set_K(self.K_N)
             self.set_NVar()
             self.set_Point()
+            self.set_POF(0.5)
 
     
     def call_DTLZ4(self):
@@ -92,6 +95,7 @@ class CreateBenchmark(InitBenchmark):
             self.set_K(self.K_N)
             self.set_NVar()
             self.set_Point()
+            self.set_POF(0.5)
 
 
     
@@ -104,7 +108,6 @@ class CreateBenchmark(InitBenchmark):
             self.set_DTLZ(DTLZ5(self))
             self.set_K(self.K_N)
             self.set_NVar()
-            self.set_Point()
             self.set_Point()
             self.set_POF(0.5)
     
@@ -173,7 +176,6 @@ class CreateBenchmark(InitBenchmark):
         point_pandas_valid=point_pandas.reset_index(drop=True)
         point_pandas_valid.index=pd.Index(range(1,len(point_pandas_valid)+1)) 
         display(HTML(f'<h1 style="font-size: 19px;">{key}</h1>'))
-        print(key)
         print()
         display(point_pandas_valid)
           
