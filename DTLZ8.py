@@ -8,7 +8,6 @@ class DTLZ8:
         self.new_benchmark_obj=new_benchmark_obj
 
 
-
     def const_gjx(self,fjx,m):
         gjx_const=[]
         for col_end,col_begin in enumerate(range(0,m-1), start=1):

@@ -17,9 +17,9 @@ class Metrics(InitMetrics):
                   return value
         return []
     
-    def build_metrics(self,vet_metrics,name_DTLZ):
+    def build_metrics(self,vet_metrics,object_DTLZ):
          label=OrderedSet()
-         label.add(f'Metrics for {name_DTLZ} ')
+         label.add(f'Metrics for {object_DTLZ} ')
 
          metric=OrderedSet()
          
@@ -79,6 +79,7 @@ class Metrics(InitMetrics):
             dict_algorithm=self.dict_algorithm()
             vet_metrics=[]
             name_DTLZ=""
+            object_DTLZ=""
             
             metric = [
                  self.M_GD,
@@ -89,7 +90,9 @@ class Metrics(InitMetrics):
                  ]
             
             for obj in self:
-                  name_DTLZ = type(obj).__name__ if str(type(obj).__name__)[0:4] == "DTLZ" and len(name_DTLZ)==0 else name_DTLZ
+                  object_DTLZ = f'{str(type(obj).__name__)[0:5]} with ( M = {obj.new_benchmark_obj.get_M()}, K = {obj.new_benchmark_obj.get_K()}, N = {obj.new_benchmark_obj.get_Nvar()} )' if str(type(obj).__name__)[0:4] == "DTLZ" and int(str(type(obj).__name__)[4:5]) <= 7 and len(object_DTLZ)==0 else object_DTLZ
+                  object_DTLZ = f'{str(type(obj).__name__)[0:5]} with ( M = {obj.new_benchmark_obj.get_M()}, N = {obj.new_benchmark_obj.get_Nvar()} )' if str(type(obj).__name__)[0:4] == "DTLZ" and int(str(type(obj).__name__)[4:5]) > 7 and len(object_DTLZ)==0 else object_DTLZ
+                  
                   if isinstance(obj,dict): 
                         same_keys = obj.keys() & dict_algorithm.keys()
                         if same_keys:
@@ -102,7 +105,7 @@ class Metrics(InitMetrics):
                                   dict_algorithm_aux_valid={key: value for key,value in dict_algorithm_aux.items() if value}
                                   vet_metrics.append(dict_algorithm_aux_valid)
             assert len(np.array(vet_metrics)) > 0, "No matrix for algorithms was sent"
-            return self.build_metrics(vet_metrics,name_DTLZ)
+            return self.build_metrics(vet_metrics,object_DTLZ)
 
 
     def param_point(self,obj):
