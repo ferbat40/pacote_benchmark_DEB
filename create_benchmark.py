@@ -89,7 +89,7 @@ class CreateBenchmark(InitBenchmark):
 
 
     def Default_DTLZ8(self):  
-        self.set_angle_azim(-40) 
+        self.set_angle_azim(-38) 
         self.set_angle_elevate(15) 
 
     
