@@ -246,7 +246,7 @@ class CreateBenchmark(InitBenchmark):
         point_pandas=pd.DataFrame(value, columns=column)  
         point_pandas_valid=point_pandas.reset_index(drop=True)
         point_pandas_valid.index=pd.Index(range(1,len(point_pandas_valid)+1)) 
-        display(HTML(f'<h1 style="font-size: 19px;">{key}</h1>'))
+        display(HTML(f'\n<h1 style="font-size: 19px;">{key} with\n( M = {self.get_M()}, K = {self.get_K()}, N= {self.get_Nvar()} )</h1>'))
         print()
         display(point_pandas_valid)
           
@@ -313,6 +313,6 @@ class CreateBenchmark(InitBenchmark):
             label_2=[i for i in label_2 if i is not None]
             label_3=[i for i in label_3 if i is not None]
             label_valid=label_1+label_2+label_3
-            PlotFP_M(self.get_M(),label_valid,vet_pt_valid,self.get_angle_azim(),self.get_angle_elevate())
+            PlotFP_M(self.benchmark,self.get_M(),label_valid,vet_pt_valid,self.get_angle_azim(),self.get_angle_elevate())
 
 

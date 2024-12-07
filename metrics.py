@@ -7,6 +7,7 @@ import numpy as np
 from init_metrics import InitMetrics
 from ordered_set import OrderedSet
 import pandas as pd
+from IPython.display import HTML
 
 class Metrics(InitMetrics):
    
@@ -19,7 +20,7 @@ class Metrics(InitMetrics):
     
     def build_metrics(self,vet_metrics,object_DTLZ):
          label=OrderedSet()
-         label.add(f'Metrics for {object_DTLZ} ')
+         label.add(f'Metrics for {object_DTLZ}')
 
          metric=OrderedSet()
          
@@ -90,8 +91,8 @@ class Metrics(InitMetrics):
                  ]
             
             for obj in self:
-                  object_DTLZ = f'{str(type(obj).__name__)[0:5]} with ( M = {obj.new_benchmark_obj.get_M()}, K = {obj.new_benchmark_obj.get_K()}, N = {obj.new_benchmark_obj.get_Nvar()} )' if str(type(obj).__name__)[0:4] == "DTLZ" and int(str(type(obj).__name__)[4:5]) <= 7 and len(object_DTLZ)==0 else object_DTLZ
-                  object_DTLZ = f'{str(type(obj).__name__)[0:5]} with ( M = {obj.new_benchmark_obj.get_M()}, N = {obj.new_benchmark_obj.get_Nvar()} )' if str(type(obj).__name__)[0:4] == "DTLZ" and int(str(type(obj).__name__)[4:5]) > 7 and len(object_DTLZ)==0 else object_DTLZ
+                  object_DTLZ = HTML(f'{str(type(obj).__name__)[0:5]} /n with ( M = {obj.new_benchmark_obj.get_M()}, K = {obj.new_benchmark_obj.get_K()}, N = {obj.new_benchmark_obj.get_Nvar()} )') if str(type(obj).__name__)[0:4] == "DTLZ" and int(str(type(obj).__name__)[4:5]) <= 7 and len(object_DTLZ)==0 else object_DTLZ
+                  object_DTLZ = HTML(f'{str(type(obj).__name__)[0:5]} /n with ( M = {obj.new_benchmark_obj.get_M()}, N = {obj.new_benchmark_obj.get_Nvar()} )') if str(type(obj).__name__)[0:4] == "DTLZ" and int(str(type(obj).__name__)[4:5]) > 7 and len(object_DTLZ)==0 else object_DTLZ
                   
                   if isinstance(obj,dict): 
                         same_keys = obj.keys() & dict_algorithm.keys()
