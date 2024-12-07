@@ -61,7 +61,7 @@ class PlotFP_M():
          ax.set_zlabel(self.z_axis.value)
          ax.view_init(elev=self.angle_elevate, azim=self.angle_azim)
          ax.legend()
-         title="""<div style="text-align: right; font-size: 15 px;">   Graph<br>with ( M = {self.benchmark.get_M()}, K = {self.benchmark.get_K()}, N= {self.benchmark.get_Nvar()} )</div>""" 
+         title="""<div style="text-align: center; font-size: 16 px;">   Graph<br>with ( M = {self.benchmark.get_M()}, K = {self.benchmark.get_K()}, N= {self.benchmark.get_Nvar()} )</div>""" 
          ax.set_title(display(HTML(title)))
          plt.draw()
     
