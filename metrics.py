@@ -7,7 +7,7 @@ import numpy as np
 from init_metrics import InitMetrics
 from ordered_set import OrderedSet
 import pandas as pd
-from IPython.display import HTML
+from IPython.display import HTML,display
 
 class Metrics(InitMetrics):
    
@@ -20,7 +20,7 @@ class Metrics(InitMetrics):
     
     def build_metrics(self,vet_metrics,object_DTLZ):
          label=OrderedSet()
-         label.add(f'Metrics for {object_DTLZ}')
+         label.add(f'Metrics for {display(object_DTLZ)}')
 
          metric=OrderedSet()
          
