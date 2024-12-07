@@ -246,7 +246,7 @@ class CreateBenchmark(InitBenchmark):
         point_pandas=pd.DataFrame(value, columns=column)  
         point_pandas_valid=point_pandas.reset_index(drop=True)
         point_pandas_valid.index=pd.Index(range(1,len(point_pandas_valid)+1)) 
-        display(HTML(f'<h1 style="font-size: 19px;">{key}<br>with ( M = {self.get_M()}, K = {self.get_K()}, N= {self.get_Nvar()} )</h1>'))
+        display(HTML(f'<h1 style="font-size: 17px;">{key}<br>with ( M = {self.get_M()}, K = {self.get_K()}, N= {self.get_Nvar()} )</h1>'))
         print()
         display(point_pandas_valid)
           
