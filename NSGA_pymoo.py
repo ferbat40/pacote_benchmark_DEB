@@ -65,7 +65,7 @@ class NSGAPymoo(Problem):
             )  
 
         NSGA_algorithm={
-            "NSGA-3 jkjkjkjk" :np.column_stack([res_NSGA.F])
+            "NSGA-3" :np.column_stack([res_NSGA.F])
         }    
         
         return NSGA_algorithm

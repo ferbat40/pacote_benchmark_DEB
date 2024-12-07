@@ -7,9 +7,30 @@ import numpy as np
 from init_metrics import InitMetrics
 from ordered_set import OrderedSet
 import pandas as pd
+import inspect
 
 
 class Metrics(InitMetrics):
+    
+    def identify_algorithm_obj(self,algorithm):
+         algorithm_v = str(algorithm).split("-")[0]
+         parameters=""
+         try:
+              for obj in self:
+               algorithm_obj = str(type(obj).__name__)
+               if algorithm_v in algorithm_obj:
+                    param=inspect.signature(obj.__init__).parameters
+                    var_const = [ i  for i in param if i != 'self']
+                    val = {var: getattr(obj,var) for var in var_const}
+                    for index, (key,value) in enumerate(val.items(),start =1):
+                         if index == 2 or index == 3 or index == 5:
+                              parameters =  parameters + f'{str(key[0:3]).upper()} = {value}, '
+         except Exception:
+               pass
+         len_param=len(parameters)
+         algorithm_v = algorithm+" ( "+parameters[0:len_param-2]+" )"
+         return algorithm_v
+              
    
         
     def identify_algorithm(self,obj,index_obj):
@@ -18,15 +39,18 @@ class Metrics(InitMetrics):
                   return value
         return []
     
+
+
     def build_metrics(self,vet_metrics,object_DTLZ):
          label=OrderedSet()
-         label.add(f'Metrics for {object_DTLZ}')
+         label.add(f'{object_DTLZ}')
 
          metric=OrderedSet()
          
          for dict_algorithm_metrics in vet_metrics:
             for key,value in dict_algorithm_metrics.items():
-                 label.add(key) 
+                 algorithm=self.identify_algorithm_obj(key)
+                 label.add(algorithm) 
                  value_div=str(value).replace("'","").replace("{","").replace("}","")
                  value_div=value_div.split(':')
                  metric.add(value_div[0])
@@ -41,6 +65,7 @@ class Metrics(InitMetrics):
               }
          )
 
+
          for index_col in range(1,len(label_data)):
               data_metrics[label_data[index_col]]=pd.NA
               
@@ -51,6 +76,7 @@ class Metrics(InitMetrics):
                    value_div=str(value).replace("'","").replace("{","").replace("}","").replace("]","")
                    value_div=value_div.split(':')   
                    key=str(np.array(list(obj.keys())))
+                   print("key",key)
                    key_div=key.replace("'","").replace("[","").replace("]","")
                    data_metrics.at[index_aux,key_div]=value_div[1]
                    index_aux=index_aux+1
@@ -79,7 +105,6 @@ class Metrics(InitMetrics):
             POF=POF[0]
             dict_algorithm=self.dict_algorithm()
             vet_metrics=[]
-            name_DTLZ=""
             object_DTLZ=""
             
             metric = [

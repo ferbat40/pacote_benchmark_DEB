@@ -8,7 +8,7 @@ from MOEAD_pymoo import MOEADpymoo
 
 
 
-bk = CreateBenchmark(1,1500,7,3)
+bk = CreateBenchmark(1,1500,3,3)
 
 
 
@@ -41,7 +41,7 @@ bk.show_points(points_in)
 
 
 
-UNSGA3 = UNSGAPymoo(bk,20)
+UNSGA3 = UNSGAPymoo(bk,10,500)
 pt_UNSGA = UNSGA3.exec()
 bk.show_points(pt_UNSGA)
 
