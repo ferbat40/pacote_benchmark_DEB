@@ -1,5 +1,5 @@
 import ipywidgets as widgets
-from IPython.display import display,HTML
+from IPython.display import display
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -61,8 +61,7 @@ class PlotFP_M():
          ax.set_zlabel(self.z_axis.value)
          ax.view_init(elev=self.angle_elevate, azim=self.angle_azim)
          ax.legend()
-         title=f'"""<div style="text-align: center; font-size: 16 px;">Plotting Graph<br>with ( M = {self.benchmark.get_M()}, K = {self.benchmark.get_K()}, N= {self.benchmark.get_Nvar()} )</div>"""'
-         ax.set_title(display(HTML(title)))
+         ax.set_title(f'Plotting Graph with ( M = {self.benchmark.get_M()}, K = {self.benchmark.get_K()}, N= {self.benchmark.get_Nvar()} )')
          plt.draw()
     
               
