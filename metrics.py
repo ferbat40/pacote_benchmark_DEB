@@ -91,8 +91,8 @@ class Metrics(InitMetrics):
                  ]
             
             for obj in self:
-                  object_DTLZ = HTML(f'{str(type(obj).__name__)[0:5]} /n with ( M = {obj.new_benchmark_obj.get_M()}, K = {obj.new_benchmark_obj.get_K()}, N = {obj.new_benchmark_obj.get_Nvar()} )') if str(type(obj).__name__)[0:4] == "DTLZ" and int(str(type(obj).__name__)[4:5]) <= 7 and len(object_DTLZ)==0 else object_DTLZ
-                  object_DTLZ = HTML(f'{str(type(obj).__name__)[0:5]} /n with ( M = {obj.new_benchmark_obj.get_M()}, N = {obj.new_benchmark_obj.get_Nvar()} )') if str(type(obj).__name__)[0:4] == "DTLZ" and int(str(type(obj).__name__)[4:5]) > 7 and len(object_DTLZ)==0 else object_DTLZ
+                  object_DTLZ = HTML(f'{str(type(obj).__name__)[0:5]}<br>with ( M = {obj.new_benchmark_obj.get_M()}, K = {obj.new_benchmark_obj.get_K()}, N = {obj.new_benchmark_obj.get_Nvar()} )') if str(type(obj).__name__)[0:4] == "DTLZ" and int(str(type(obj).__name__)[4:5]) <= 7 and len(object_DTLZ)==0 else object_DTLZ
+                  object_DTLZ = HTML(f'{str(type(obj).__name__)[0:5]}<br>with ( M = {obj.new_benchmark_obj.get_M()}, N = {obj.new_benchmark_obj.get_Nvar()} )') if str(type(obj).__name__)[0:4] == "DTLZ" and int(str(type(obj).__name__)[4:5]) > 7 and len(object_DTLZ)==0 else object_DTLZ
                   
                   if isinstance(obj,dict): 
                         same_keys = obj.keys() & dict_algorithm.keys()
