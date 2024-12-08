@@ -7,7 +7,7 @@ from pymoo.core.problem import Problem
 from pymoo.util.ref_dirs import get_reference_directions
 
 class SPEAPymoo(Problem):
-    def __init__(self,benchmark,partitions=13, generations=300,seed=15,pop_size=100):
+    def __init__(self,benchmark,partitions=15, generations=300,seed=15,pop_size=100):
         self.benchmark=benchmark
         self.partitions=partitions
         self.generations=generations
