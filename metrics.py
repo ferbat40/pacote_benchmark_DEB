@@ -18,7 +18,7 @@ class Metrics(InitMetrics):
          try:
               for obj in self:
                algorithm_obj = str(type(obj).__name__)
-               if algorithm_v in algorithm_obj:
+               if algorithm_v == algorithm_obj[0:len(algorithm_v)]:
                     param=inspect.signature(obj.__init__).parameters
                     var_const = [ i  for i in param if i != 'self']
                     val = {var: getattr(obj,var) for var in var_const}
@@ -91,7 +91,7 @@ class Metrics(InitMetrics):
               "SPEA-2"   : [],
               "RVEA"     : [],
               "MOEAD"    : [],
-              "UNSGA_3"  : []        
+              "UNSGA-3"  : []        
               }
             return algorithm
             
