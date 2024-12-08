@@ -8,7 +8,7 @@ from pymoo.core.problem import Problem
 
 
 class NSGAPymoo(Problem):
-    def __init__(self,benchmark,partitions=15, generations=300,seed=15,pop_size=100):
+    def __init__(self,benchmark,partitions=13, generations=300,seed=15,pop_size=100):
         self.benchmark=benchmark
         self.partitions=partitions
         self.generations=generations
