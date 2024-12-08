@@ -3,7 +3,6 @@ import numpy as np
 from pymoo.util.ref_dirs import get_reference_directions
 from pymoo.operators.crossover.sbx import SBX
 from pymoo.operators.mutation.pm import PolynomialMutation
-from metrics import Metrics
 from pymoo.core.problem import Problem
 from pymoo.algorithms.moo.moead import MOEAD
 
