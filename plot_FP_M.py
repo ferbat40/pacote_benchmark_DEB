@@ -61,7 +61,7 @@ class PlotFP_M():
          ax.set_zlabel(self.z_axis.value)
          ax.view_init(elev=self.angle_elevate, azim=self.angle_azim)
          ax.legend()
-         ax.set_title(f'Plotting Graph with ( M = {self.benchmark.get_M()}, K = {self.benchmark.get_K()}, N= {self.benchmark.get_Nvar()} )')
+         ax.set_title("Plotting Graph")
          plt.draw()
     
               
