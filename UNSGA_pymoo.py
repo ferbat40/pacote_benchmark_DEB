@@ -65,7 +65,7 @@ class UNSGAPymoo(Problem):
             )  
 
         UNSGA_algorithm={
-            "UNSGA-3" :np.column_stack([res_UNSGA.F])
+            "U_NSGA-3" :np.column_stack([res_UNSGA.F])
         }    
         
         return UNSGA_algorithm

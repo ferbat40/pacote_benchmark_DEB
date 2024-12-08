@@ -49,7 +49,7 @@ metric = Metrics()
 metric.add_t(bk.get_DTLZ())
 metric.add_t(UNSGA3)
 metric.add_t(points_in)
-metric.add_t(pt_UNSGA)
+#metric.add_t(pt_UNSGA)
 
 pds = metric.get_metric()
 print(pds)
