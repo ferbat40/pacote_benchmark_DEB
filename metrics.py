@@ -24,12 +24,11 @@ class Metrics(InitMetrics):
                     val = {var: getattr(obj,var) for var in var_const}
                     for index, (key,value) in enumerate(val.items(),start =1):
                          if index == 2 or index == 3 or index == 5:
-                              parameters =  parameters + f'{str(key[0:3]).upper()} = {value}, '
+                              parameters =  parameters + f'{str(key[0:3]).upper()}={value},'
          except Exception:
                pass
          len_param=len(parameters)
-         algorithm_v = algorithm+" ( "+parameters[0:len_param-2]+" )"
-         return algorithm_v
+         return "     "+algorithm+" ("+parameters[0:len_param-1]+")" if len_param > 0 else algorithm
               
    
         
@@ -49,8 +48,7 @@ class Metrics(InitMetrics):
          
          for dict_algorithm_metrics in vet_metrics:
             for key,value in dict_algorithm_metrics.items():
-                 algorithm=self.identify_algorithm_obj(key)
-                 label.add(algorithm) 
+                 label.add(key) 
                  value_div=str(value).replace("'","").replace("{","").replace("}","")
                  value_div=value_div.split(':')
                  metric.add(value_div[0])
@@ -76,7 +74,6 @@ class Metrics(InitMetrics):
                    value_div=str(value).replace("'","").replace("{","").replace("}","").replace("]","")
                    value_div=value_div.split(':')   
                    key=str(np.array(list(obj.keys())))
-                   print("key",key)
                    key_div=key.replace("'","").replace("[","").replace("]","")
                    data_metrics.at[index_aux,key_div]=value_div[1]
                    index_aux=index_aux+1
@@ -116,7 +113,7 @@ class Metrics(InitMetrics):
                  ]
             
             for obj in self:
-                  object_DTLZ = f'{str(type(obj).__name__)[0:5]} with ( M = {obj.new_benchmark_obj.get_M()}, K = {obj.new_benchmark_obj.get_K()}, N = {obj.new_benchmark_obj.get_Nvar()} )' if str(type(obj).__name__)[0:4] == "DTLZ" and int(str(type(obj).__name__)[4:5]) <= 7 and len(object_DTLZ)==0 else object_DTLZ
+                  object_DTLZ = f'Metrics for {str(type(obj).__name__)[0:5]} (M={obj.new_benchmark_obj.get_M()},K={obj.new_benchmark_obj.get_K()},N={obj.new_benchmark_obj.get_Nvar()})' if str(type(obj).__name__)[0:4] == "DTLZ" and int(str(type(obj).__name__)[4:5]) <= 7 and len(object_DTLZ)==0 else object_DTLZ
                   object_DTLZ = f'{str(type(obj).__name__)[0:5]} with ( M = {obj.new_benchmark_obj.get_M()}, N = {obj.new_benchmark_obj.get_Nvar()} )' if str(type(obj).__name__)[0:4] == "DTLZ" and int(str(type(obj).__name__)[4:5]) > 7 and len(object_DTLZ)==0 else object_DTLZ
                   
                   if isinstance(obj,dict): 
@@ -128,7 +125,7 @@ class Metrics(InitMetrics):
                              for c,func in enumerate(metric):
                                   key_algorithm=(str(same_keys)).replace("'","").replace("{","").replace("}","")
                                   dict_algorithm_aux[key_algorithm]=func(POF_algorithm,POF)
-                                  dict_algorithm_aux_valid={key: value for key,value in dict_algorithm_aux.items() if value}
+                                  dict_algorithm_aux_valid={self.identify_algorithm_obj(key) : value for key,value in dict_algorithm_aux.items() if value}
                                   vet_metrics.append(dict_algorithm_aux_valid)
             assert len(np.array(vet_metrics)) > 0, "No matrix for algorithms was sent"
             return self.build_metrics(vet_metrics,object_DTLZ)
