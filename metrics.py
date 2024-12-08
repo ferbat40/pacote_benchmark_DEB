@@ -91,7 +91,7 @@ class Metrics(InitMetrics):
               "SPEA-2"   : [],
               "RVEA"     : [],
               "MOEAD"    : [],
-              "U_NSGA-3"  : []        
+              "UNSGA_3"  : []        
               }
             return algorithm
             
